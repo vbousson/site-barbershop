@@ -108,3 +108,79 @@ const dejaJoue = passe.filter(garde);
     }
   </div>
 </section>
+
+<style>
+  /* Les lignes de date et le bandeau photo. */
+  /* ═══ concerts ═══ */
+  .subh {
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--ink) 42%, transparent);
+    margin: 2.4rem 0 0.7rem;
+  }
+
+  .subh:first-of-type {
+    margin-top: 0;
+  }
+
+  .bandeau {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .dts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dts li {
+    display: grid;
+    grid-template-columns: 7.6rem minmax(0, 1fr) auto auto;
+    gap: 0.6rem 1rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: var(--rule);
+  }
+
+  .dts li:first-child {
+    border-top: var(--rule);
+  }
+
+  .dts time,
+  .dts .nodate {
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  .dts.past {
+    color: color-mix(in srgb, var(--ink) 62%, transparent);
+  }
+
+  .dts .rec {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gold-deep);
+    white-space: nowrap;
+    border-bottom: 1.5px solid currentColor;
+  }
+
+  .dts .rec:hover {
+    color: var(--ink);
+  }
+
+  @media (max-width: 640px) {
+    .dts li {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .dts time,
+    .dts .nodate {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

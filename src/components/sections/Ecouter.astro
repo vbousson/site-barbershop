@@ -76,3 +76,78 @@ const rienEnLigne = pistes.length > 0 && pistes.every((p) => p.data.url === null
     }
   </div>
 </section>
+
+<style>
+  /* Les lignes de piste. */
+  /* ═══ pistes à écouter ═══ */
+  .trk {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    gap: 0.6rem 1rem;
+    align-items: center;
+    padding: 0.95rem 0;
+    border-bottom: var(--rule);
+    width: 100%;
+    text-align: left;
+  }
+
+  .trk:first-child {
+    border-top: var(--rule);
+  }
+
+  .trk .pl {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    transition: background 0.2s;
+  }
+
+  .trk:not([disabled]):hover .pl {
+    background: var(--gold);
+  }
+
+  .trk[disabled] {
+    cursor: default;
+  }
+
+  .trk .pl svg {
+    width: 9px;
+    translate: 1px 0;
+  }
+
+  .trk strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .trk span.meta {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--ink) 52%, transparent);
+  }
+
+  .trk .d {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--ink) 52%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 640px) {
+    .trk {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    /* L'étiquette est rendue par le composant Chip : elle porte SA portée,
+       pas celle d'ici. Sans le :global(), la puce reste en 3e colonne et la
+       ligne se réorganise de travers sur mobile. */
+    .trk :global(.chip) {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+</style>

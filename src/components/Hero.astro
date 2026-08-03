@@ -33,3 +33,72 @@ const { formation, titre } = Astro.props;
     <Plateau formation={formation} />
   </div>
 </div>
+
+<style>
+  /* Le hero et son lavis. */
+  /* ═══ hero aquarelle ═══
+     Le lavis de l'affiche est reconstitué en dégradés radiaux, avec une portée
+     dorée en bas à droite. */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 5.9rem 0 3rem;
+    background:
+      radial-gradient(58% 44% at 6% 74%, color-mix(in srgb, var(--gold) 55%, transparent) 0%, transparent 68%),
+      radial-gradient(46% 38% at 96% 34%, color-mix(in srgb, var(--gold) 40%, transparent) 0%, transparent 70%),
+      radial-gradient(75% 44% at 52% 112%, color-mix(in srgb, var(--gold-deep) 42%, transparent) 0%, transparent 66%),
+      radial-gradient(26% 20% at 16% 20%, color-mix(in srgb, var(--peach) 44%, transparent) 0%, transparent 68%),
+      radial-gradient(22% 17% at 84% 88%, color-mix(in srgb, var(--lilac) 40%, transparent) 0%, transparent 68%),
+      radial-gradient(18% 14% at 92% 64%, color-mix(in srgb, var(--peach) 34%, transparent) 0%, transparent 70%),
+      var(--wash);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 12%, transparent) 0.5px, transparent 0.5px);
+    background-size: 3px 3px;
+  }
+
+  .splash {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  .staff {
+    position: absolute;
+    right: -6%;
+    bottom: 6%;
+    width: 46%;
+    opacity: 0.4;
+    pointer-events: none;
+    rotate: -8deg;
+  }
+
+  .staff span {
+    display: block;
+    height: 2px;
+    background: var(--gold-deep);
+    margin-bottom: 9px;
+    border-radius: 2px;
+  }
+
+  .hero-in {
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

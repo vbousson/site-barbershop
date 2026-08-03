@@ -208,3 +208,448 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
 <script>
   import "../scripts/plateau";
 </script>
+
+<style>
+  /* Le plateau. Les enfants du logotype sont créés par le script à
+     l'exécution, d'où les :global() : ils ne portent pas la portée d'Astro. */
+  /* ═══ onglets de formation ═══ */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
+  }
+
+  .tab {
+    border: 2px solid color-mix(in srgb, var(--ink) 25%, transparent);
+    border-radius: 999px;
+    padding: 0.42rem 1rem;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--ink) 60%, transparent);
+    transition: all 0.22s;
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .tab[aria-selected='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .tab em {
+    font-style: normal;
+    font-weight: 400;
+    opacity: 0.6;
+    margin-left: 0.45rem;
+  }
+
+  .stage-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(215px, 0.68fr);
+    gap: clamp(1.4rem, 3.5vw, 3.2rem);
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .stage-grid {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+  }
+
+  /* ═══ le rond ═══ */
+  .spot {
+    position: relative;
+    width: 100%;
+    max-width: 660px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+    container-type: inline-size;
+    background: var(--paper);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 clamp(9px, 1.8vw, 24px) color-mix(in srgb, var(--paper) 52%, transparent),
+      0 24px 60px -30px color-mix(in srgb, var(--gold-deep) 60%, transparent);
+  }
+
+  .arc {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .arc.live {
+    opacity: 1;
+  }
+
+  .arc circle {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.05;
+    stroke-linecap: round;
+  }
+
+  /* Le disque est un trou dans le fond : les têtes n'existent qu'à l'intérieur.
+     Elles émergent donc de sous le périmètre au lieu d'apparaître dans le lavis. */
+  .dish {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  /* ═══ le bloc typographique ═══
+     La position change à l'abri, opacité 0 : le logotype ne se déforme jamais
+     d'un état à l'autre. */
+  .mark {
+    position: absolute;
+    transition: opacity 0.34s ease;
+  }
+
+  .mark :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .mark :global(.txt) {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 1.02;
+    text-align: center;
+    font-size: clamp(1.1rem, 3.3vw, 2.05rem);
+    letter-spacing: -0.02em;
+  }
+
+  @supports (font-size: 1cqw) {
+    .mark :global(.txt) {
+      font-size: var(--ms, 9cqw);
+    }
+  }
+
+  .mark :global(.bar) {
+    height: 0.055em;
+    min-height: 3px;
+    background: var(--ink);
+    margin: 0.3em auto 0;
+    width: 82%;
+    border-radius: 2px;
+  }
+
+  .mark :global(.rule2) {
+    height: 0.02em;
+    min-height: 2px;
+    background: var(--ink);
+    margin: 0.09em auto 0;
+    width: 82%;
+  }
+
+  /* ═══ les têtes de Mathilde ═══
+     La position est posée d'un coup en %, le mouvement est joué en transform
+     par le moteur de vol (courbes de Bézier tirées au hasard). */
+  .face {
+    position: absolute;
+    padding: 0;
+    display: block;
+    transform-origin: 50% 60%;
+    will-change: transform, opacity;
+    transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(var(--fs, 1)) translateY(var(--ly, 0px)) scale(var(--ls, 1));
+    filter: blur(var(--fb, 0px));
+    transition: opacity 0.7s ease;
+  }
+
+  .face img {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .face .glow {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    translate: -50% -50%;
+    width: 150%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.45s, transform 0.45s;
+    filter: blur(4px);
+    background: radial-gradient(circle,
+        color-mix(in srgb, var(--gold) 72%, transparent) 0%,
+        color-mix(in srgb, var(--gold) 20%, transparent) 44%,
+        transparent 68%);
+  }
+
+  .face .nm {
+    position: absolute;
+    left: 50%;
+    bottom: -0.1em;
+    translate: -50% 0;
+    white-space: nowrap;
+    opacity: 0;
+    background: var(--paper);
+    border-radius: 0.45em;
+    padding: 0.22em 0.6em;
+    text-align: center;
+    line-height: 1.12;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--ink) 9%, transparent),
+      0 0 0 0.3em color-mix(in srgb, var(--paper) 78%, transparent);
+  }
+
+  .face .nm b {
+    display: block;
+    font-weight: 700;
+    font-size: clamp(0.56rem, 1.25vw, 0.74rem);
+    color: var(--ink);
+  }
+
+  .face .nm i {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    margin-top: 0.05em;
+    font-size: clamp(0.42rem, 0.95vw, 0.56rem);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .face:hover .nm,
+  .face.on .nm {
+    opacity: 1;
+  }
+
+  /* état « on joue » : les voix muettes passent en fantôme */
+  .spot.playing .face {
+    opacity: 0.18;
+  }
+
+  .spot.playing .face:hover {
+    opacity: 0.5;
+  }
+
+  .spot.playing .face.on {
+    opacity: 1;
+  }
+
+  .face.on .glow {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .face.on {
+    --ly: -1%;
+    --ls: 1.02;
+  }
+
+  .face.leaving {
+    opacity: 1;
+  }
+
+  /* pas de fondu : la tête est mangée par le bord du disque */
+  .face.gone {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
+  /* Les têtes sont rendues au build à leur place finale. Quand JavaScript est
+     là, il les renvoie aux coulisses pour rejouer leur arrivée : on les masque
+     le temps qu'il pose les positions de départ, sinon on verrait un saut.
+     Sans JavaScript, `.ready` n'arrive jamais — mais `.js` non plus, donc les
+     têtes restent visibles et le logo s'affiche, fixe. */
+  .js .spot:not(.ready) .face {
+    opacity: 0;
+    transition: none;
+  }
+
+  .ring {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5%;
+    translate: -50% 0;
+    font-family: var(--font-script);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.3vw, 1.3rem);
+    color: var(--gold-deep);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .spot.full .ring {
+    opacity: 1;
+  }
+
+  /* ═══ panneau latéral ═══ */
+  .panel {
+    font-size: 0.9rem;
+  }
+
+  .panel h4 {
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--ink) 48%, transparent);
+    margin: 0 0 0.3rem;
+  }
+
+  .panel .note {
+    margin: 1.1rem 0 0;
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--ink) 52%, transparent);
+    max-width: none;
+  }
+
+  .piste {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.42rem 0;
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--ink) 62%, transparent);
+    transition: color 0.2s;
+  }
+
+  .piste:hover {
+    color: var(--ink);
+  }
+
+  .piste[aria-pressed='true'] {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .piste .bt {
+    width: 15px;
+    flex: 0 0 auto;
+    color: color-mix(in srgb, var(--ink) 25%, transparent);
+    transition: color 0.2s;
+  }
+
+  .piste[aria-pressed='true'] .bt {
+    color: var(--gold-deep);
+  }
+
+  .piste i {
+    font-style: normal;
+    margin-left: auto;
+    font-size: 0.76rem;
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  .hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 0 3rem -3rem;
+    justify-self: flex-start;
+    max-width: none;
+    font-family: var(--font-script);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+    color: var(--ink-soft);
+    transition: opacity 0.4s;
+  }
+
+  .hint svg {
+    width: 44px;
+    flex: 0 0 auto;
+    color: var(--gold-deep);
+  }
+
+  .hint.off {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* On ne clique pas sur un téléphone. */
+  .hint .tactile {
+    display: none;
+  }
+
+  @media (hover: none) {
+    .hint .souris {
+      display: none;
+    }
+
+    .hint .tactile {
+      display: inline;
+    }
+  }
+
+  /* ═══ transport ═══ */
+  .transport {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .tbtn {
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    display: grid;
+    place-items: center;
+    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+  }
+
+  /* paintTransport() réécrit l'intérieur du bouton : le SVG recréé ne porte
+     pas la portée, d'où le :global(). */
+  .tbtn :global(svg) {
+    width: 0.8rem;
+    height: auto;
+    display: block;
+  }
+
+  .tbtn:hover {
+    background: var(--gold);
+  }
+
+  .tbtn.play {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .tbtn.play:hover {
+    background: var(--gold-deep);
+    border-color: var(--gold-deep);
+  }
+
+  .tbtn:disabled {
+    opacity: 0.28;
+    cursor: default;
+    background: none;
+    color: var(--ink);
+  }
+</style>
