@@ -1,0 +1,24 @@
+---
+/**
+ * Page manquante. GitHub Pages sert automatiquement 404.html.
+ */
+import Base from '../layouts/Base.astro';
+import { href, anchor } from '../lib/url';
+import Bowtie from '../components/Bowtie.astro';
+---
+
+<Base title="Page introuvable" description="Cette page n'existe pas.">
+  <section>
+    <div class="wrap">
+      <Bowtie n={1} rot={-8} />
+      <p class="eyebrow">Erreur 404</p>
+      <h2>Fausse note</h2>
+      <p class="lede">Cette page n'existe pas — ou plus.</p>
+      <p>
+        <a href={href()}>Retour à l'accueil</a> ·
+        <a href={anchor('concerts')}>Les concerts</a> ·
+        <a href={anchor('contact')}>Nous écrire</a>
+      </p>
+    </div>
+  </section>
+</Base>

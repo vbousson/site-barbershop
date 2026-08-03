@@ -1,0 +1,62 @@
+---
+/**
+ * Trois familles, quelques titres chacune.
+ *
+ * Pas de liste exhaustive : elle date, elle ennuie, et elle prive
+ * l'organisateur d'une raison d'écrire.
+ */
+import SectionHead from '../SectionHead.astro';
+import Chip from '../Chip.astro';
+import { getRepertoire, getFormationIndex } from '../../lib/content';
+import type { FormationId } from '../../data/formations';
+
+interface Props {
+  formation?: FormationId;
+  alt?: boolean;
+}
+
+const { formation, alt = false } = Astro.props;
+
+const index = await getFormationIndex();
+const familles = (await getRepertoire())
+  .map((f) => ({
+    ...f,
+    titres: formation ? f.data.titres.filter((t) => t.formation === formation) : f.data.titres,
+  }))
+  .filter((f) => f.titres.length > 0);
+---
+
+<section id="repertoire" class={alt ? 'alt' : undefined}>
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Le répertoire"
+      titre="Ce qu'on chante"
+      lede="Une trentaine de pièces, trois familles, un seul principe. Le programme se construit avec vous selon la durée, le lieu et le public. Liste complète sur demande."
+      tie={2}
+      rot={-6}
+    />
+
+    <div class="rep">
+      {
+        familles.map((f) => (
+          <div class="rv">
+            <h3>{f.data.famille}</h3>
+            <ul>
+              {f.titres.map((t) => (
+                <li>
+                  <span class:list={{ brouillon: t.brouillon }}>
+                    {t.titre}
+                    {t.brouillon && <span class="sr"> (à compléter)</span>}
+                  </span>
+                  <i>
+                    <Chip formation={t.formation} index={index} statique={!!formation} />
+                  </i>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

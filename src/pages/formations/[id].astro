@@ -1,0 +1,184 @@
+---
+/**
+ * Une page par formation.
+ *
+ * Trois vraies pages plutôt que trois ancres : trois titres, trois
+ * descriptions de partage, trois entrées dans un moteur de recherche. C'est
+ * ce que cherche une mairie qui tape « quatuor barbershop Grenoble ».
+ *
+ * Le hero est le même partout, simplement pré-réglé sur la bonne formation :
+ * le plateau s'ouvre déjà sur le bon logo.
+ */
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Ecouter from '../../components/sections/Ecouter.astro';
+import Repertoire from '../../components/sections/Repertoire.astro';
+import Concerts from '../../components/sections/Concerts.astro';
+import Contact from '../../components/sections/Contact.astro';
+import Photo from '../../components/Photo.astro';
+import DonneesStructurees from '../../components/DonneesStructurees.astro';
+import { getFormations } from '../../lib/content';
+import { href } from '../../lib/url';
+import { ogImage } from '../../lib/og';
+import { VOICES } from '../../data/voices';
+import { FORMATIONS, type FormationId } from '../../data/formations';
+
+export const getStaticPaths = (async () => {
+  const formations = await getFormations();
+  return formations.map((f) => ({ params: { id: f.id }, props: { entry: f } }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const id = entry.id as FormationId;
+const d = entry.data;
+
+// Qui chante quoi, dans cette formation précisément.
+const membres = FORMATIONS[id].members
+  .map((m) => VOICES.find((v) => v.id === m)!)
+  .sort((a, b) => VOICES.indexOf(a) - VOICES.indexOf(b));
+
+const autres = (await getFormations()).filter((f) => f.id !== id);
+
+// Faute de photo propre à la formation, on partage l'ambiance du concert
+// plutôt qu'une photo d'un autre effectif, qui induirait en erreur.
+const partage = await ogImage(d.photo ?? 'public-chenoise');
+---
+
+<Base
+  title={`${d.nom} — ${d.effectif} ${d.registre}`}
+  description={`${d.accroche} ${d.resume}`}
+  image={partage}
+>
+  <DonneesStructurees
+    slot="head"
+    nom={d.nom}
+    description={`${d.accroche} ${d.resume}`}
+    effectif={d.effectif}
+    url={new URL(Astro.url.pathname, Astro.site)}
+  />
+
+  <Hero formation={id} titre={`${d.nom} — ${d.effectif} ${d.registre}, ${d.notation}`} />
+
+  <section id="formation">
+    <div class="wrap">
+      <SectionHead
+        eyebrow={`${d.effectif} · ${d.registre} · ${d.notation}`}
+        titre={d.nom}
+        lede={d.accroche}
+        tie={0}
+        rot={-4}
+        as="h2"
+      />
+
+      <div class="two">
+        <div class="rv">
+          <Photo
+            photo={d.photo}
+            attendue={d.photoAttendue}
+            ratio="3 / 2"
+            widths={[560, 840, 1120]}
+            sizes="(max-width: 860px) 92vw, 46vw"
+            legende={d.photo !== null}
+            prioritaire
+          />
+          <div class="apres-photo">
+            {d.detail.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+
+        <div class="rv">
+          <h3>Qui chante</h3>
+          <div class="dl-clair">
+            {
+              membres.map((v) => (
+                <div class="kv-clair">
+                  <span>{v.label}</span>
+                  <span>
+                    {v.name}
+                    {v.pivot && <em> · chante aussi dans l'autre quatuor</em>}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+
+          <h3 class="apres">Les autres formations</h3>
+          <ul class="liens">
+            {
+              autres.map((f) => (
+                <li>
+                  <a href={href(`formations/${f.id}`)}>{f.data.nom}</a>
+                  <span>
+                    {f.data.effectif} {f.data.registre}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Repertoire formation={id} alt />
+  <Concerts formation={id} alt={false} />
+  <Ecouter formation={id} />
+  <Contact />
+</Base>
+
+<style>
+  .kv-clair {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: var(--rule);
+    font-size: 0.9rem;
+  }
+  .kv-clair > span:first-child {
+    font-weight: 700;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+  .kv-clair em {
+    font-style: normal;
+    font-size: 0.78rem;
+    color: var(--gold-deep);
+  }
+  .apres-photo {
+    margin-top: 1.6rem;
+  }
+  .apres {
+    margin-top: 2.2rem;
+  }
+  .liens {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .liens li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: var(--rule);
+    font-size: 0.9rem;
+  }
+  .liens a {
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--gold);
+  }
+  .liens a:hover {
+    border-bottom-color: var(--ink);
+  }
+  .liens span {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--ink) 50%, transparent);
+  }
+</style>

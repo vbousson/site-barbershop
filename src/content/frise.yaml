@@ -1,0 +1,54 @@
+# La frise.
+#
+# ⚠ `aConfirmer: true` = millésime reconstruit à partir du récit oral
+# (cf. BRIEF §7). Les six dates sont dans ce cas. À corriger avec le groupe,
+# puis retirer le drapeau.
+
+- id: depart
+  annee: 2018
+  aConfirmer: true
+  titre: Quatre chanteurs, quatre voix
+  texte: >-
+    Le pari de départ : une voix par partie, sur le répertoire barbershop.
+    Pur amateurisme, répétitions très irrégulières.
+
+- id: interruption
+  annee: 2020
+  aConfirmer: true
+  titre: Interruption
+  texte: >-
+    Le covid arrête tout. La reprise se fera à effectif remanié, avec
+    l'arrivée d'un nouveau lead.
+
+- id: regularite
+  annee: 2022
+  aConfirmer: true
+  titre: La régularité
+  texte: >-
+    Adrien rejoint le quatuor au lead. C'est le moment où le groupe trouve son
+    rythme de travail — et son nom, Katr Tet.
+
+- id: concerts
+  annee: 2023
+  aConfirmer: true
+  titre: Premiers vrais concerts
+  texte: Des programmes tenus de bout en bout, entre une heure et une heure trente.
+
+- id: second-quatuor
+  annee: 2024
+  aConfirmer: true
+  cle: true
+  titre: Le second quatuor
+  texte: >-
+    Maurin, également alto en chœur mixte, réunit Naïs, Mathilde et Aurore
+    pour monter des pièces à voix aiguës. Il chante dans les deux : quatre
+    plus quatre font sept.
+
+- id: identite
+  annee: 2026
+  aConfirmer: true
+  titre: Identité et structure
+  texte: >-
+    Mathilde dessine les logos et les visuels. Une association est en cours de
+    constitution, pour facturer, déclarer à la Sacem, et porter les formations
+    à venir.

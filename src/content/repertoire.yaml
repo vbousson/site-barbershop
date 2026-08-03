@@ -1,0 +1,35 @@
+# Le répertoire, par familles.
+#
+# Volontairement NON exhaustif : une liste complète date, elle ennuie, et elle
+# prive l'organisateur d'une raison d'écrire. Quelques titres par famille
+# suffisent à situer le niveau et la couleur.
+#
+# `brouillon: true` = emplacement à remplir. Retirer la ligne une fois le
+# vrai titre saisi.
+
+- id: films
+  ordre: 1
+  famille: Musiques de films
+  titres:
+    - { titre: Les Aristochats, formation: 4plus4 }
+    - { titre: Toy Story, formation: katr-tet }
+    - { titre: Gladiator, formation: 4plus4 }
+    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }
+
+- id: barbershop
+  ordre: 2
+  famille: Barbershop & standards
+  titres:
+    - { titre: Titre à compléter, formation: katr-tet, brouillon: true }
+    - { titre: Titre à compléter, formation: katr-tet, brouillon: true }
+    - { titre: Titre à compléter, formation: 4plus4, brouillon: true }
+    - { titre: Tag à compléter, formation: katr-tet, brouillon: true }
+
+- id: sacre
+  ordre: 3
+  famille: Classique & sacré
+  titres:
+    - { titre: Evening Rise, formation: 4plus4 }
+    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }
+    - { titre: Titre à compléter, formation: 4plus4, brouillon: true }
+    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }

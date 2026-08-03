@@ -1,0 +1,105 @@
+---
+/**
+ * L'agenda. Placé AVANT l'histoire : ce qu'on peut réserver prime sur d'où
+ * l'on vient.
+ *
+ * Le partage à venir / déjà joué se calcule au build à partir des dates ISO.
+ * Une date passée bascule donc toute seule au prochain déploiement.
+ */
+import SectionHead from '../SectionHead.astro';
+import Chip from '../Chip.astro';
+import Photo from '../Photo.astro';
+import { getConcerts, getFormationIndex, dateLongue } from '../../lib/content';
+import type { FormationId } from '../../data/formations';
+
+interface Props {
+  formation?: FormationId;
+  alt?: boolean;
+}
+
+const { formation, alt = true } = Astro.props;
+
+const index = await getFormationIndex();
+const { avenir, passe } = await getConcerts();
+const garde = (c: { data: { formation: FormationId } }) => !formation || c.data.formation === formation;
+const aVenir = avenir.filter(garde);
+const dejaJoue = passe.filter(garde);
+---
+
+<section id="concerts" class={alt ? 'alt' : undefined}>
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Agenda"
+      titre="Concerts"
+      lede="Concerts, participations, interventions courtes. Pour une date qui n'y figure pas encore, écrivez-nous : le calendrier se remplit vite."
+      tie={3}
+      rot={5}
+    />
+
+    {/* Ce qu'un programmateur veut voir avant les dates : qu'il y a du monde. */}
+    <div class="bandeau rv">
+      <Photo
+        photo="public-chenoise"
+        attendue=""
+        ratio="21 / 8"
+        widths={[640, 1024, 1440]}
+        sizes="(max-width: 1200px) 92vw, 1160px"
+        legende
+      />
+    </div>
+
+    <p class="subh">À venir</p>
+    {
+      aVenir.length === 0 ? (
+        <p class="empty rv">Prochaine date en cours de calage.</p>
+      ) : (
+        <ul class="dts rv">
+          {aVenir.map((c) => (
+            <li>
+              <time datetime={c.data.date!}>{dateLongue(c.data.date!)}</time>
+              <span>
+                {c.data.lieu} — {c.data.description}
+              </span>
+              <Chip formation={c.data.formation} index={index} statique={!!formation} />
+              <span />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <p class="subh">Déjà joué</p>
+    {
+      dejaJoue.length === 0 ? (
+        <p class="empty rv">Rien encore à cette affiche.</p>
+      ) : (
+        <ul class="dts past rv">
+          {dejaJoue.map((c) => (
+            <li>
+              {c.data.date ? (
+                <time datetime={c.data.date}>{dateLongue(c.data.date)}</time>
+              ) : (
+                <span class="nodate brouillon">
+                  Date à retrouver<span class="sr"> (à compléter)</span>
+                </span>
+              )}
+              <span class:list={{ brouillon: c.data.brouillon }}>
+                {c.data.lieu} — {c.data.description}
+              </span>
+              <Chip formation={c.data.formation} index={index} statique={!!formation} />
+              {/* Fragment nu : la section « Écouter » existe sur l'accueil
+                  comme sur chaque page de formation. */}
+              {c.data.enregistrement ? (
+                <a class="rec" href="#ecouter">
+                  Écouter
+                </a>
+              ) : (
+                <span />
+              )}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>

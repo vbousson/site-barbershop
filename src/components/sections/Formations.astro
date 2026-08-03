@@ -1,0 +1,53 @@
+---
+/**
+ * Trois cartes au gabarit strictement identique : même format, même longueur
+ * de texte, même nombre de puces. L'égalité entre les trois formations ne se
+ * décrète pas, elle s'impose par la contrainte typographique.
+ */
+import SectionHead from '../SectionHead.astro';
+import Photo from '../Photo.astro';
+import { getFormations } from '../../lib/content';
+import { href } from '../../lib/url';
+
+const formations = await getFormations();
+---
+
+<section id="formations">
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Trois formations"
+      titre="Une voix par tête"
+      lede="Personne ne double personne : chaque partie est tenue par un seul chanteur. Ça change l'équilibre, l'écoute, et le risque. Trois configurations sont disponibles à la programmation."
+      tie={0}
+      rot={-4}
+    />
+
+    <div class="cards">
+      {
+        formations.map((f) => (
+          <article class="card rv">
+            <Photo photo={f.data.photo} attendue={f.data.photoAttendue} />
+            <div class="n">
+              {f.data.effectif}
+              <small>
+                {f.data.registre} · {f.data.notation}
+              </small>
+            </div>
+            <h3>
+              <a href={href(`formations/${f.id}`)}>{f.data.nom}</a>
+            </h3>
+            <p>{f.data.resume}</p>
+            <ul>
+              {f.data.puces.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+            <a class="more" href={href(`formations/${f.id}`)}>
+              La programmer &rarr;
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

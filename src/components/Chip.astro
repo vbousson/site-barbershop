@@ -1,0 +1,28 @@
+---
+/**
+ * L'étiquette de formation. Cliquable : elle mène à la page de la formation,
+ * ce qui donne au programmateur un chemin direct depuis n'importe quel titre
+ * du répertoire ou n'importe quelle date.
+ */
+import type { FormationId } from '../data/formations';
+
+interface Props {
+  formation: FormationId;
+  index: Record<FormationId, { nom: string; url: string }>;
+  /** Sur la page d'une formation, l'étiquette est redondante : on la fige. */
+  statique?: boolean;
+}
+
+const { formation, index, statique = false } = Astro.props;
+const f = index[formation];
+---
+
+{
+  statique ? (
+    <span class="chip">{f.nom}</span>
+  ) : (
+    <a class="chip" href={f.url}>
+      {f.nom}
+    </a>
+  )
+}

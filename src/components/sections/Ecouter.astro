@@ -1,0 +1,78 @@
+---
+/**
+ * Les captations de salle.
+ *
+ * Tant qu'une piste n'a pas d'`url`, son bouton est désactivé plutôt que
+ * trompeur : rien de pire qu'un triangle de lecture qui ne joue rien.
+ */
+import SectionHead from '../SectionHead.astro';
+import Chip from '../Chip.astro';
+import { getEnregistrements, getFormationIndex } from '../../lib/content';
+import type { FormationId } from '../../data/formations';
+
+interface Props {
+  /** Sur une page de formation, on ne montre que ses propres captations. */
+  formation?: FormationId;
+  alt?: boolean;
+}
+
+const { formation, alt = true } = Astro.props;
+
+const index = await getFormationIndex();
+const tous = await getEnregistrements();
+const pistes = formation ? tous.filter((e) => e.data.formation === formation) : tous;
+
+// Tant qu'aucune captation n'est en ligne, on le dit plutôt que de laisser
+// quatre lignes grises parler à notre place.
+const rienEnLigne = pistes.length > 0 && pistes.every((p) => p.data.url === null);
+---
+
+<section id="ecouter" class={alt ? 'alt' : undefined}>
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Enregistrements"
+      titre="Écouter"
+      lede="Captations de salle, telles quelles, sans retouche. C'est ce que vous entendrez le soir du concert."
+      tie={1}
+      rot={3}
+    />
+
+    {
+      pistes.length === 0 ? (
+        <p class="empty rv">Pas encore de captation pour cette formation.</p>
+      ) : (
+        <div class="tracks">
+          {
+            rienEnLigne && (
+              <p class="empty rv">
+                Les captations sont en cours de montage — écrivez-nous en attendant, on vous envoie
+                un extrait.
+              </p>
+            )
+          }
+          {pistes.map((p) => (
+            <button class="trk rv" type="button" disabled={p.data.url === null}>
+              <span class="pl">
+                <svg viewBox="0 0 10 12" fill="currentColor" aria-hidden="true">
+                  <path d="M0 0l10 6-10 6z" />
+                </svg>
+              </span>
+              <span>
+                <strong class:list={{ brouillon: p.data.brouillon }}>
+                  {p.data.titre}
+                  {p.data.brouillon && <span class="sr"> (à compléter)</span>}
+                </strong>
+                <span class="meta">
+                  {p.data.lieu} · {p.data.quand}
+                </span>
+              </span>
+              {/* Toujours statique : un lien dans un bouton n'est pas du HTML valide. */}
+              <Chip formation={p.data.formation} index={index} statique />
+              <span class="d">{p.data.duree}</span>
+            </button>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

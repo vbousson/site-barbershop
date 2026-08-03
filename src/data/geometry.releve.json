@@ -1,0 +1,112 @@
+{
+ "note": "Coordonnees en % du disque blanc. left/top = coin haut-gauche, w/h = taille. Releve pixel sur les logos originaux de Mathilde Varin.",
+ "affiche_7_voix": {
+  "alto": {
+   "left": 12.528,
+   "top": 9.934,
+   "w": 18.985,
+   "h": 28.587
+  },
+  "mezzo": {
+   "left": 72.241,
+   "top": 16.004,
+   "w": 18.874,
+   "h": 18.985
+  },
+  "soprano": {
+   "left": 37.804,
+   "top": 8.057,
+   "w": 23.841,
+   "h": 21.854
+  },
+  "basse": {
+   "left": 8.554,
+   "top": 38.3,
+   "w": 19.536,
+   "h": 27.815
+  },
+  "tenor": {
+   "left": 28.532,
+   "top": 30.243,
+   "w": 19.868,
+   "h": 28.366
+  },
+  "lead": {
+   "left": 53.366,
+   "top": 29.249,
+   "w": 19.757,
+   "h": 26.6
+  },
+  "baryton": {
+   "left": 73.013,
+   "top": 37.307,
+   "w": 20.751,
+   "h": 27.483
+  },
+  "mark": {
+   "left": 26.214,
+   "top": 62.472,
+   "w": 46.468,
+   "h": 31.898
+  }
+ },
+ "logo_katr_tet": {
+  "basse": {
+   "left": 6.569,
+   "top": 23.538,
+   "w": 19.536,
+   "h": 27.815
+  },
+  "tenor": {
+   "left": 27.218,
+   "top": 16.269,
+   "w": 19.868,
+   "h": 28.366
+  },
+  "lead": {
+   "left": 53.069,
+   "top": 16.148,
+   "w": 19.757,
+   "h": 26.6
+  },
+  "baryton": {
+   "left": 72.68,
+   "top": 25.343,
+   "w": 20.751,
+   "h": 27.483
+  },
+  "mark": {
+   "left": 12.856,
+   "top": 46.293,
+   "w": 71.758
+  }
+ },
+ "quartet_a_une_barbe": {
+  "note": "pas de logo existant : centres choisis, ascendants par tessiture",
+  "centres_pct": {
+   "tenor": [
+    19,
+    37
+   ],
+   "alto": [
+    39.5,
+    29
+   ],
+   "mezzo": [
+    61.5,
+    27
+   ],
+   "soprano": [
+    81.5,
+    33
+   ]
+  },
+  "markBox": [
+   14,
+   52,
+   72
+  ],
+  "markFs": "8.2cqw"
+ },
+ "echelle_globale": "K = 0.95, applique dans boxOf() et sur le logotype"
+}
