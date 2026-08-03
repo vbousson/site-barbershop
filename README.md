@@ -54,10 +54,15 @@ chaque déploiement — une date qui passe bascule toute seule.
 
 - [x] L'adresse mail — `katr.tet@gmail.com`, à revoir quand l'association aura la sienne
 - [x] Photo de Katr Tet et photo de 4+4=7 (Chenoise, 16 juillet 2026)
+- [x] Six concerts datés (2023 → 2026)
 - [ ] **Une photo du Quartet à une barbe** — sa carte affiche encore un cadre vide
-- [ ] **Les dates et lieux des cinq concerts passés** — cinq lignes `brouillon: true`
-      dans `concerts.yaml` attendent leur date
+- [ ] **Les villes des quatre salles** : Depsival, Salle Olivier Messiaen,
+      Atelier du 8, CHU Sud. Un programmateur extérieur ne sait pas où c'est.
+- [ ] **Quatre concerts sans date** — deux « Concert entre amis », un mariage,
+      une seconde visite au CHU Sud ; voir les commentaires de `concerts.yaml`
 - [ ] Les titres du répertoire — huit lignes `brouillon: true` dans `repertoire.yaml`
+- [ ] Aucun concert n'est rattaché au Quartet à une barbe : sa page affiche
+      « Rien encore à cette affiche »
 - [ ] Les quatre documents à télécharger (fiche technique, photos HD, logos, répertoire)
 - [ ] Confirmer les millésimes de la frise, tous marqués `aConfirmer: true`
 - [ ] Confirmer l'affectation des visages féminins — voir le commentaire en tête de `src/data/voices.ts`

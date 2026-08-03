@@ -36,17 +36,24 @@ const dejaJoue = passe.filter(garde);
       rot={5}
     />
 
-    {/* Ce qu'un programmateur veut voir avant les dates : qu'il y a du monde. */}
-    <div class="bandeau rv">
-      <Photo
-        photo="public-chenoise"
-        attendue=""
-        ratio="21 / 8"
-        widths={[640, 1024, 1440]}
-        sizes="(max-width: 1200px) 92vw, 1160px"
-        legende
-      />
-    </div>
+    {/* Ce qu'un programmateur veut voir avant les dates : qu'il y a du monde.
+        Réservé à l'agenda complet : sur une page de formation, la photo d'un
+        concert donné surplomberait une liste filtrée à laquelle elle
+        n'appartient pas forcément. */}
+    {
+      !formation && (
+        <div class="bandeau rv">
+          <Photo
+            photo="public-chenoise"
+            attendue=""
+            ratio="21 / 8"
+            widths={[640, 1024, 1440]}
+            sizes="(max-width: 1200px) 92vw, 1160px"
+            legende
+          />
+        </div>
+      )
+    }
 
     <p class="subh">À venir</p>
     {
@@ -57,9 +64,7 @@ const dejaJoue = passe.filter(garde);
           {aVenir.map((c) => (
             <li>
               <time datetime={c.data.date!}>{dateLongue(c.data.date!)}</time>
-              <span>
-                {c.data.lieu} — {c.data.description}
-              </span>
+              <span>{c.data.lieu}{c.data.description && ` — ${c.data.description}`}</span>
               <Chip formation={c.data.formation} index={index} statique={!!formation} />
               <span />
             </li>
@@ -84,7 +89,7 @@ const dejaJoue = passe.filter(garde);
                 </span>
               )}
               <span class:list={{ brouillon: c.data.brouillon }}>
-                {c.data.lieu} — {c.data.description}
+                {c.data.lieu}{c.data.description && ` — ${c.data.description}`}
               </span>
               <Chip formation={c.data.formation} index={index} statique={!!formation} />
               {/* Fragment nu : la section « Écouter » existe sur l'accueil

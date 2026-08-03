@@ -62,13 +62,18 @@ export async function getFormationIndex(): Promise<Record<FormationId, { nom: st
   ) as Record<FormationId, { nom: string; url: string }>;
 }
 
-/** Date longue en français, sans dépendance : « 16 juillet 2026 ». */
+/**
+ * Date longue en français, sans dépendance.
+ * « 16 juillet 2026 » quand on connaît le jour, « janvier 2025 » sinon.
+ */
 const MOIS = [
   'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
   'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
 ];
 
 export function dateLongue(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number) as [number, number, number];
-  return `${d === 1 ? '1er' : d} ${MOIS[m - 1]} ${y}`;
+  const [y, m, d] = iso.split('-').map(Number) as [number, number, number?];
+  const mois = MOIS[m - 1];
+  if (d === undefined) return `${mois} ${y}`;
+  return `${d === 1 ? '1er' : d} ${mois} ${y}`;
 }

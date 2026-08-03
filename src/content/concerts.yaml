@@ -1,11 +1,16 @@
 # Les concerts. Les dates à venir en premier, le passé ensuite : c'est ce
-# qu'on peut réserver qui prime.
+# qu'on peut réserver qui prime. Le tri et le partage entre les deux se font
+# tout seuls à partir de la date, à chaque déploiement.
 #
-# `date` : ISO (2026-07-16), ou `null` tant que la date n'est pas retrouvée.
-# Le tri et le partage entre « à venir » et « déjà joué » se font tout seuls
-# à partir de cette date.
+# `date` : `2026-07-16` si on connaît le jour, `2025-01` si on ne se souvient
+# que du mois, `null` tant qu'on ne sait pas. Rien n'oblige à inventer un jour.
 #
+# `description` : facultative. Sans elle, seul le lieu s'affiche.
 # `enregistrement` : l'id d'une entrée de enregistrements.yaml, ou null.
+#
+# ⚠ Les villes manquent sur les quatre salles reprises de la liste de VBO
+# (Depsival, Salle Olivier Messiaen, Atelier du 8, CHU Sud) : un programmateur
+# extérieur ne saura pas où c'est. À compléter.
 
 - id: chenoise-2026
   date: 2026-07-16
@@ -14,42 +19,63 @@
   formation: 4plus4
   enregistrement: chenoise-2026
 
-- id: concert-a
-  date: null
-  lieu: Lieu à compléter
-  description: Concert 1 h 15
+- id: chu-sud-2026-06
+  date: 2026-06
+  lieu: CHU Sud
   formation: 4plus4
-  enregistrement: null
-  brouillon: true
 
-- id: festival-a
+- id: atelier-du-8-2025-02
+  date: 2025-02
+  lieu: Atelier du 8
+  formation: katr-tet
+
+- id: messiaen-2025-01
+  date: 2025-01
+  lieu: Salle Olivier Messiaen
+  formation: katr-tet
+
+- id: atelier-du-8-2024-04
+  date: 2024-04
+  lieu: Atelier du 8
+  description: Scène ouverte de Simon Bouvot
+  formation: katr-tet
+
+- id: depsival-2023-08
+  date: 2023-08
+  lieu: Depsival
+  formation: katr-tet
+
+# ── dates non retrouvées ────────────────────────────────────────────────────
+# Ces quatre-là sont dans la liste de VBO sans millésime. Elles s'affichent en
+# gris, « Date à retrouver ». Renseigner `date` et retirer `brouillon`.
+
+- id: chu-sud-autre
+  # Une seconde visite au CHU Sud, distincte de celle de juin 2026 dans la
+  # liste d'origine. Si c'est en fait la même, supprimer cette entrée.
   date: null
-  lieu: Lieu à compléter
-  description: Festival
+  lieu: CHU Sud
   formation: 4plus4
-  enregistrement: null
   brouillon: true
 
-- id: eglise-a
+- id: entre-amis-a
+  # La liste d'origine porte deux fois « Concert entre amis #2 ». Deux éditions
+  # donc, mais la numérotation est à confirmer avant de la réafficher.
   date: null
   lieu: Lieu à compléter
-  description: Concert d'église
+  description: Concert entre amis
   formation: katr-tet
-  enregistrement: null
   brouillon: true
 
-- id: ceremonie-a
+- id: entre-amis-b
   date: null
   lieu: Lieu à compléter
-  description: Cérémonie
+  description: Concert entre amis
   formation: katr-tet
-  enregistrement: null
   brouillon: true
 
-- id: premiere-partie-a
+- id: mariage
   date: null
   lieu: Lieu à compléter
-  description: Première partie
+  description: Mariage
   formation: katr-tet
-  enregistrement: null
   brouillon: true
