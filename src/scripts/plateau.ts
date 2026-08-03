@@ -57,6 +57,8 @@ function init(spot: HTMLElement): void {
     wet: null as GainNode | null,
     gain: {} as Record<VoiceId, GainNode>,
     src: {} as Partial<Record<VoiceId, AudioBufferSourceNode>>,
+    /** Boucles rendues une fois, rejouées par des sources recréées à chaque départ. */
+    buf: {} as Partial<Record<VoiceId, AudioBuffer>>,
     piste: PISTES[0]!,
     t0: 0,
     loopLen: 0,
@@ -178,31 +180,60 @@ function init(spot: HTMLElement): void {
         const bufs = await Promise.all(
           VOICES.map((v, i) => this.renderVoice(piste.lines[v.id], piste.bpm, i)),
         );
-        Object.values(this.src).forEach((s) => {
-          try {
-            s?.stop();
-          } catch {
-            /* déjà arrêtée */
-          }
-        });
-        this.src = {};
+        // On garde les buffers rendus : les sources, elles, sont recréées à
+        // chaque départ pour que la boucle reprenne à zéro.
+        this.arreterSources();
+        VOICES.forEach((v, i) => (this.buf[v.id] = bufs[i]!));
         this.loopLen = bufs[0]!.duration;
-        const start = this.ctx!.currentTime + 0.12;
-        VOICES.forEach((v, i) => {
-          const s = this.ctx!.createBufferSource();
-          s.buffer = bufs[i]!;
-          s.loop = true;
-          s.connect(this.gain[v.id]);
-          s.start(start);
-          this.src[v.id] = s;
-        });
-        this.t0 = start;
         this.loaded = piste.id;
       } finally {
         this.busy = false;
         if (!discret) setBusy(false);
       }
+      // Changement de boucle en cours de lecture : on relance depuis le début.
+      if (this.anyOn()) this.demarrerSources();
       VOICES.forEach((v) => this.apply(v.id)); // rétablit les voix déjà allumées
+    },
+
+    /** Une source tourne-t-elle ? */
+    enCours(): boolean {
+      return Object.keys(this.src).length > 0;
+    },
+
+    /**
+     * Lance les sept boucles au même instant, depuis leur début.
+     *
+     * Personne ne démarre un morceau en plein milieu de la partition : la
+     * boucle ne tourne donc que pendant que quelqu'un chante. Les sources
+     * d'AudioBuffer ne se rembobinent pas, il faut les recréer.
+     */
+    demarrerSources(): void {
+      if (!this.ctx || !this.loaded) return;
+      this.arreterSources();
+      const start = this.ctx.currentTime + 0.12;
+      VOICES.forEach((v) => {
+        const b = this.buf[v.id];
+        if (!b) return;
+        const s = this.ctx!.createBufferSource();
+        s.buffer = b;
+        s.loop = true;
+        s.connect(this.gain[v.id]);
+        s.start(start);
+        this.src[v.id] = s;
+      });
+      this.t0 = start;
+    },
+
+    arreterSources(): void {
+      Object.values(this.src).forEach((s) => {
+        try {
+          s?.stop();
+        } catch {
+          /* déjà arrêtée */
+        }
+      });
+      this.src = {};
+      this.t0 = 0;
     },
 
     apply(id: VoiceId): void {
@@ -213,7 +244,12 @@ function init(spot: HTMLElement): void {
     async set(id: VoiceId, on: boolean): Promise<void> {
       this.want[id] = on;
       await this.load(this.piste);
+      // Première voix à entrer : la boucle repart du début. Les suivantes se
+      // posent par-dessus celle qui tourne déjà, sans la rembobiner.
+      if (on && !this.enCours()) this.demarrerSources();
       this.apply(id);
+      // Plus personne : on coupe les sources, la prochaine entrée repartira de zéro.
+      if (!this.anyOn()) this.arreterSources();
     },
 
     async pause(): Promise<void> {
@@ -231,7 +267,8 @@ function init(spot: HTMLElement): void {
 
     /** Position dans la boucle, de 0 à 1 — c'est elle qui trace l'arc doré. */
     phase(): number {
-      if (!this.ctx || !this.loopLen || this.ctx.currentTime < this.t0) return 0;
+      if (!this.ctx || !this.loopLen || !this.enCours()) return 0;
+      if (this.ctx.currentTime < this.t0) return 0;
       return ((this.ctx.currentTime - this.t0) % this.loopLen) / this.loopLen;
     },
   };
