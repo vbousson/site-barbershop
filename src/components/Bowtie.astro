@@ -1,0 +1,34 @@
+---
+/**
+ * Un nœud papillon aquarellé de Mathilde, en marqueur de section.
+ * Quatre variantes, choisies par index pour qu'aucune section voisine n'ait
+ * le même. Décoratif : jamais annoncé aux lecteurs d'écran.
+ */
+import { Image } from 'astro:assets';
+import tie1 from '../assets/bowties/1.png';
+import tie2 from '../assets/bowties/2.png';
+import tie3 from '../assets/bowties/3.png';
+import tie4 from '../assets/bowties/4.png';
+
+const TIES = [tie1, tie2, tie3, tie4];
+
+interface Props {
+  /** Index de la variante, ramené dans 0–3. */
+  n?: number;
+  /** Inclinaison, en degrés. */
+  rot?: number;
+  /** Version réduite, pour la frise. */
+  tiny?: boolean;
+}
+
+const { n = 0, rot = 0, tiny = false } = Astro.props;
+const src = TIES[((n % TIES.length) + TIES.length) % TIES.length]!;
+---
+
+<Image
+  class:list={['tie', { tiny }]}
+  src={src}
+  alt=""
+  aria-hidden="true"
+  style={`--rot:${rot}deg`}
+/>

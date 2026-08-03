@@ -1,0 +1,35 @@
+---
+/**
+ * Données structurées schema.org, pour que le groupe apparaisse comme un
+ * ensemble musical et non comme une page quelconque.
+ *
+ * On n'y met que du vérifiable. Pas d'adresse mail tant que celle du site est
+ * un placeholder : une fausse coordonnée dans des données structurées est
+ * bien pire qu'une coordonnée absente.
+ */
+import { SITE } from '../data/site';
+
+interface Props {
+  nom: string;
+  description: string;
+  /** Nombre de chanteurs de la formation décrite. */
+  effectif: number;
+  url: URL;
+}
+
+const { nom, description, effectif, url } = Astro.props;
+
+const donnees = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: nom,
+  description,
+  url: url.href,
+  numberOfPerformers: effectif,
+  genre: ['A cappella', 'Barbershop', 'Musique vocale'],
+  areaServed: { '@type': 'Place', name: `${SITE.ville}, Isère, France` },
+  location: { '@type': 'Place', name: SITE.ville },
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(donnees)} />

@@ -1,0 +1,32 @@
+---
+/**
+ * La barre haute. Elle devient opaque dès qu'on quitte le hero, sinon elle
+ * flotte sur le lavis. Les liens de navigation pointent tous vers les
+ * sections de l'accueil : le site tient sur une page, plus trois pages de
+ * formation pour les programmateurs.
+ */
+import { anchor, href } from '../lib/url';
+import { SITE } from '../data/site';
+
+const liens = [
+  { id: 'formations', label: 'Formations' },
+  { id: 'ecouter', label: 'Écouter' },
+  { id: 'repertoire', label: 'Répertoire' },
+  { id: 'concerts', label: 'Concerts' },
+  { id: 'histoire', label: 'Histoire' },
+];
+---
+
+<header class="top" id="top">
+  <a class="brand" href={href()}>{SITE.titre}</a>
+  <nav aria-label="Navigation principale">
+    <span class="links">
+      {liens.map((l) => <a href={anchor(l.id)}>{l.label}</a>)}
+    </span>
+    <a class="cta" href={`mailto:${SITE.mail}`}>Nous écrire</a>
+  </nav>
+</header>
+
+<script>
+  import '../scripts/topbar';
+</script>

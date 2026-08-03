@@ -1,0 +1,57 @@
+---
+/**
+ * La dernière section, et la vraie raison d'être du site : donner les quatre
+ * réponses que cherche un programmateur — qu'est-ce que je peux réserver,
+ * à quoi ça ressemble, combien de temps ça dure, qui j'appelle.
+ */
+import { SITE, FICHE_TECHNIQUE, TELECHARGEMENTS } from '../../data/site';
+---
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Nous programmer</h2>
+      </div>
+      <p class="lede">
+        Dites-nous la durée, le lieu et le public : nous proposons un programme.
+        Réponse sous quelques jours.
+      </p>
+    </div>
+
+    <div class="two">
+      <div class="rv">
+        <a class="bigmail" href={`mailto:${SITE.mail}`}>{SITE.mail}</a>
+        <div class="dl">
+          {
+            TELECHARGEMENTS.map((d) =>
+              d.href ? (
+                <a href={d.href}>
+                  {d.label}
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              ) : (
+                <span class="soon">
+                  {d.label}
+                  <em>bientôt</em>
+                </span>
+              ),
+            )
+          }
+        </div>
+      </div>
+
+      <div class="rv">
+        {
+          FICHE_TECHNIQUE.map((r) => (
+            <div class="kv">
+              <span>{r.k}</span>
+              <span>{r.v}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

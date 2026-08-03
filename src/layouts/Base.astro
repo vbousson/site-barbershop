@@ -1,0 +1,73 @@
+---
+/**
+ * Le gabarit commun. Tout le site est statique ; la seule île de code client
+ * est le widget du plateau, qui charge son propre script.
+ */
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  /** Titre de la page, sans le nom du site. */
+  title: string;
+  description: string;
+  /** Image de partage (Open Graph), en URL absolue. */
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
+const fullTitle = `${title} — ${SITE.titre}`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <meta name="theme-color" content="#FDF6E6" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.titre} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-numeral" preload />
+    <Font cssVariable="--font-script" />
+    <Font cssVariable="--font-body" preload />
+
+    {/* Données structurées, injectées par chaque page. */}
+    <slot name="head" />
+
+    {/* Posé avant le premier rendu : les blocs qui apparaissent au défilement
+        ne sont masqués que si JavaScript est là pour les révéler. */}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+
+  <body>
+    <a class="skip" href="#contenu">Aller au contenu</a>
+    <SiteHeader />
+    <main id="contenu">
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

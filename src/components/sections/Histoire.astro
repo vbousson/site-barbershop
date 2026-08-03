@@ -1,0 +1,44 @@
+---
+/**
+ * La frise, six jalons. Un nœud papillon remplace le point au jalon de
+ * naissance du second quatuor : c'est là que quatre plus quatre commencent
+ * à faire sept.
+ */
+import SectionHead from '../SectionHead.astro';
+import Bowtie from '../Bowtie.astro';
+import { getFrise } from '../../lib/content';
+
+interface Props {
+  alt?: boolean;
+}
+
+const { alt = false } = Astro.props;
+const jalons = await getFrise();
+---
+
+<section id="histoire" class={alt ? 'alt' : undefined}>
+  <div class="wrap">
+    <SectionHead
+      eyebrow="Le projet"
+      titre="L'histoire"
+      lede="Nous ne sommes pas un chœur réduit. Nous sommes un ensemble où chaque partie n'a qu'un seul propriétaire : un pari technique autant qu'un choix de son."
+      tie={0}
+      rot={7}
+    />
+
+    <ol class="tl2 rv">
+      {
+        jalons.map((j) => (
+          <li>
+            <span class="yr">{j.data.annee}</span>
+            <span class="rail">{j.data.cle ? <Bowtie n={2} tiny /> : <i class="dot" />}</span>
+            <div>
+              <h3>{j.data.titre}</h3>
+              <p>{j.data.texte}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

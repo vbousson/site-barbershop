@@ -1,0 +1,48 @@
+# Les captations.
+#
+# ⚠ AVANT DE METTRE UN `url` EN LIGNE (cf. BRIEF §9) : diffuser une captation
+# d'une musique de film relève de la SACEM/SDRM, indépendamment du concert,
+# et les arrangements a cappella comptent aussi. C'est une raison de plus
+# d'attendre que l'association existe. Ceci n'est pas un avis juridique.
+#
+# `url: null` = la piste est annoncée mais pas encore écoutable.
+
+- id: chenoise-2026
+  ordre: 1
+  titre: Titre à compléter
+  lieu: Cour du 10 rue Chenoise, Grenoble
+  quand: juillet 2026
+  formation: 4plus4
+  duree: "3:12"
+  url: null
+  brouillon: true
+
+- id: captation-b
+  ordre: 2
+  titre: Titre à compléter
+  lieu: Lieu à compléter
+  quand: à compléter
+  formation: katr-tet
+  duree: "2:48"
+  url: null
+  brouillon: true
+
+- id: captation-c
+  ordre: 3
+  titre: Titre à compléter
+  lieu: Lieu à compléter
+  quand: à compléter
+  formation: quartet-a-une-barbe
+  duree: "3:35"
+  url: null
+  brouillon: true
+
+- id: captation-d
+  ordre: 4
+  titre: Titre à compléter
+  lieu: Lieu à compléter
+  quand: à compléter
+  formation: 4plus4
+  duree: "2:20"
+  url: null
+  brouillon: true

@@ -1,0 +1,28 @@
+---
+/**
+ * Le chapeau commun à toutes les sections : nœud papillon, sur-titre, titre,
+ * chapô. Deux colonnes désolidarisées, soulignées d'un filet épais.
+ */
+import Bowtie from './Bowtie.astro';
+
+interface Props {
+  eyebrow: string;
+  titre: string;
+  lede: string;
+  tie?: number;
+  rot?: number;
+  /** Rang du titre : h1 sur la page dont c'est le sujet, h2 ailleurs. */
+  as?: 'h1' | 'h2';
+}
+
+const { eyebrow, titre, lede, tie = 0, rot = 0, as: Tag = 'h2' } = Astro.props;
+---
+
+<div class="sec-head rv">
+  <div>
+    <Bowtie n={tie} rot={rot} />
+    <p class="eyebrow">{eyebrow}</p>
+    <Tag>{titre}</Tag>
+  </div>
+  <p class="lede">{lede}</p>
+</div>

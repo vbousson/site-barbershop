@@ -1,0 +1,55 @@
+# Les concerts. Les dates à venir en premier, le passé ensuite : c'est ce
+# qu'on peut réserver qui prime.
+#
+# `date` : ISO (2026-07-16), ou `null` tant que la date n'est pas retrouvée.
+# Le tri et le partage entre « à venir » et « déjà joué » se font tout seuls
+# à partir de cette date.
+#
+# `enregistrement` : l'id d'une entrée de enregistrements.yaml, ou null.
+
+- id: chenoise-2026
+  date: 2026-07-16
+  lieu: Cour du 10 rue Chenoise, Grenoble
+  description: Musiques de films a cappella, avec Osez Chenoise
+  formation: 4plus4
+  enregistrement: chenoise-2026
+
+- id: concert-a
+  date: null
+  lieu: Lieu à compléter
+  description: Concert 1 h 15
+  formation: 4plus4
+  enregistrement: null
+  brouillon: true
+
+- id: festival-a
+  date: null
+  lieu: Lieu à compléter
+  description: Festival
+  formation: 4plus4
+  enregistrement: null
+  brouillon: true
+
+- id: eglise-a
+  date: null
+  lieu: Lieu à compléter
+  description: Concert d'église
+  formation: katr-tet
+  enregistrement: null
+  brouillon: true
+
+- id: ceremonie-a
+  date: null
+  lieu: Lieu à compléter
+  description: Cérémonie
+  formation: katr-tet
+  enregistrement: null
+  brouillon: true
+
+- id: premiere-partie-a
+  date: null
+  lieu: Lieu à compléter
+  description: Première partie
+  formation: katr-tet
+  enregistrement: null
+  brouillon: true

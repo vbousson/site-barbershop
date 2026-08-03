@@ -1,0 +1,42 @@
+---
+/**
+ * L'accueil.
+ *
+ * L'ordre des sections est pensé pour un programmateur : le widget, puis ce
+ * qu'il peut réserver, puis à quoi ça ressemble, puis les dates, et l'histoire
+ * seulement ensuite.
+ */
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Formations from '../components/sections/Formations.astro';
+import Ecouter from '../components/sections/Ecouter.astro';
+import Repertoire from '../components/sections/Repertoire.astro';
+import Concerts from '../components/sections/Concerts.astro';
+import Histoire from '../components/sections/Histoire.astro';
+import Contact from '../components/sections/Contact.astro';
+import DonneesStructurees from '../components/DonneesStructurees.astro';
+
+import { ogImage } from '../lib/og';
+
+const description =
+  'Sept chanteurs, une voix par partie. Trois formations programmables : Katr Tet (4 voix graves), Le Quartet à une barbe (4 voix aiguës) et 4+4=7 (7 voix mixtes).';
+const partage = await ogImage('4plus4-chenoise');
+---
+
+<Base title="Ensemble vocal à Grenoble" description={description} image={partage}>
+  <DonneesStructurees
+    slot="head"
+    nom="4+4=7"
+    description={description}
+    effectif={7}
+    url={new URL(Astro.url.pathname, Astro.site)}
+  />
+
+  <Hero titre="4+4=7 — ensemble vocal a cappella à Grenoble" />
+  <Formations />
+  <Ecouter />
+  <Repertoire />
+  <Concerts />
+  <Histoire />
+  <Contact />
+</Base>
