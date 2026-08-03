@@ -47,7 +47,7 @@ const partage = await ogImage(d.photo ?? 'public-chenoise');
 ---
 
 <Base
-  title={`${d.nom} — ${d.effectif} ${d.registre}`}
+  title={`${d.nom}, ${d.effectif} ${d.registre}`}
   description={`${d.accroche} ${d.resume}`}
   image={partage}
 >
@@ -59,7 +59,7 @@ const partage = await ogImage(d.photo ?? 'public-chenoise');
     url={new URL(Astro.url.pathname, Astro.site)}
   />
 
-  <Hero formation={id} titre={`${d.nom} — ${d.effectif} ${d.registre}, ${d.notation}`} />
+  <Hero formation={id} titre={`${d.nom}, ${d.effectif} ${d.registre}, ${d.notation}`} />
 
   <section id="formation">
     <div class="wrap">

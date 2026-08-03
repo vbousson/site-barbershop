@@ -1,8 +1,10 @@
 ---
 /**
- * La frise, six jalons. Un nœud papillon remplace le point au jalon de
- * naissance du second quatuor : c'est là que quatre plus quatre commencent
- * à faire sept.
+ * La frise, six jalons.
+ *
+ * Chaque jalon porte un nœud papillon de Mathilde, tous à la même taille, en
+ * alternant les quatre variantes pour que deux voisins ne soient jamais
+ * identiques. Le drapeau `cle` du contenu n'est plus utilisé à l'affichage.
  */
 import SectionHead from '../SectionHead.astro';
 import Bowtie from '../Bowtie.astro';
@@ -14,6 +16,22 @@ interface Props {
 
 const { alt = false } = Astro.props;
 const jalons = await getFrise();
+
+/**
+ * Trois chapôs à l'essai, volontairement opposés. Changer la lettre ci-dessous
+ * suffit à basculer. À réduire à un seul une fois tranché.
+ *
+ *   a  humain et modeste, on se moque un peu de nous
+ *   b  factuel et sec, le chapô annonce une chronologie
+ *   c  le son d'abord, la raison musicale du groupe
+ */
+const CHAPO = 'c' as 'a' | 'b' | 'c';
+
+const CHAPOS = {
+  a: "Sept chanteurs, deux quatuors, un ténor qui n'a jamais voulu choisir. Voilà comment on en est arrivés là.",
+  b: "Un quatuor monté en 2018, arrêté par le covid, reformé, puis doublé d'un second en 2024. Les jalons, dans l'ordre.",
+  c: "Au départ, on voulait juste entendre un accord vraiment juste à quatre voix. Les concerts, le second quatuor, les logos, tout ça est venu après.",
+};
 ---
 
 <section id="histoire" class={alt ? 'alt' : undefined}>
@@ -21,17 +39,19 @@ const jalons = await getFrise();
     <SectionHead
       eyebrow="Le projet"
       titre="L'histoire"
-      lede="Nous ne sommes pas un chœur réduit. Nous sommes un ensemble où chaque partie n'a qu'un seul propriétaire : un pari technique autant qu'un choix de son."
+      lede={CHAPOS[CHAPO]}
       tie={0}
       rot={7}
     />
 
     <ol class="tl2 rv">
       {
-        jalons.map((j) => (
-          <li>
+        jalons.map((j, i) => (
+          <li class:list={{ cle: j.data.cle }}>
             <span class="yr">{j.data.annee}</span>
-            <span class="rail">{j.data.cle ? <Bowtie n={2} tiny /> : <i class="dot" />}</span>
+            <span class="rail">
+              <Bowtie n={i} rot={(i % 2 ? 5 : -5) + (i % 3)} tiny />
+            </span>
             <div>
               <h3>{j.data.titre}</h3>
               <p>{j.data.texte}</p>

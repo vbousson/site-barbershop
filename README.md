@@ -32,7 +32,9 @@ en ligne.
 | Les dates de concert | `src/content/concerts.yaml` |
 | Les captations | `src/content/enregistrements.yaml` |
 | La frise historique | `src/content/frise.yaml` |
-| L'adresse mail, la fiche technique, les téléchargements | `src/data/site.ts` |
+| L'adresse mail | `src/data/site.ts` |
+| Les trois versions à l'essai de la section Contact | `src/components/sections/Contact.astro` |
+| Les trois chapôs à l'essai de la section Histoire | `src/components/sections/Histoire.astro` |
 | Qui chante quelle voix | `src/data/voices.ts` |
 | Les photos (légende, texte alternatif, recadrage) | `src/data/photos.ts` |
 
@@ -55,7 +57,7 @@ chaque déploiement — une date qui passe bascule toute seule.
 - [x] L'adresse mail — `katr.tet@gmail.com`, à revoir quand l'association aura la sienne
 - [x] Photo de Katr Tet et photo de 4+4=7 (Chenoise, 16 juillet 2026)
 - [x] Six concerts datés (2023 → 2026)
-- [ ] **Une photo du Quartet à une barbe** — sa carte affiche encore un cadre vide
+- [ ] **Une photo du Quatuor à une barbe** — sa carte affiche encore un cadre vide
 - [ ] **Les villes des quatre salles** : Depsival, Salle Olivier Messiaen,
       Atelier du 8, CHU Sud. Un programmateur extérieur ne sait pas où c'est.
 - [ ] **Quatre concerts sans date** — deux « Concert entre amis », un mariage,
@@ -63,7 +65,7 @@ chaque déploiement — une date qui passe bascule toute seule.
 - [x] Les titres du répertoire — trois familles renseignées, plus aucun placeholder
 - [ ] Arbitrer les deux familles gardées en commentaire dans `repertoire.yaml`
       (« Pop & contemporain », « Autres »)
-- [ ] Aucun concert n'est rattaché au Quartet à une barbe : sa page affiche
+- [ ] Aucun concert n'est rattaché au Quatuor à une barbe : sa page affiche
       « Rien encore à cette affiche »
 - [ ] Les quatre documents à télécharger (fiche technique, photos HD, logos, répertoire)
 - [ ] Confirmer les millésimes de la frise, tous marqués `aConfirmer: true`

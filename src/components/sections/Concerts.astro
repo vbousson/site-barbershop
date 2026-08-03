@@ -31,7 +31,7 @@ const dejaJoue = passe.filter(garde);
     <SectionHead
       eyebrow="Agenda"
       titre="Concerts"
-      lede="Concerts, participations, interventions courtes. Pour une date qui n'y figure pas encore, écrivez-nous : le calendrier se remplit vite."
+      lede="Où nous entendre prochainement, et ce qu'on a déjà joué. Cours d'immeuble, salles, scène ouverte, hôpital, mariage : on sort régulièrement, dans des formats très différents."
       tie={3}
       rot={5}
     />
@@ -64,7 +64,7 @@ const dejaJoue = passe.filter(garde);
           {aVenir.map((c) => (
             <li>
               <time datetime={c.data.date!}>{dateLongue(c.data.date!)}</time>
-              <span>{c.data.lieu}{c.data.description && ` — ${c.data.description}`}</span>
+              <span>{c.data.lieu}{c.data.description && ` · ${c.data.description}`}</span>
               <Chip formation={c.data.formation} index={index} statique={!!formation} />
               <span />
             </li>
@@ -89,7 +89,7 @@ const dejaJoue = passe.filter(garde);
                 </span>
               )}
               <span class:list={{ brouillon: c.data.brouillon }}>
-                {c.data.lieu}{c.data.description && ` — ${c.data.description}`}
+                {c.data.lieu}{c.data.description && ` · ${c.data.description}`}
               </span>
               <Chip formation={c.data.formation} index={index} statique={!!formation} />
               {/* Fragment nu : la section « Écouter » existe sur l'accueil

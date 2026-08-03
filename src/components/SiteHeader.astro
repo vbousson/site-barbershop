@@ -5,8 +5,10 @@
  * sections de l'accueil : le site tient sur une page, plus trois pages de
  * formation pour les programmateurs.
  */
+import { Image } from 'astro:assets';
 import { anchor, href } from '../lib/url';
 import { SITE } from '../data/site';
+import { MARKS } from '../data/images';
 
 const liens = [
   { id: 'formations', label: 'Formations' },
@@ -18,7 +20,10 @@ const liens = [
 ---
 
 <header class="top" id="top">
-  <a class="brand" href={href()}>{SITE.titre}</a>
+  {/* Le logotype de Mathilde plutôt que le nom composé en Big Shoulders. */}
+  <a class="brand" href={href()} aria-label={`${SITE.titre}, retour à l'accueil`}>
+    <Image src={MARKS.sept} alt={`${SITE.titre}, ensemble vocal`} widths={[110, 220]} sizes="110px" />
+  </a>
   <nav aria-label="Navigation principale">
     <span class="links">
       {liens.map((l) => <a href={anchor(l.id)}>{l.label}</a>)}

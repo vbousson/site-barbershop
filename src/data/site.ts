@@ -19,7 +19,11 @@ export const SITE = {
   graphiste: 'Mathilde Varin',
 } as const;
 
-/** Ce que cherche un programmateur : ce qu'il faut prévoir. */
+/**
+ * ⚠ PLUS AFFICHÉE. La section Contact a été volontairement dépouillée : pas de
+ * fiche technique ni de documents à télécharger tant que personne ne les
+ * demande. Les données restent ici, prêtes à être remises si le besoin vient.
+ */
 export const FICHE_TECHNIQUE: { k: string; v: string }[] = [
   { k: 'Effectifs', v: '4 voix graves · 4 voix aiguës · 7 voix mixtes' },
   { k: 'Durées', v: "de 20 min à 1 h 30, avec ou sans entracte" },
