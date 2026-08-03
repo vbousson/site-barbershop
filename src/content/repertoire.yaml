@@ -5,31 +5,56 @@
 # suffisent à situer le niveau et la couleur.
 #
 # `brouillon: true` = emplacement à remplir. Retirer la ligne une fois le
-# vrai titre saisi.
+# vrai titre saisi. Plus aucun aujourd'hui : les trois familles affichées ne
+# contiennent que de vrais titres.
+#
+# Deux familles sont gardées en commentaire en bas de fichier, le temps
+# d'arbitrer si elles ont leur place : « Pop & contemporain » et « Autres ».
+# Les décommenter suffit à les faire apparaître.
 
 - id: films
   ordre: 1
   famille: Musiques de films
   titres:
-    - { titre: Les Aristochats, formation: katr-tet }
-    - { titre: Toy Story, formation: katr-tet }
-    - { titre: Gladiator, formation: quartet-a-une-barbe }
     - { titre: Le voyage de Chihiro, formation: quartet-a-une-barbe }
+    - { titre: Les Aristochats, formation: katr-tet }
+    - { titre: Gladiator, formation: quartet-a-une-barbe }
+    - { titre: Le bossu de Notre-Dame, formation: katr-tet }
+    # - { titre: Toy Story, formation: katr-tet }
 
 - id: barbershop
   ordre: 2
   famille: Barbershop & standards
   titres:
-    - { titre: Titre à compléter, formation: katr-tet, brouillon: true }
-    - { titre: Titre à compléter, formation: katr-tet, brouillon: true }
-    - { titre: Titre à compléter, formation: 4plus4, brouillon: true }
-    - { titre: Tag à compléter, formation: katr-tet, brouillon: true }
+    - { titre: Smile, formation: katr-tet }
+    - { titre: When I Sing, formation: katr-tet }
+    - { titre: Five Minutes More, formation: katr-tet }
+    - { titre: Fluffy Ruffle Days, formation: katr-tet }
 
 - id: sacre
   ordre: 3
   famille: Classique & sacré
   titres:
     - { titre: Evening Rise, formation: 4plus4 }
-    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }
-    - { titre: Titre à compléter, formation: 4plus4, brouillon: true }
-    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }
+    - { titre: Coventry Carol, formation: 4plus4 }
+    - { titre: Quatre Petites Prières de saint François d’Assise, formation: katr-tet }
+    - { titre: Gaudete Christus est Natus, formation: 4plus4 }
+
+# - id: pop
+#   ordre: 4
+#   famille: Pop & contemporain
+#   titres:
+#     - { titre: When I'm sixty-four, formation: katr-tet }
+#     - { titre: Africa, formation: katr-tet }
+#     - { titre: The Wellerman, formation: katr-tet }
+#     - { titre: Tag à compléter, formation: katr-tet }
+
+    
+# - id: other
+#   ordre: 5
+#   famille: Autres
+#   titres:
+#     - { titre: Signore delle cime, formation: katr-tet }
+#     - { titre: , formation: katr-tet }
+#     - { titre: Titre à compléter, formation: 4plus4 }
+#     - { titre: Tag à compléter, formation: katr-tet }

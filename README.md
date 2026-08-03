@@ -60,7 +60,9 @@ chaque déploiement — une date qui passe bascule toute seule.
       Atelier du 8, CHU Sud. Un programmateur extérieur ne sait pas où c'est.
 - [ ] **Quatre concerts sans date** — deux « Concert entre amis », un mariage,
       une seconde visite au CHU Sud ; voir les commentaires de `concerts.yaml`
-- [ ] Les titres du répertoire — huit lignes `brouillon: true` dans `repertoire.yaml`
+- [x] Les titres du répertoire — trois familles renseignées, plus aucun placeholder
+- [ ] Arbitrer les deux familles gardées en commentaire dans `repertoire.yaml`
+      (« Pop & contemporain », « Autres »)
 - [ ] Aucun concert n'est rattaché au Quartet à une barbe : sa page affiche
       « Rien encore à cette affiche »
 - [ ] Les quatre documents à télécharger (fiche technique, photos HD, logos, répertoire)
