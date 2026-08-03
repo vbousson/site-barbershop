@@ -32,3 +32,20 @@ const src = TIES[((n % TIES.length) + TIES.length) % TIES.length]!;
   aria-hidden="true"
   style={`--rot:${rot}deg`}
 />
+
+<style>
+  /* Le nœud papillon. Sa position dans la frise est réglée par Histoire. */
+  /* Les nœuds papillon de Mathilde servent de marqueur en tête de section. */
+  .tie {
+    display: block;
+    width: clamp(40px, 5.2vw, 60px);
+    height: auto;
+    margin-bottom: 0.85rem;
+    rotate: var(--rot, 0deg);
+  }
+
+  .tie.tiny {
+    width: 30px;
+    margin: 0;
+  }
+</style>

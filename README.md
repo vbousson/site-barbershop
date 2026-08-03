@@ -94,8 +94,29 @@ src/
 │   ├── index.astro
 │   └── formations/[id].astro   une page par formation
 ├── scripts/plateau.ts le moteur : vols, bascule, audio
-└── styles/global.css
+└── styles/global.css   le partagé, et rien d'autre
 ```
+
+**Le CSS est colocalisé.** `global.css` ne garde que ce qui est vraiment
+mutualisé : les variables de couleur, la remise à zéro, les fontes, les
+primitives typographiques (`h2`, `.eyebrow`, `.lede`), `.wrap`, `.chip`,
+`.brouillon`, l'apparition au défilement. Tout le reste vit dans un bloc
+`<style>` du composant qui l'utilise, donc portée et chargé seulement sur les
+pages concernées.
+
+⚠ **Le piège de la portée.** Astro ajoute un attribut de portée à chaque
+compound du sélecteur, ce qui change la spécificité, et ne le pose que sur les
+éléments du composant lui-même. Deux conséquences vécues :
+
+- un élément rendu par un **autre composant** (`<Chip>`, `<Bowtie>`) ou **créé
+  par le script** (le logotype, les icônes de transport) ne porte pas la portée
+  du composant qui le stylise : la partie enfant du sélecteur doit passer en
+  `:global()`. Les cas concernés sont commentés sur place.
+- une spécificité peut s'inverser : `.top nav a` passait derrière `.top .cta`
+  sans portée, et devant avec. D'où `.top nav a.cta`.
+
+Le découpage a été validé par comparaison pixel à pixel avant / après, sur les
+5 pages en bureau et en mobile : zéro différence.
 
 Quelques points qui méritent qu'on s'y arrête avant de toucher au widget :
 

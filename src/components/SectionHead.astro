@@ -26,3 +26,28 @@ const { eyebrow, titre, lede, tie = 0, rot = 0, as: Tag = 'h2' } = Astro.props;
   </div>
   <p class="lede">{lede}</p>
 </div>
+
+<style>
+  /* Le chapeau de section. */
+  .sec-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: clamp(1rem, 4vw, 3rem);
+    align-items: end;
+    margin-bottom: clamp(2rem, 4.5vw, 3.2rem);
+    padding-bottom: 1.4rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .sec-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  .contact h2,
+  .contact .sec-head {
+    border-color: color-mix(in srgb, var(--wash) 35%, transparent);
+  }
+</style>

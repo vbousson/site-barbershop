@@ -60,3 +60,44 @@ const familles = (await getRepertoire())
     </div>
   </div>
 </section>
+
+<style>
+  /* Les colonnes du répertoire. */
+  /* ═══ répertoire ═══ */
+  .rep {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 3vw, 2.6rem);
+  }
+
+  @media (max-width: 860px) {
+    .rep {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .rep h3 {
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.82rem;
+  }
+
+  .rep ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rep li {
+    padding: 0.34rem 0;
+    font-size: 0.95rem;
+    border-bottom: var(--rule);
+  }
+
+  .rep li i {
+    display: block;
+    font-style: normal;
+    margin-top: 0.22rem;
+  }
+</style>

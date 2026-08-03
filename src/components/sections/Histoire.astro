@@ -62,3 +62,85 @@ const CHAPOS = {
     </ol>
   </div>
 </section>
+
+<style>
+  /* La frise verticale. */
+  /* ═══ frise historique ═══ */
+  .tl2 {
+    --c1: clamp(3rem, 7vw, 4.4rem);
+    --c2: 2rem;
+    --gp: clamp(0.6rem, 2vw, 1.2rem);
+    position: relative;
+    list-style: none;
+    /* Le bloc est centré dans la page : sans ça la frise se colle à la marge
+       gauche et laisse un grand vide à droite. */
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .tl2::before {
+    content: '';
+    position: absolute;
+    top: 0.7rem;
+    bottom: 2.6rem;
+    left: calc(var(--c1) + var(--gp) + var(--c2) / 2 - 1px);
+    width: 2px;
+    background: linear-gradient(color-mix(in srgb, var(--ink) 20%, transparent) 88%, transparent);
+  }
+
+  .tl2 li {
+    display: grid;
+    grid-template-columns: var(--c1) var(--c2) minmax(0, 1fr);
+    gap: 0 var(--gp);
+    padding-bottom: clamp(1.5rem, 3.2vw, 2.4rem);
+  }
+
+  .tl2 .yr {
+    font-family: var(--font-numeral);
+    font-weight: 800;
+    line-height: 0.85;
+    text-align: right;
+    font-size: clamp(1.45rem, 3.4vw, 2.15rem);
+    color: var(--gold-deep);
+    letter-spacing: -0.01em;
+  }
+
+  .tl2 .rail {
+    position: relative;
+  }
+
+  /* Le nœud est rendu par Bowtie et porte donc SA portée, pas celle d'ici :
+     la partie enfant du sélecteur doit être globale. */
+  .tl2 .rail> :global(*) {
+    position: absolute;
+    left: 50%;
+    top: 0.25rem;
+    translate: -50% 0;
+  }
+
+  .tl2 h3 {
+    margin: 0 0 0.2rem;
+    font-size: 0.92rem;
+  }
+
+  .tl2 p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 48ch;
+  }
+
+  /* Chaque jalon porte un nœud papillon. Le halo de la couleur du fond coupe le
+     filet vertical derrière lui, sinon la ligne traverse le nœud de part en part. */
+  .tl2 .rail> :global(.tie) {
+    top: 0.1rem;
+    width: 30px;
+    padding: 0 2px;
+    background: var(--paper);
+  }
+
+  .alt .tl2 .rail> :global(.tie) {
+    background: var(--wash);
+  }
+</style>

@@ -12,3 +12,22 @@ import { SITE } from '../data/site';
     <span>Logo et caricatures : {SITE.graphiste} · Maquette et audio de démonstration</span>
   </div>
 </footer>
+
+<style>
+  /* Le pied de page. */
+  footer {
+    background: var(--ink);
+    color: color-mix(in srgb, var(--wash) 42%, transparent);
+    font-size: 0.74rem;
+    padding: 1.6rem 0 2.6rem;
+  }
+
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-top: 1px solid color-mix(in srgb, var(--wash) 16%, transparent);
+    padding-top: 1.3rem;
+  }
+</style>
