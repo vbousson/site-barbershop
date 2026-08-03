@@ -4,6 +4,9 @@
 # puces chacune. L'égalité entre les trois formations ne se décrète pas,
 # elle s'impose par la typographie.
 #
+# `notation` peut être vide : sept parties ne sont pas un SATB, la notation
+# n'aurait aucun sens pour la formation à sept.
+#
 # `id` doit correspondre à une entrée de src/data/formations.ts.
 
 - id: katr-tet
@@ -12,23 +15,22 @@
   registre: voix graves
   notation: TTBB
   effectif: 4
-  accroche: Le quatuor barbershop d'origine, quatre voix graves.
+  accroche: "Ténor, lead, baryton, basse : le quatuor par lequel tout a commencé."
   resume: >-
-    Le quatuor d'origine, formé il y a sept ans autour du répertoire
-    barbershop : ténor, lead, baryton, basse. Accords serrés, arrangements
-    resserrés, humour de scène.
+    Ténor, lead, baryton, basse. Le barbershop se joue sur des accords très
+    serrés, où le moindre écart s'entend tout de suite. C'est exigeant, et
+    c'est précisément ce qui plaît.
   puces:
     - Barbershop, musiques de films, standards
-    - La formule la plus mobile
+    - Tient dans une cour, une église, une salle des fêtes
   detail:
     - >-
-      Quatre chanteurs, quatre parties, aucun doublage. C'est la formule
-      d'origine et la plus mobile : elle tient dans une cour, une église, une
-      salle des fêtes, et se déplace sans matériel.
+      Quatre chanteurs qui se déplacent sans matériel et chantent là où il y a
+      un mur pour renvoyer le son.
     - >-
-      Le répertoire est celui du barbershop (accords serrés, septièmes
-      partout, tags tenus), élargi aux musiques de films et aux standards.
-      L'humour de scène fait partie du programme.
+      Le répertoire est d'abord celui du barbershop : accords serrés, septièmes
+      partout, tags qu'on tient jusqu'à ce que ça sonne. Il s'est élargi depuis
+      aux musiques de films, aux standards et au sacré.
   photo: katr-tet-chenoise
   photoAttendue: photo de Katr Tet
 
@@ -38,22 +40,22 @@
   registre: voix aiguës
   notation: SSAA
   effectif: 4
-  accroche: Trois chanteuses et un ténor, quatre voix aiguës.
+  accroche: Quatre voix aiguës, et une seule barbe.
   resume: >-
-    Trois chanteuses et le ténor du quatuor de voix graves, qui tient la ligne
-    d'alto. Monté pour ouvrir le répertoire aux pièces écrites pour voix
-    aiguës, d'où la barbe unique.
+    Naïs, Mathilde et Aurore, plus Maurin sur la ligne d'alto. Le quatuor s'est
+    monté autour du répertoire écrit pour voix aiguës : du sacré, du classique,
+    de la chanson. Le nom, lui, se lit tout seul.
   puces:
     - Classique, sacré, chanson
-    - Programmé au sein des concerts à sept
+    - Souvent glissé dans un concert à sept
   detail:
     - >-
-      Le second quatuor est né du besoin d'aller chercher un répertoire que
-      quatre voix graves ne peuvent pas servir : les pièces écrites pour voix
-      aiguës, du sacré au classique en passant par la chanson.
+      Beaucoup de pièces sont écrites pour des voix hautes et ne se transposent
+      pas sans y perdre. Ce quatuor s'est monté pour aller les chanter là où
+      elles sont écrites.
     - >-
-      Maurin y tient la ligne d'alto. Ce n'est donc pas un quatuor féminin,
-      et le nom le dit : une seule barbe pour quatre voix.
+      Maurin y tient la ligne d'alto. Ce n'est donc pas un quatuor féminin, et
+      le nom le dit sans détour.
   photo: null
   photoAttendue: photo du Quatuor à une barbe
 
@@ -61,24 +63,23 @@
   ordre: 3
   nom: 4+4=7
   registre: voix mixtes
-  notation: SATB
+  notation: null
   effectif: 7
-  accroche: Les deux quatuors réunis, sept voix mixtes.
+  accroche: Les deux quatuors réunis, du grave à l'aigu.
   resume: >-
-    Les deux quatuors réunis. Quatre plus quatre font sept parce que le ténor
-    chante dans les deux. Le concert alterne pièces graves, pièces aiguës et
-    tutti à sept parties.
+    Quatre plus quatre font sept parce que Maurin chante dans les deux. Le
+    concert passe des voix graves aux voix aiguës, puis réunit tout le monde
+    sur des pièces à sept parties.
   puces:
-    - Le programme le plus large
-    - La formule de concert complète
+    - Le répertoire le plus large des trois
+    - Du grave à l'aigu dans le même concert
   detail:
     - >-
       Quatre plus quatre font sept : Maurin chante dans les deux quatuors.
-      C'est l'arithmétique du nom, et c'est aussi la structure du concert.
+      C'est l'arithmétique du nom, et c'est aussi le plan du concert.
     - >-
-      Le programme alterne les pièces à voix graves, les pièces à voix aiguës
-      et les tutti à sept parties. C'est la formule la plus complète, et celle
-      qui montre le principe du groupe : sept chanteurs, sept parties,
-      personne ne double personne.
+      On alterne les pièces graves, les pièces aiguës, puis les tutti à sept.
+      C'est la configuration où le répertoire est le plus large, et celle qui
+      demande le plus de répétitions.
   photo: 4plus4-chenoise
   photoAttendue: photo de 4+4=7

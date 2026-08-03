@@ -13,8 +13,8 @@
 # extérieur ne saura pas où c'est. À compléter.
 
 - id: chenoise-2026
-  date: 2026-07-16
-  lieu: Cour du 10 rue Chenoise, Grenoble
+  date: 2026-07
+  lieu: Rue Chenoise - Grenoble
   description: Musiques de films a cappella, avec Osez Chenoise
   formation: 4plus4
   enregistrement: chenoise-2026
@@ -22,6 +22,7 @@
 - id: chu-sud-2026-06
   date: 2026-06
   lieu: CHU Sud
+  description: Musiques de films a cappella
   formation: 4plus4
 
 - id: atelier-du-8-2025-02
@@ -37,12 +38,13 @@
 - id: atelier-du-8-2024-04
   date: 2024-04
   lieu: Atelier du 8
-  description: Scène ouverte de Simon Bouvot
+  description: Scène ouverte
   formation: katr-tet
 
 - id: depsival-2023-08
   date: 2023-08
   lieu: Depsival
+  description: Festival privé de musique (open air)
   formation: katr-tet
 
 # ── dates non retrouvées ────────────────────────────────────────────────────
@@ -61,17 +63,15 @@
   # La liste d'origine porte deux fois « Concert entre amis #2 ». Deux éditions
   # donc, mais la numérotation est à confirmer avant de la réafficher.
   date: null
-  lieu: Lieu à compléter
+  lieu: chez Naïs et Thomas
   description: Concert entre amis
   formation: katr-tet
-  brouillon: true
 
 - id: entre-amis-b
   date: null
-  lieu: Lieu à compléter
+  lieu: chez Naïs et Thomas
   description: Concert entre amis
   formation: katr-tet
-  brouillon: true
 
 - id: mariage
   date: null

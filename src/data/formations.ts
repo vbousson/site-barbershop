@@ -56,11 +56,14 @@ export const FORMATIONS: Record<FormationId, Formation> = {
     tab: 'Quatuor à une barbe',
     effectif: '4 voix',
     members: ['tenor', 'alto', 'mezzo', 'soprano'],
+    // Mathilde (mezzo) à droite, Naïs (soprano) au milieu : les deux places ont
+    // été échangées par rapport au premier jet, qui rangeait les têtes par
+    // tessiture croissante.
     centres: {
       tenor: [19, 39],
       alto: [39.5, 31],
-      mezzo: [61.5, 29],
-      soprano: [81.5, 35],
+      soprano: [61.5, 29],
+      mezzo: [81.5, 35],
     },
     mark: { kind: 'txt', lines: ['Quatuor', 'à\u00A0une\u00A0barbe'], left: 12, top: 55, w: 76, fs: 9.9 },
   },

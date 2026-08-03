@@ -28,8 +28,11 @@ const formations = defineCollection({
     nom: z.string(),
     /** Le seul axe vrai dans les trois cas : le registre. */
     registre: z.string(),
-    /** Notation pour les programmateurs musiciens : TTBB, SSAA, SATB. */
-    notation: z.string(),
+    /**
+     * Notation pour les programmateurs musiciens : TTBB, SSAA. Vide quand elle
+     * n'a pas de sens : sept parties ne sont pas un SATB.
+     */
+    notation: z.string().nullable().default(null),
     effectif: z.number(),
     /** Une phrase, sur les onglets et les métadonnées de partage. */
     accroche: z.string(),
