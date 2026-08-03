@@ -30,7 +30,8 @@ const formations = await getFormations();
             <div class="n">
               {f.data.effectif}
               <small>
-                {f.data.registre} · {f.data.notation}
+                {f.data.registre}
+                {f.data.notation && ` · ${f.data.notation}`}
               </small>
             </div>
             <h3>

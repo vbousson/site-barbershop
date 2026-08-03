@@ -44,6 +44,11 @@ const autres = (await getFormations()).filter((f) => f.id !== id);
 // Faute de photo propre à la formation, on partage l'ambiance du concert
 // plutôt qu'une photo d'un autre effectif, qui induirait en erreur.
 const partage = await ogImage(d.photo ?? 'public-chenoise');
+
+// La notation est absente pour la formation à sept : on ne laisse pas de
+// séparateur orphelin derrière elle.
+const signature = [`${d.effectif}`, d.registre, d.notation].filter(Boolean).join(' · ');
+const titreLong = [`${d.nom}, ${d.effectif} ${d.registre}`, d.notation].filter(Boolean).join(', ');
 ---
 
 <Base
@@ -59,12 +64,12 @@ const partage = await ogImage(d.photo ?? 'public-chenoise');
     url={new URL(Astro.url.pathname, Astro.site)}
   />
 
-  <Hero formation={id} titre={`${d.nom}, ${d.effectif} ${d.registre}, ${d.notation}`} />
+  <Hero formation={id} titre={titreLong} />
 
   <section id="formation">
     <div class="wrap">
       <SectionHead
-        eyebrow={`${d.effectif} · ${d.registre} · ${d.notation}`}
+        eyebrow={signature}
         titre={d.nom}
         lede={d.accroche}
         tie={0}

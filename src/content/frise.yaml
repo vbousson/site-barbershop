@@ -1,8 +1,8 @@
 # La frise.
 #
-# ⚠ `aConfirmer: true` = millésime reconstruit à partir du récit oral
-# (cf. BRIEF §7). Les six dates sont dans ce cas. À corriger avec le groupe,
-# puis retirer le drapeau.
+# `aConfirmer: true` = millésime encore reconstruit à partir du récit oral
+# (cf. BRIEF §7). Les trois premiers sont dans ce cas ; les suivants ont été
+# confirmés par le groupe.
 
 - id: depart
   annee: 2018
@@ -25,28 +25,34 @@
   aConfirmer: true
   titre: La régularité
   texte: >-
-    Adrien rejoint le quatuor au lead. C'est le moment où le groupe trouve son
-    rythme de travail, et son nom, Katr Tet.
+    Adrien arrive au lead. C'est là que le groupe se met à répéter pour de bon,
+    et plus seulement quand tout le monde est libre en même temps.
 
-- id: concerts
+- id: nom-et-scene
   annee: 2023
-  aConfirmer: true
-  titre: Premiers vrais concerts
-  texte: Des programmes tenus de bout en bout, entre une heure et une heure trente.
+  titre: Un nom et une scène
+  texte: >-
+    Premier concert au Depsival. Il fallait un nom pour l'affiche : ce sera
+    Katr Tet. C'est aussi l'année où on arrive à tenir une heure de musique.
 
 - id: second-quatuor
   annee: 2024
-  aConfirmer: true
   cle: true
   titre: Le second quatuor
   texte: >-
-    Maurin, également alto en chœur mixte, réunit Naïs, Mathilde et Aurore
-    pour monter des pièces à voix aiguës. Il chante dans les deux : quatre
-    plus quatre font sept.
+    Maurin, qui chante aussi l'alto en chœur mixte, embarque Naïs, Mathilde et
+    Léa sur des pièces à voix aiguës. Il tient les deux quatuors à la fois :
+    quatre plus quatre font sept.
+
+- id: relais-alto
+  annee: 2025
+  titre: Passage de relais
+  texte: >-
+    Léa passe la main à Aurore sur la ligne d'alto. Même répertoire, une
+    couleur de voix différente, et tout un équilibre à retrouver.
 
 - id: identite
   annee: 2026
-  aConfirmer: true
   titre: Identité et structure
   texte: >-
     Mathilde dessine les logos et les visuels. Une association est en cours de

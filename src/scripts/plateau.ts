@@ -256,11 +256,8 @@ function init(spot: HTMLElement): void {
   for (const node of faces) {
     const id = node.dataset.voice as VoiceId;
     el[id] = { node, on: false, off: { x: 0, y: 0 }, sc: 1, bl: 0, ctr: null, onstage: false };
-    node.addEventListener('click', () => {
-      spot.classList.add('playing');
-      hint.classList.add('off');
-      void setVoice(id, !el[id].on);
-    });
+    // C'est setVoice qui décide de l'état du plateau, à partir de qui chante.
+    node.addEventListener('click', () => void setVoice(id, !el[id].on));
     // Double-clic : solo. Pratique pour entendre une partie seule.
     node.addEventListener('dblclick', () => {
       for (const m of current.members) void setVoice(m, m === id);
@@ -279,6 +276,14 @@ function init(spot: HTMLElement): void {
     const live = ms.some((m) => el[m].on);
     arc.classList.toggle('live', live);
     if (live) startTick();
+
+    // Dès que plus personne ne chante, on revient exactement à l'état d'arrivée
+    // sur le site : toutes les têtes en plein noir, aucune en retrait, et
+    // l'invitation à cliquer de nouveau visible. Sinon éteindre la dernière voix
+    // laissait le plateau entier en fantôme, ce qui n'a aucun sens.
+    spot.classList.toggle('playing', live);
+    hint.classList.toggle('off', live);
+
     paintTransport();
   }
 
@@ -549,9 +554,9 @@ function init(spot: HTMLElement): void {
       paintTransport();
       return;
     }
-    // Rien ne joue : on fait entrer les voix une à une, dans l'ordre.
-    spot.classList.add('playing');
-    hint.classList.add('off');
+    // Rien ne joue : on fait entrer les voix une à une, dans l'ordre. On ne
+    // passe pas le plateau en fantôme dès maintenant, sinon le rendu des
+    // boucles laisserait toutes les têtes en retrait sans qu'aucune chante.
     await AU.load(AU.piste);
     // Du grave vers l'aigu : c'est comme ça qu'on empile un accord barbershop.
     // `members` suit l'ordre d'empilement graphique, pas l'ordre des tessitures.
@@ -565,9 +570,8 @@ function init(spot: HTMLElement): void {
   btnStop.addEventListener('click', async () => {
     annulerEntree();
     await AU.resume();
+    // setVoice remet le plateau à l'état d'arrivée dès la dernière voix éteinte.
     for (const v of VOICES) setVoice(v.id, false);
-    spot.classList.remove('playing');
-    hint.classList.remove('off');
     paintTransport();
   });
 
