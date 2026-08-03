@@ -68,17 +68,21 @@ const concerts = defineCollection({
   schema: z.object({
     id: z.string(),
     /**
-     * ISO, ou null tant que la date n'est pas retrouvée.
-     * YAML transforme `2026-07-16` en Date : on renormalise en chaîne pour que
-     * tout le site manipule des dates comparables lexicographiquement, sans
-     * jamais se poser de question de fuseau.
+     * `2026-07-16` quand on connaît le jour, `2025-01` quand on ne se souvient
+     * que du mois, `null` tant qu'on ne sait rien. Les trois se trient
+     * correctement par comparaison de chaînes, et l'affichage s'adapte : on
+     * n'invente pas un jour pour faire joli.
+     *
+     * YAML transforme une date complète non guillemetée en objet Date, d'où la
+     * renormalisation. Un `2025-01` reste une chaîne, lui.
      */
     date: z
-      .union([z.date(), z.iso.date()])
+      .union([z.date(), z.iso.date(), z.string().regex(/^\d{4}-\d{2}$/, 'attendu AAAA-MM')])
       .nullable()
       .transform((v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v)),
     lieu: z.string(),
-    description: z.string(),
+    /** Ce qui s'est passé, quand on a mieux à dire que le nom du lieu. */
+    description: z.string().nullable().default(null),
     formation: formationRef,
     /** id d'une entrée de `enregistrements`, si une captation existe. */
     enregistrement: z.string().nullable().default(null),

@@ -11,10 +11,10 @@
   ordre: 1
   famille: Musiques de films
   titres:
-    - { titre: Les Aristochats, formation: 4plus4 }
+    - { titre: Les Aristochats, formation: katr-tet }
     - { titre: Toy Story, formation: katr-tet }
-    - { titre: Gladiator, formation: 4plus4 }
-    - { titre: Titre à compléter, formation: quartet-a-une-barbe, brouillon: true }
+    - { titre: Gladiator, formation: quartet-a-une-barbe }
+    - { titre: Le voyage de Chihiro, formation: quartet-a-une-barbe }
 
 - id: barbershop
   ordre: 2
