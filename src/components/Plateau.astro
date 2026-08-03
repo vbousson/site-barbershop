@@ -9,12 +9,17 @@
  * demandée : sans JavaScript, on voit le logo, juste. Le script ne fait
  * qu'ajouter le comportement — vols, bascule, audio.
  */
-import { Image, getImage } from 'astro:assets';
-import { VOICES, ZORDER, voiceById } from '../data/voices';
-import { HEADS, MARKS } from '../data/images';
-import { boxOf, markOf } from '../data/geometry';
-import { FORMATIONS, FORMATION_LIST, DEFAULT_FORMATION, type FormationId } from '../data/formations';
-import { PISTES } from '../data/pistes';
+import { Image, getImage } from "astro:assets";
+import { VOICES, ZORDER, voiceById } from "../data/voices";
+import { HEADS, MARKS } from "../data/images";
+import { boxOf, markOf } from "../data/geometry";
+import {
+  FORMATIONS,
+  FORMATION_LIST,
+  DEFAULT_FORMATION,
+  type FormationId,
+} from "../data/formations";
+import { PISTES } from "../data/pistes";
 
 interface Props {
   /** Formation affichée au chargement. */
@@ -27,8 +32,8 @@ const f = FORMATIONS[formation];
 // Les deux logotypes en image sont préparés au build : le script n'a plus qu'à
 // permuter deux URL connues, sans rien recalculer.
 const markSrc = {
-  sept: (await getImage({ src: MARKS.sept, format: 'webp' })).src,
-  kt: (await getImage({ src: MARKS.kt, format: 'webp', width: 900 })).src,
+  sept: (await getImage({ src: MARKS.sept, format: "webp" })).src,
+  kt: (await getImage({ src: MARKS.kt, format: "webp", width: 900 })).src,
 };
 
 const mark = markOf(f);
@@ -45,7 +50,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
         role="tab"
         type="button"
         data-f={x.id}
-        aria-selected={x.id === formation ? 'true' : 'false'}
+        aria-selected={x.id === formation ? "true" : "false"}
         aria-controls="spot"
       >
         {x.tab} <em>{x.effectif}</em>
@@ -58,11 +63,14 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
   <div class="spot" id="spot" data-formation={formation}>
     {/* L'arc doré suit la position dans la boucle audio. */}
     <svg class="arc" id="arc" viewBox="0 0 100 100" aria-hidden="true">
-      <circle id="arcC" cx="50" cy="50" r="49.3" transform="rotate(-90 50 50)"></circle>
+      <circle id="arcC" cx="50" cy="50" r="49.3" transform="rotate(-90 50 50)"
+      ></circle>
     </svg>
 
-    {/* Le disque est un trou : rien n'existe hors du périmètre, les têtes
-        émergent de sous la ligne au lieu d'apparaître dans le lavis. */}
+    {
+      /* Le disque est un trou : rien n'existe hors du périmètre, les têtes
+        émergent de sous la ligne au lieu d'apparaître dans le lavis. */
+    }
     <div class="dish" id="dish">
       <div
         class="mark"
@@ -70,18 +78,22 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
         data-mark-sept={markSrc.sept}
         data-mark-kt={markSrc.kt}
         style={`left:${mark.left}%;top:${mark.top}%;width:${mark.w}%${
-          mark.kind === 'txt' ? `;--ms:${mark.fs.toFixed(2)}cqw` : ''
+          mark.kind === "txt" ? `;--ms:${mark.fs.toFixed(2)}cqw` : ""
         }`}
       >
         {
-          mark.kind === 'img' ? (
+          mark.kind === "img" ? (
             <img
               src={markSrc[mark.asset]}
-              alt={mark.asset === 'kt' ? 'Katr Tet — Barbershop' : '4+4=7 — Ensemble vocal'}
+              alt={
+                mark.asset === "kt"
+                  ? "Katr Tet · Barbershop"
+                  : "4+4=7 · Ensemble vocal"
+              }
             />
           ) : (
             <>
-              <div class="txt" set:html={mark.lines.join('<br>')} />
+              <div class="txt" set:html={mark.lines.join("<br>")} />
               <div class="bar" />
               <div class="rule2" />
             </>
@@ -100,7 +112,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
           return (
             <button
               type="button"
-              class:list={['face', { pivot: v.pivot, gone: !onstage }]}
+              class:list={["face", { pivot: v.pivot, gone: !onstage }]}
               data-voice={id}
               aria-pressed="false"
               aria-label={`${v.name}, ${v.label.toLowerCase()}`}
@@ -123,13 +135,45 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
   </div>
 
   <aside class="panel">
-    <h4 id="transport-t">Transport</h4>
+    <p class="hint" id="hint">
+      <svg
+        viewBox="0 0 60 30"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M56 6C40 2 14 6 6 22"></path>
+        <path d="M4 12l2 11 11-3"></path>
+      </svg>
+      <span class="souris">cliquez une tête, sa voix entre</span>
+      <span class="tactile">touchez une tête, sa voix entre</span>
+    </p>
+
+    <h4 id="transport-t">Ecouter</h4>
     <div class="transport" role="group" aria-labelledby="transport-t">
       <button class="tbtn play" id="btnPlay" type="button" aria-label="Lecture">
-        <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M1 1l12 7-12 7z" fill="currentColor"></path></svg>
+        <svg viewBox="0 0 14 16" aria-hidden="true"
+          ><path d="M1 1l12 7-12 7z" fill="currentColor"></path></svg
+        >
       </button>
-      <button class="tbtn" id="btnStop" type="button" aria-label="Arrêt" disabled>
-        <svg viewBox="0 0 14 16" aria-hidden="true"><rect x="2" y="2.5" width="10" height="11" rx="1.5" fill="currentColor"></rect></svg>
+      <button
+        class="tbtn"
+        id="btnStop"
+        type="button"
+        aria-label="Arrêt"
+        disabled
+      >
+        <svg viewBox="0 0 14 16" aria-hidden="true"
+          ><rect
+            x="2"
+            y="2.5"
+            width="10"
+            height="11"
+            rx="1.5"
+            fill="currentColor"></rect></svg
+        >
       </button>
     </div>
 
@@ -137,7 +181,12 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
     <div id="pistes" role="group" aria-labelledby="boucle-t">
       {
         PISTES.map((p, i) => (
-          <button class="piste" type="button" data-piste={p.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+          <button
+            class="piste"
+            type="button"
+            data-piste={p.id}
+            aria-pressed={i === 0 ? "true" : "false"}
+          >
             <svg class="bt" viewBox="0 0 60 30" aria-hidden="true">
               <path d="M30 15 3 3v24z" fill="currentColor" />
               <path d="M30 15 57 3v24z" fill="currentColor" />
@@ -150,21 +199,12 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
     </div>
 
     <p class="note">
-      Le son est une maquette de synthèse, pas un enregistrement du groupe.
-      Il sert à montrer comment les {VOICES.length} voix s'empilent.
+      Le son est une maquette de synthèse, pas un enregistrement du groupe. Il
+      sert à montrer comment les {VOICES.length} voix s'empilent.
     </p>
   </aside>
 </div>
 
-<p class="hint" id="hint">
-  <svg viewBox="0 0 60 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
-    <path d="M56 6C40 2 14 6 6 22"></path>
-    <path d="M4 12l2 11 11-3"></path>
-  </svg>
-  <span class="souris">cliquez une tête, sa voix entre</span>
-  <span class="tactile">touchez une tête, sa voix entre</span>
-</p>
-
 <script>
-  import '../scripts/plateau';
+  import "../scripts/plateau";
 </script>

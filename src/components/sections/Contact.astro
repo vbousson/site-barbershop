@@ -1,57 +1,114 @@
 ---
 /**
- * La dernière section, et la vraie raison d'être du site : donner les quatre
- * réponses que cherche un programmateur — qu'est-ce que je peux réserver,
- * à quoi ça ressemble, combien de temps ça dure, qui j'appelle.
+ * La dernière section : donner une adresse à qui voudrait nous programmer.
+ *
+ * Volontairement dépouillée. Pas de fiche technique, pas de détails de
+ * plateau, pas de documents à télécharger : ça viendra si le besoin s'en fait
+ * sentir. Ici, un titre, une phrase, une adresse.
+ *
+ * Trois versions à l'essai. Changer la lettre ci-dessous suffit à basculer,
+ * et on n'en gardera qu'une une fois tranché.
+ *
+ *   a  le strict minimum, la porte ouverte
+ *   b  cadre un peu ce qu'on attend dans le message
+ *   c  la question en guise de titre, l'adresse en grand
  */
-import { SITE, FICHE_TECHNIQUE, TELECHARGEMENTS } from '../../data/site';
+import Bowtie from "../Bowtie.astro";
+import { SITE } from "../../data/site";
+
+const VERSION = "c" as "a" | "b" | "c";
+
+const lien = `mailto:${SITE.mail}`;
 ---
 
-<section id="contact" class="contact">
+<section id="contact" class:list={["contact", `v-${VERSION}`]}>
   <div class="wrap">
-    <div class="sec-head rv">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2>Nous programmer</h2>
-      </div>
-      <p class="lede">
-        Dites-nous la durée, le lieu et le public : nous proposons un programme.
-        Réponse sous quelques jours.
-      </p>
-    </div>
-
-    <div class="two">
-      <div class="rv">
-        <a class="bigmail" href={`mailto:${SITE.mail}`}>{SITE.mail}</a>
-        <div class="dl">
-          {
-            TELECHARGEMENTS.map((d) =>
-              d.href ? (
-                <a href={d.href}>
-                  {d.label}
-                  <span aria-hidden="true">&rarr;</span>
-                </a>
-              ) : (
-                <span class="soon">
-                  {d.label}
-                  <em>bientôt</em>
-                </span>
-              ),
-            )
-          }
+    {
+      VERSION === "a" && (
+        <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
+          <p class="eyebrow">Contact</p>
+          <h2>Nous écrire</h2>
+          <p class="lede">
+            Une date, une question, une envie de nous entendre : un mot suffit.
+          </p>
+          <a class="bigmail" href={lien}>
+            {SITE.mail}
+          </a>
         </div>
-      </div>
+      )
+    }
 
-      <div class="rv">
-        {
-          FICHE_TECHNIQUE.map((r) => (
-            <div class="kv">
-              <span>{r.k}</span>
-              <span>{r.v}</span>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+    {
+      VERSION === "b" && (
+        <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
+          <p class="eyebrow">Contact</p>
+          <h2>Nous programmer</h2>
+          <p class="lede">
+            Dites-nous la date, le lieu et la durée qui vous arrangent. On vous
+            répond avec une proposition de programme.
+          </p>
+          <a class="bigmail" href={lien}>
+            {SITE.mail}
+          </a>
+          <p class="apres">Réponse en quelques jours.</p>
+        </div>
+      )
+    }
+
+    {
+      VERSION === "c" && (
+        <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
+          <p class="eyebrow">Contact</p>
+          <h2>On vient chanter chez vous ?</h2>
+          <a class="bigmail" href={lien}>
+            {SITE.mail}
+          </a>
+          <p class="apres large">
+            Concert, cérémonie, scène ouverte, ou juste pour voir. Écrivez, on
+            en discute.
+          </p>
+        </div>
+      )
+    }
   </div>
 </section>
+
+<style>
+  /* Un seul bloc, plutôt que les deux colonnes de la fiche technique. */
+  .bloc {
+    max-width: 42rem;
+  }
+
+  .bloc :global(.tie) {
+    margin-bottom: 1rem;
+  }
+
+  .bloc h2 {
+    margin-bottom: 1.2rem;
+  }
+
+  .bloc .lede {
+    margin-bottom: 2rem;
+  }
+
+  .bloc .apres {
+    margin: 1.4rem 0 0;
+    font-size: 0.92rem;
+    color: color-mix(in srgb, var(--wash) 58%, transparent);
+  }
+
+  .bloc .apres.large {
+    font-size: 1.05rem;
+    color: color-mix(in srgb, var(--wash) 72%, transparent);
+    max-width: 34ch;
+  }
+
+  /* Version c : l'adresse est l'objet principal de la section. */
+  .v-c .bigmail {
+    font-size: clamp(1.4rem, 5.2vw, 3rem);
+    margin-bottom: 0;
+  }
+</style>

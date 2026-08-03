@@ -16,9 +16,9 @@
   ordre: 1
   famille: Musiques de films
   titres:
-    - { titre: Le voyage de Chihiro, formation: quartet-a-une-barbe }
+    - { titre: Le voyage de Chihiro, formation: quatuor-a-une-barbe }
     - { titre: Les Aristochats, formation: katr-tet }
-    - { titre: Gladiator, formation: quartet-a-une-barbe }
+    - { titre: Gladiator, formation: quatuor-a-une-barbe }
     - { titre: Le bossu de Notre-Dame, formation: katr-tet }
     # - { titre: Toy Story, formation: katr-tet }
 

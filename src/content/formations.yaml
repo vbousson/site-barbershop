@@ -26,15 +26,15 @@
       d'origine et la plus mobile : elle tient dans une cour, une église, une
       salle des fêtes, et se déplace sans matériel.
     - >-
-      Le répertoire est celui du barbershop — accords serrés, septièmes
-      partout, tags tenus — élargi aux musiques de films et aux standards.
+      Le répertoire est celui du barbershop (accords serrés, septièmes
+      partout, tags tenus), élargi aux musiques de films et aux standards.
       L'humour de scène fait partie du programme.
   photo: katr-tet-chenoise
-  photoAttendue: photo — Katr Tet
+  photoAttendue: photo de Katr Tet
 
-- id: quartet-a-une-barbe
+- id: quatuor-a-une-barbe
   ordre: 2
-  nom: Le Quartet à une barbe
+  nom: Quatuor à une barbe
   registre: voix aiguës
   notation: SSAA
   effectif: 4
@@ -42,7 +42,7 @@
   resume: >-
     Trois chanteuses et le ténor du quatuor de voix graves, qui tient la ligne
     d'alto. Monté pour ouvrir le répertoire aux pièces écrites pour voix
-    aiguës — d'où la barbe unique.
+    aiguës, d'où la barbe unique.
   puces:
     - Classique, sacré, chanson
     - Programmé au sein des concerts à sept
@@ -55,7 +55,7 @@
       Maurin y tient la ligne d'alto. Ce n'est donc pas un quatuor féminin,
       et le nom le dit : une seule barbe pour quatre voix.
   photo: null
-  photoAttendue: photo — Le Quartet à une barbe
+  photoAttendue: photo du Quatuor à une barbe
 
 - id: 4plus4
   ordre: 3
@@ -81,4 +81,4 @@
       qui montre le principe du groupe : sept chanteurs, sept parties,
       personne ne double personne.
   photo: 4plus4-chenoise
-  photoAttendue: photo — 4+4=7
+  photoAttendue: photo de 4+4=7

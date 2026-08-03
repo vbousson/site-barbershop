@@ -16,7 +16,7 @@ import type { VoiceId } from './voices';
 import { ZORDER } from './voices';
 import { GEOM_KT, type FormationGeom } from './geometry';
 
-export const FORMATION_IDS = ['4plus4', 'katr-tet', 'quartet-a-une-barbe'] as const;
+export const FORMATION_IDS = ['4plus4', 'katr-tet', 'quatuor-a-une-barbe'] as const;
 export type FormationId = (typeof FORMATION_IDS)[number];
 
 export interface Formation extends FormationGeom {
@@ -51,9 +51,9 @@ export const FORMATIONS: Record<FormationId, Formation> = {
 
   // Pas de logo existant pour cette formation : centres choisis à la main,
   // ascendants par tessiture, et un logotype purement typographique.
-  'quartet-a-une-barbe': {
-    id: 'quartet-a-une-barbe',
-    tab: 'Le Quartet à une barbe',
+  'quatuor-a-une-barbe': {
+    id: 'quatuor-a-une-barbe',
+    tab: 'Quatuor à une barbe',
     effectif: '4 voix',
     members: ['tenor', 'alto', 'mezzo', 'soprano'],
     centres: {
@@ -62,7 +62,7 @@ export const FORMATIONS: Record<FormationId, Formation> = {
       mezzo: [61.5, 29],
       soprano: [81.5, 35],
     },
-    mark: { kind: 'txt', lines: ['Le Quartet', 'à une barbe'], left: 12, top: 55, w: 76, fs: 10.5 },
+    mark: { kind: 'txt', lines: ['Quatuor', 'à\u00A0une\u00A0barbe'], left: 12, top: 55, w: 76, fs: 9.9 },
   },
 };
 
