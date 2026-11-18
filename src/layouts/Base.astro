@@ -20,7 +20,9 @@ interface Props {
 const { title, description, image } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
-const fullTitle = `${title} · ${SITE.titre}`;
+// Le nom du site en suffixe, sauf quand le titre l'a déjà (la page de
+// l'ensemble porte le même nom que le site).
+const fullTitle = title.startsWith(SITE.titre) ? title : `${title} · ${SITE.titre}`;
 ---
 
 <!doctype html>
