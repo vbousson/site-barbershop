@@ -1,7 +1,7 @@
 /**
  * Le contenu éditorial du site.
  *
- * Tout ce qui date — les concerts, le répertoire, les enregistrements — vit
+ * Tout ce qui date (les concerts, le répertoire, les enregistrements) vit
  * dans des fichiers YAML éditables sans toucher au code, et validé au build :
  * une faute de frappe sur un nom de formation casse le build au lieu de
  * passer inaperçue en ligne.

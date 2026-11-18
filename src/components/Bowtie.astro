@@ -1,8 +1,8 @@
 ---
 /**
- * Un nœud papillon aquarellé de Mathilde, en marqueur de section.
- * Quatre variantes, choisies par index pour qu'aucune section voisine n'ait
- * le même. Décoratif : jamais annoncé aux lecteurs d'écran.
+ * Un nœud papillon aquarellé de Mathilde, en marqueur.
+ * Quatre variantes, choisies par index pour qu'aucun voisin n'ait le même.
+ * Décoratif : jamais annoncé aux lecteurs d'écran.
  */
 import { Image } from 'astro:assets';
 import tie1 from '../assets/bowties/1.png';
@@ -17,16 +17,16 @@ interface Props {
   n?: number;
   /** Inclinaison, en degrés. */
   rot?: number;
-  /** Version réduite, pour la frise. */
-  tiny?: boolean;
+  /** Gabarit d'emploi : chapeau de section, jalon de frise, puce de liste. */
+  size?: 'section' | 'frise' | 'puce';
 }
 
-const { n = 0, rot = 0, tiny = false } = Astro.props;
+const { n = 0, rot = 0, size = 'section' } = Astro.props;
 const src = TIES[((n % TIES.length) + TIES.length) % TIES.length]!;
 ---
 
 <Image
-  class:list={['tie', { tiny }]}
+  class:list={['tie', size]}
   src={src}
   alt=""
   aria-hidden="true"
@@ -38,14 +38,24 @@ const src = TIES[((n % TIES.length) + TIES.length) % TIES.length]!;
   /* Les nœuds papillon de Mathilde servent de marqueur en tête de section. */
   .tie {
     display: block;
-    width: clamp(40px, 5.2vw, 60px);
     height: auto;
-    margin-bottom: 0.85rem;
     rotate: var(--rot, 0deg);
   }
 
-  .tie.tiny {
+  .tie.section {
+    width: clamp(40px, 5.2vw, 60px);
+    margin-bottom: 0.85rem;
+  }
+
+  .tie.frise {
     width: 30px;
+    margin: 0;
+  }
+
+  /* En puce de liste, il tient la place d'une glyphe : la largeur suit le
+     texte à côté plutôt qu'un réglage fixe. */
+  .tie.puce {
+    width: 2.1em;
     margin: 0;
   }
 </style>

@@ -1,15 +1,16 @@
 ---
 /**
- * Le plateau — la pièce maîtresse et la seule audace visuelle du site.
+ * Le plateau, la pièce maîtresse et la seule audace visuelle du site.
  * Le logo est jouable : trois onglets basculent entre les formations, les
  * têtes se réorganisent en suivant la géométrie exacte du logo correspondant,
  * et cliquer une tête fait entrer sa voix.
  *
  * Le DOM entier est rendu au build, aux positions finales de la formation
  * demandée : sans JavaScript, on voit le logo, juste. Le script ne fait
- * qu'ajouter le comportement — vols, bascule, audio.
+ * qu'ajouter le comportement : vols, bascule, audio.
  */
 import { Image, getImage } from "astro:assets";
+import Bowtie from "./Bowtie.astro";
 import { VOICES, ZORDER, voiceById } from "../data/voices";
 import { HEADS, MARKS } from "../data/images";
 import { boxOf, markOf } from "../data/geometry";
@@ -187,10 +188,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
             data-piste={p.id}
             aria-pressed={i === 0 ? "true" : "false"}
           >
-            <svg class="bt" viewBox="0 0 60 30" aria-hidden="true">
-              <path d="M30 15 3 3v24z" fill="currentColor" />
-              <path d="M30 15 57 3v24z" fill="currentColor" />
-            </svg>
+            <Bowtie n={p.tie} rot={i % 2 ? 6 : -6} size="puce" />
             {p.nom}
             <i>{p.meta}</i>
           </button>
@@ -478,7 +476,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
   /* Les têtes sont rendues au build à leur place finale. Quand JavaScript est
      là, il les renvoie aux coulisses pour rejouer leur arrivée : on les masque
      le temps qu'il pose les positions de départ, sinon on verrait un saut.
-     Sans JavaScript, `.ready` n'arrive jamais — mais `.js` non plus, donc les
+     Sans JavaScript, `.ready` n'arrive jamais, mais `.js` non plus, donc les
      têtes restent visibles et le logo s'affiche, fixe. */
   .js .spot:not(.ready) .face {
     opacity: 0;
@@ -547,15 +545,25 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
     font-weight: 700;
   }
 
-  .piste .bt {
-    width: 15px;
+  /* Le nœud papillon est rendu par Bowtie et porte donc SA portée, pas celle
+     d'ici : d'où le :global(). L'aquarelle ne se recolore pas comme un SVG,
+     donc la boucle choisie se signale par un nœud rendu à ses vraies couleurs,
+     les autres restant en retrait, presque au crayon. */
+  .piste :global(.tie) {
     flex: 0 0 auto;
-    color: color-mix(in srgb, var(--ink) 25%, transparent);
-    transition: color 0.2s;
+    opacity: 0.38;
+    filter: saturate(0.12);
+    transition: opacity 0.2s, filter 0.2s;
   }
 
-  .piste[aria-pressed='true'] .bt {
-    color: var(--gold-deep);
+  .piste:hover :global(.tie) {
+    opacity: 0.66;
+    filter: saturate(0.5);
+  }
+
+  .piste[aria-pressed='true'] :global(.tie) {
+    opacity: 1;
+    filter: none;
   }
 
   .piste i {

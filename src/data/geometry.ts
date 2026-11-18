@@ -1,5 +1,5 @@
 /**
- * Géométrie du plateau — coordonnées en % du disque blanc.
+ * Géométrie du plateau : coordonnées en % du disque blanc.
  *
  * Relevées au pixel sur les logos originaux de Mathilde Varin, pas placées à
  * l'œil : détection de l'encre par seuil colorimétrique, isolement des têtes
@@ -30,7 +30,7 @@ export interface MarkBox {
 
 export type GeomTable = Partial<Record<VoiceId, Box>> & { mark: MarkBox };
 
-/** Positions exactes de l'affiche du 16 juillet 2026 — les sept voix. */
+/** Positions exactes de l'affiche du 16 juillet 2026, les sept voix. */
 export const GEOM: GeomTable = {
   alto: { left: 12.528, top: 9.934, w: 18.985, h: 28.587 },
   mezzo: { left: 72.241, top: 16.004, w: 18.874, h: 18.985 },

@@ -1,5 +1,5 @@
 /**
- * Le moteur du plateau — la seule île de code client du site.
+ * Le moteur du plateau, la seule île de code client du site.
  *
  * Le DOM est déjà en place, rendu au build : ce script n'ajoute que le
  * comportement. Trois morceaux indépendants :
@@ -34,7 +34,7 @@ function init(spot: HTMLElement): void {
   };
 
   /* ═══════════════════════════════════════════════════════
-     Audio — chaque voix est rendue hors-ligne en une boucle,
+     Audio : chaque voix est rendue hors-ligne en une boucle,
      puis jouée par un AudioBufferSource en loop. Toutes les
      sources démarrent au même instant : synchro parfaite,
      aucun ordonnanceur à la milliseconde.
@@ -164,7 +164,7 @@ function init(spot: HTMLElement): void {
 
     /**
      * `discret` : rendre sans griser le transport. C'est le mode du
-     * préchauffage — sinon le tout premier clic sur Lecture arrive sur un
+     * préchauffage : sinon le tout premier clic sur Lecture arrive sur un
      * bouton déjà désactivé par le pointerdown qui l'a précédé, et se perd.
      */
     async load(piste: Piste, discret = false): Promise<void> {
@@ -265,7 +265,7 @@ function init(spot: HTMLElement): void {
       return VOICES.some((v) => this.want[v.id]);
     },
 
-    /** Position dans la boucle, de 0 à 1 — c'est elle qui trace l'arc doré. */
+    /** Position dans la boucle, de 0 à 1 : c'est elle qui trace l'arc doré. */
     phase(): number {
       if (!this.ctx || !this.loopLen || !this.enCours()) return 0;
       if (this.ctx.currentTime < this.t0) return 0;
@@ -331,7 +331,7 @@ function init(spot: HTMLElement): void {
 
   /* ═══════════════════════════════════════════════════════
      Vols : les têtes entrent et sortent par la périphérie du
-     disque — plutôt par l'arrière (le haut) — en suivant une
+     disque, plutôt par l'arrière (le haut), en suivant une
      courbe de Bézier dont la flèche est tirée au hasard.
      Deux têtes ne suivent jamais la même courbe.
      ═══════════════════════════════════════════════════════ */
@@ -429,7 +429,7 @@ function init(spot: HTMLElement): void {
     if (m.kind === 'img') {
       markEl.style.removeProperty('--ms');
       markEl.innerHTML =
-        `<img alt="${m.asset === 'kt' ? 'Katr Tet — Barbershop' : '4+4=7 — Ensemble vocal'}"` +
+        `<img alt="${m.asset === 'kt' ? 'Katr Tet · Barbershop' : '4+4=7 · Ensemble vocal'}"` +
         ` src="${MARK_SRC[m.asset]}">`;
     } else {
       markEl.style.setProperty('--ms', m.fs.toFixed(2) + 'cqw');
@@ -641,13 +641,13 @@ function init(spot: HTMLElement): void {
      « jamais entrée » pour qu'elles rejouent leur arrivée par la périphérie,
      puis on rend le plateau visible : le premier rendu ne montre donc jamais
      de saut. Sans JavaScript, `.ready` n'arrive jamais mais rien ne masque
-     les têtes non plus — le logo reste simplement fixe. */
+     les têtes non plus : le logo reste simplement fixe. */
   paintTransport();
   layout(readFormation());
   spot.classList.add('ready');
 
   // Préchauffage : dès le premier geste sur la page, on prépare l'audio, sans
-  // rien griser — le geste en question est souvent le clic sur Lecture.
+  // rien griser, car le geste en question est souvent le clic sur Lecture.
   for (const ev of ['pointerdown', 'keydown'] as const) {
     window.addEventListener(ev, () => void AU.load(AU.piste, true), { once: true });
   }

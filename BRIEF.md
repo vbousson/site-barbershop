@@ -1,4 +1,4 @@
-# 4+4=7 — site vitrine
+# 4+4=7, site vitrine
 
 **État : prototype fonctionnel, prêt à être porté sous Astro.js et publié sur GitHub Pages.**
 
@@ -18,7 +18,7 @@ Trois formations sont programmables :
 | **Le Quartet à une barbe** | 4 | quatre voix aiguës (SSAA) | monté vers 2024 |
 | **4+4=7** | 7 | voix mixtes (SATB) | les deux réunis |
 
-Quatre plus quatre font sept parce que **Maurin, le ténor, chante dans les deux quatuors** — il tient la ligne d'alto chez les femmes. C'est l'arithmétique du nom, et le ressort de tout le design.
+Quatre plus quatre font sept parce que **Maurin, le ténor, chante dans les deux quatuors** : il tient la ligne d'alto chez les femmes. C'est l'arithmétique du nom, et le ressort de tout le design.
 
 ### Les sept
 
@@ -38,9 +38,9 @@ Mathilde Varin est aussi la graphiste : les logos, l'affiche et tous les visuels
 
 ## 2. Décisions arrêtées
 
-**Nomenclature des registres.** « Voix égales » a été écarté : en usage choral français, le terme désigne des voix de même nature, ce qui vaut autant pour un TTBB que pour un SSAA — il ne distingue rien. « Quatuor féminin » est factuellement faux puisque Maurin y chante. Le seul axe vrai dans les trois cas est le **registre** : voix graves / voix aiguës / voix mixtes, doublé de la notation TTBB / SSAA / SATB pour les programmateurs musiciens.
+**Nomenclature des registres.** « Voix égales » a été écarté : en usage choral français, le terme désigne des voix de même nature, ce qui vaut autant pour un TTBB que pour un SSAA, il ne distingue rien. « Quatuor féminin » est factuellement faux puisque Maurin y chante. Le seul axe vrai dans les trois cas est le **registre** : voix graves / voix aiguës / voix mixtes, doublé de la notation TTBB / SSAA / SATB pour les programmateurs musiciens.
 
-**Nom de la formation à 7 : « 4+4=7 »**, retenu contre « KatEtKatSet ». C'est un signe graphique avant d'être un nom, il se lit instantanément, et il raconte le mécanisme. Contrainte : ni `+` ni `=` ne passent en URL ni dans un formulaire SACEM — prévoir une forme écrite de repli (`4plus4`, ou « Quatre plus quatre »).
+**Nom de la formation à 7 : « 4+4=7 »**, retenu contre « KatEtKatSet ». C'est un signe graphique avant d'être un nom, il se lit instantanément, et il raconte le mécanisme. Contrainte : ni `+` ni `=` ne passent en URL ni dans un formulaire SACEM, donc prévoir une forme écrite de repli (`4plus4`, ou « Quatre plus quatre »).
 
 **Nom de contenant : non tranché.** Voir §7.
 
@@ -52,7 +52,7 @@ Mathilde Varin est aussi la graphiste : les logos, l'affiche et tous les visuels
 
 Entièrement dérivée de l'affiche de Mathilde (concert du 16 juillet 2026, Cour du 10 rue Chenoise, Grenoble).
 
-**Palette** — relevée au pixel sur l'affiche.
+**Palette**, relevée au pixel sur l'affiche.
 
 ```
 --ink       #17130E   encre chaude, presque noire
@@ -65,7 +65,7 @@ Entièrement dérivée de l'affiche de Mathilde (concert du 16 juillet 2026, Cou
 --lilac     #B4A6C4   taches d'aquarelle
 ```
 
-**Typographie** — quatre familles, une fonction chacune, comme sur l'affiche.
+**Typographie** : quatre familles, une fonction chacune, comme sur l'affiche.
 
 | Rôle | Fonte | Usage |
 |---|---|---|
@@ -86,7 +86,7 @@ C'est la pièce maîtresse et la seule audace visuelle du site. Le logo est joua
 
 **Le disque est un trou.** Un calque circulaire masqué (`overflow:hidden` + `clip-path`) contient les têtes et le logotype. Rien n'existe hors du périmètre : les têtes émergent de sous la ligne au lieu d'apparaître dans le lavis.
 
-**Les vols.** Chaque entrée/sortie part d'un point tiré au hasard sur l'arc nord du disque (−135° à −45°), à 62–82 % du rayon. Le trajet est une Bézier quadratique dont la flèche est tirée entre 16 et 36 % de la corde, signe aléatoire — deux têtes ne suivent jamais la même courbe. Entrée 1,75 s, déplacement 1,4 s, sortie 1,45 s, décalage de 55 ms entre les départs. Chaque tête mémorise son décalage, son échelle et son flou à chaque image : un changement de formation en pleine animation repart exactement de la position visuelle courante.
+**Les vols.** Chaque entrée/sortie part d'un point tiré au hasard sur l'arc nord du disque (−135° à −45°), à 62–82 % du rayon. Le trajet est une Bézier quadratique dont la flèche est tirée entre 16 et 36 % de la corde, signe aléatoire, si bien que deux têtes ne suivent jamais la même courbe. Entrée 1,75 s, déplacement 1,4 s, sortie 1,45 s, décalage de 55 ms entre les départs. Chaque tête mémorise son décalage, son échelle et son flou à chaque image : un changement de formation en pleine animation repart exactement de la position visuelle courante.
 
 **Les têtes ne changent jamais de taille.** Contrainte forte. Les largeurs sont identiques au millième entre les trois géométries.
 
@@ -94,7 +94,7 @@ C'est la pièce maîtresse et la seule audace visuelle du site. Le logo est joua
 
 ### Comment la géométrie a été obtenue
 
-Ce n'est pas du placement à l'œil. Pour chaque logo : détection de l'encre par seuil colorimétrique, isolement des têtes par composantes connexes, puis recalage par **centroïde d'encre** (et non par boîte englobante, faussée par la main d'Adrien et les nœuds papillon décalés). L'échelle est déduite de l'égalisation des aires d'encre : les quatre têtes du logo Katr Tet donnent 0,0218 / 0,0218 / 0,0224 / 0,0220 — un accord à 1,5 % près, qui confirme que Mathilde a dessiné les deux logos aux mêmes proportions. Vérification finale : zéro pixel d'encre hors du disque.
+Ce n'est pas du placement à l'œil. Pour chaque logo : détection de l'encre par seuil colorimétrique, isolement des têtes par composantes connexes, puis recalage par **centroïde d'encre** (et non par boîte englobante, faussée par la main d'Adrien et les nœuds papillon décalés). L'échelle est déduite de l'égalisation des aires d'encre : les quatre têtes du logo Katr Tet donnent 0,0218 / 0,0218 / 0,0224 / 0,0220, un accord à 1,5 % près, qui confirme que Mathilde a dessiné les deux logos aux mêmes proportions. Vérification finale : zéro pixel d'encre hors du disque.
 
 Tout est consigné dans `data/geometry.json`.
 
@@ -116,13 +116,13 @@ Le remplacement par de vraies prises est le point le plus important de la suite.
 
 Ordre actuel, réfléchi pour un programmateur :
 
-1. **Accueil** — le widget, seul.
-2. **Formations** — trois cartes au gabarit strictement identique (même format, même longueur de texte, même nombre de puces). L'égalité entre les trois formations ne se décrète pas, elle s'impose par la contrainte typographique.
-3. **Écouter** — captations de concert, avec étiquette de formation.
-4. **Répertoire** — trois familles (musiques de films / barbershop & standards / classique & sacré), étiquette de formation par titre. Pas de liste exhaustive : elle date, elle ennuie, et elle prive l'organisateur d'une raison d'écrire.
-5. **Concerts** — à venir, puis déjà joué, avec lien « Écouter » quand l'enregistrement existe. Placé **avant** l'histoire : ce qu'on peut réserver prime sur d'où l'on vient.
-6. **L'histoire** — frise verticale, six jalons de 2018 à 2026, un nœud papillon au jalon de naissance du second quatuor.
-7. **Contact** — adresse mail, bloc technique (effectifs, durées, sonorisation, scène, loge, secteur), liens de téléchargement.
+1. **Accueil** : le widget, seul.
+2. **Formations** : trois cartes au gabarit strictement identique (même format, même longueur de texte, même nombre de puces). L'égalité entre les trois formations ne se décrète pas, elle s'impose par la contrainte typographique.
+3. **Écouter** : captations de concert, avec étiquette de formation.
+4. **Répertoire** : trois familles (musiques de films / barbershop & standards / classique & sacré), étiquette de formation par titre. Pas de liste exhaustive : elle date, elle ennuie, et elle prive l'organisateur d'une raison d'écrire.
+5. **Concerts** : à venir, puis déjà joué, avec lien « Écouter » quand l'enregistrement existe. Placé **avant** l'histoire : ce qu'on peut réserver prime sur d'où l'on vient.
+6. **L'histoire** : frise verticale, six jalons de 2018 à 2026, un nœud papillon au jalon de naissance du second quatuor.
+7. **Contact** : adresse mail, bloc technique (effectifs, durées, sonorisation, scène, loge, secteur), liens de téléchargement.
 
 ---
 
@@ -144,7 +144,7 @@ data/
   _geom-*.json        relevés bruts, pour traçabilité
 ```
 
-Les fichiers `assets/` sont nommés par **identifiant de voix**, pas par position. `mezzo.png` est bien Mathilde (la femme de droite sur l'affiche) et `soprano.png` est Naïs (celle du milieu) — l'appariement a été corrigé et figé dans les données.
+Les fichiers `assets/` sont nommés par **identifiant de voix**, pas par position. `mezzo.png` est bien Mathilde (la femme de droite sur l'affiche) et `soprano.png` est Naïs (celle du milieu). L'appariement a été corrigé et figé dans les données.
 
 ---
 
@@ -152,9 +152,9 @@ Les fichiers `assets/` sont nommés par **identifiant de voix**, pas par positio
 
 **Le nom de contenant.** L'association portera les deux formations et celles à venir (trio, quintette, octuor). « 4+4=7 » et « Katr Tet » sont déjà deux traits d'esprit : le contenant doit être le socle calme qui les porte, pas une troisième blague. Pistes explorées, à soumettre au groupe :
 
-- *famille « têtes »* — Une voix par tête, Une par tête, Têtes d'accord, Voix de tête
-- *registre acoustique* — La Voix en plus, Sillage, Battements (autour de l'`expanded sound`, la voix qu'on entend en plus quand l'accord est juste)
-- *combinatoire* — Sous-ensembles, Effectif variable
+- *famille « têtes »* : Une voix par tête, Une par tête, Têtes d'accord, Voix de tête
+- *registre acoustique* : La Voix en plus, Sillage, Battements (autour de l'`expanded sound`, la voix qu'on entend en plus quand l'accord est juste)
+- *combinatoire* : Sous-ensembles, Effectif variable
 
 Deux vérifications avant d'acheter : `.fr` libre, et absence d'homonyme au Journal Officiel. Prévoir des domaines de vanité en redirection 301 vers les pages internes plutôt que des sites séparés.
 
@@ -168,9 +168,9 @@ Deux vérifications avant d'acheter : `.fr` libre, et absence d'homonyme au Jour
 
 ## 8. Suite du travail
 
-**Priorité 1 — enregistrer le tag.** Une session dédiée : click track, même pièce, même micro, même placement pour les sept prises. Sans ça l'empilement sonne collé-serré. Choisir un extrait où chaque voix seule reste écoutable et où toute combinaison partielle tient debout — donc éviter les arrangements où le lead porte 90 % de l'information. Le remplacement dans le code est mécanique : sept fichiers audio au lieu des sept lignes de `PISTES`, le reste du widget ne bouge pas.
+**Priorité 1 : enregistrer le tag.** Une session dédiée : click track, même pièce, même micro, même placement pour les sept prises. Sans ça l'empilement sonne collé-serré. Choisir un extrait où chaque voix seule reste écoutable et où toute combinaison partielle tient debout, donc éviter les arrangements où le lead porte 90 % de l'information. Le remplacement dans le code est mécanique : sept fichiers audio au lieu des sept lignes de `PISTES`, le reste du widget ne bouge pas.
 
-**Priorité 2 — le portage Astro.** Points d'attention :
+**Priorité 2 : le portage Astro.** Points d'attention :
 
 - Le widget est une **île client** (`client:load`). Tout le reste peut être statique.
 - Sortir les images de l'inline base64 vers `public/`. Le fichier fait 590 Ko aujourd'hui, dont l'essentiel en images encodées en dur.
@@ -179,7 +179,7 @@ Deux vérifications avant d'acheter : `.fr` libre, et absence d'homonyme au Jour
 - `container-type: inline-size` sur le disque et unités `cqw` pour le logotype typographique : à conserver, c'est ce qui garde les proportions.
 - `prefers-reduced-motion` court-circuite déjà tout le moteur de vol.
 
-**Priorité 3 — vérifier le mobile.** Le disque devient carré, les têtes petites. C'est le point le plus fragile et il n'a pas été testé sur appareil réel.
+**Priorité 3 : vérifier le mobile.** Le disque devient carré, les têtes petites. C'est le point le plus fragile et il n'a pas été testé sur appareil réel.
 
 ---
 

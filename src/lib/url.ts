@@ -5,7 +5,7 @@
  * se voient pas en développement.
  */
 
-const BASE = import.meta.env.BASE_URL; // '/site-barbershop/' — se termine par /
+const BASE = import.meta.env.BASE_URL; // '/site-barbershop/', se termine par /
 
 /** Lien interne, avec la barre oblique finale attendue par `trailingSlash: 'always'`. */
 export function href(path = ''): string {

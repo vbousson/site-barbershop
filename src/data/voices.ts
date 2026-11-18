@@ -6,7 +6,7 @@
  *
  * ⚠ À CONFIRMER (cf. BRIEF §7) : l'affectation des trois visages féminins.
  * Aurore est supposée être la femme de gauche sur l'affiche. Si c'est faux,
- * il suffit d'échanger les `id` entre les lignes concernées ici — l'image et
+ * il suffit d'échanger les `id` entre les lignes concernées ici : l'image et
  * la géométrie suivent automatiquement, puisque tout est indexé par `id`.
  */
 
@@ -38,7 +38,7 @@ export const VOICES: Voice[] = [
   { id: 'baryton', name: 'Amédée', label: 'Baryton', grp: 'h' }, // logo Katr Tet : 4e tête
   { id: 'lead', name: 'Adrien', label: 'Lead', grp: 'h' }, // logo Katr Tet : 3e tête
   { id: 'tenor', name: 'Maurin', label: 'Ténor', grp: 'p', pivot: true }, // logo Katr Tet : 2e tête
-  { id: 'alto', name: 'Aurore', label: 'Alto', grp: 'f' }, // affiche : femme de gauche — à confirmer
+  { id: 'alto', name: 'Aurore', label: 'Alto', grp: 'f' }, // affiche : femme de gauche, à confirmer
   { id: 'mezzo', name: 'Mathilde', label: 'Mezzo', grp: 'f' }, // affiche : femme de droite
   { id: 'soprano', name: 'Naïs', label: 'Soprano', grp: 'f' }, // affiche : femme du milieu
 ];

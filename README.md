@@ -1,4 +1,4 @@
-# 4+4=7 — site vitrine
+# 4+4=7, site vitrine
 
 Site statique de l'ensemble vocal grenoblois, porté sous Astro depuis le
 prototype d'origine. `BRIEF.md` reste le document de référence du projet :
@@ -14,7 +14,7 @@ npm install
 npm run dev        # http://localhost:4321/site-barbershop/
 npm run build      # sortie statique dans dist/
 npm run preview    # sert dist/ comme en production
-npx astro check    # typage — la CI le lance avant de déployer
+npx astro check    # typage, lancé par la CI avant de déployer
 ```
 
 Node 22 minimum.
@@ -41,7 +41,7 @@ en ligne.
 **Ajouter une photo** : la déposer dans `src/assets/photos/`, l'importer dans
 `src/data/photos.ts` avec sa légende et son texte alternatif, puis citer sa clé
 dans le YAML. `cadrage` est le recadrage à l'écran (`object-position`),
-`cadrageOg` celui de l'image de partage — les deux comptent, les chanteurs sont
+`cadrageOg` celui de l'image de partage : les deux comptent, les chanteurs sont
 dans le bas de ces photos et un recadrage centré leur coupe la tête.
 
 **`brouillon: true`** marque une entrée dont le contenu reste à fournir : elle
@@ -50,26 +50,26 @@ une fois le vrai contenu saisi.
 
 **Les dates** s'écrivent en ISO (`2026-07-16`), ou `null` tant qu'elles ne sont
 pas retrouvées. Le partage entre « à venir » et « déjà joué » se recalcule à
-chaque déploiement — une date qui passe bascule toute seule.
+chaque déploiement : une date qui passe bascule toute seule.
 
 ## À compléter (repris de BRIEF §7)
 
-- [x] L'adresse mail — `katr.tet@gmail.com`, à revoir quand l'association aura la sienne
+- [x] L'adresse mail : `katr.tet@gmail.com`, à revoir quand l'association aura la sienne
 - [x] Photo de Katr Tet et photo de 4+4=7 (Chenoise, 16 juillet 2026)
 - [x] Six concerts datés (2023 → 2026)
-- [ ] **Une photo du Quatuor à une barbe** — sa carte affiche encore un cadre vide
+- [ ] **Une photo du Quatuor à une barbe** : sa carte affiche encore un cadre vide
 - [ ] **Les villes des quatre salles** : Depsival, Salle Olivier Messiaen,
       Atelier du 8, CHU Sud. Un programmateur extérieur ne sait pas où c'est.
-- [ ] **Quatre concerts sans date** — deux « Concert entre amis », un mariage,
+- [ ] **Quatre concerts sans date** : deux « Concert entre amis », un mariage,
       une seconde visite au CHU Sud ; voir les commentaires de `concerts.yaml`
-- [x] Les titres du répertoire — trois familles renseignées, plus aucun placeholder
+- [x] Les titres du répertoire : trois familles renseignées, plus aucun placeholder
 - [ ] Arbitrer les deux familles gardées en commentaire dans `repertoire.yaml`
       (« Pop & contemporain », « Autres »)
 - [ ] Aucun concert n'est rattaché au Quatuor à une barbe : sa page affiche
       « Rien encore à cette affiche »
 - [ ] Les quatre documents à télécharger (fiche technique, photos HD, logos, répertoire)
 - [ ] Confirmer les millésimes de la frise, tous marqués `aConfirmer: true`
-- [ ] Confirmer l'affectation des visages féminins — voir le commentaire en tête de `src/data/voices.ts`
+- [ ] Confirmer l'affectation des visages féminins, voir le commentaire en tête de `src/data/voices.ts`
 - [ ] Remplacer l'audio de synthèse par de vraies prises (BRIEF §8, priorité 1)
 - [ ] Les captations : rien en ligne, et rien à mettre en ligne avant d'avoir
       réglé la question SACEM (voir plus bas)
@@ -131,7 +131,7 @@ millième entre les trois géométries. C'est une contrainte, pas un hasard.
 
 **Le disque est un trou.** `overflow:hidden` + `clip-path` : rien n'existe hors
 du périmètre, les têtes émergent de sous la ligne. `container-type:inline-size`
-sur le disque et unités `cqw` pour le logotype typographique — c'est ce qui
+sur le disque et unités `cqw` pour le logotype typographique : c'est ce qui
 garde les proportions à toutes les tailles.
 
 **Sans JavaScript, le logo s'affiche quand même**, simplement fixe. Le HTML
@@ -167,7 +167,7 @@ récupérées plutôt que ces découpes bitmap.
 Les trois photos du concert du 16 juillet 2026 sont publiées sans mention
 d'auteur : si quelqu'un d'identifié les a prises, le crédit lui est dû dans
 `src/data/photos.ts`. La photo du public montre des visages reconnaissables,
-dont des enfants — à vérifier avant que le site soit largement diffusé.
+dont des enfants, à vérifier avant que le site soit largement diffusé.
 
 Mettre en ligne des captations de musiques de films relève de la SACEM/SDRM,
 indépendamment des concerts, et les arrangements a cappella comptent aussi.
