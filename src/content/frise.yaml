@@ -58,3 +58,16 @@
     Mathilde dessine les logos et les visuels. Une association est en cours de
     constitution, pour facturer, déclarer à la Sacem, et porter les formations
     à venir.
+
+# ✎ Écrit la nuit du 19 novembre 2026 à partir de trois faits : le groupe est
+# à six sans Aurore, le nom KatréKatr Set est retenu, le logo est de Mathilde.
+# Formulation à valider (et à reprendre par Naïs).
+- id: a-six
+  annee: 2026
+  mois: 11
+  cle: true
+  titre: KatréKatr Set
+  texte: >-
+    Aurore quitte le groupe. On continue à six, sous un nom qui se lit à voix
+    haute : KatréKatr Set, quatre et quatre, sept. Mathilde redessine le logo
+    pour l'occasion.

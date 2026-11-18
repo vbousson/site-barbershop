@@ -1,16 +1,47 @@
-# Les trois formations programmables.
+# Les formations programmables : KatréKatr Set à six, Katr Tet à quatre.
 #
 # Le gabarit est volontairement contraint : même longueur de résumé, deux
-# puces chacune. L'égalité entre les trois formations ne se décrète pas,
-# elle s'impose par la typographie.
+# puces chacune. L'égalité entre les formations ne se décrète pas, elle
+# s'impose par la typographie.
 #
-# `notation` peut être vide : sept parties ne sont pas un SATB, la notation
-# n'aurait aucun sens pour la formation à sept.
+# `notation` peut être vide quand elle n'aurait pas de sens : six parties ne
+# font pas un SATB.
+#
+# ✎ Textes de KatréKatr Set écrits la nuit du 19 novembre 2026 pour remplacer
+# ceux de 4+4=7 et du Quatuor à une barbe : factuels, à reprendre par Naïs.
 #
 # `id` doit correspondre à une entrée de src/data/formations.ts.
 
-- id: katr-tet
+- id: katrekatr-set
   ordre: 1
+  nom: KatréKatr Set
+  registre: voix mixtes
+  notation: null
+  effectif: 6
+  accroche: Six voix, du grave à l'aigu, une seule par partie.
+  resume: >-
+    Les quatre voix de Katr Tet, plus deux voix aiguës. Le concert passe du
+    quatuor aux pièces à six parties, où chacun tient seul sa ligne : rien ne
+    se cache, tout s'entend, et c'est ce qui fait le son du groupe.
+  puces:
+    - Noël, pop revisitée, musiques de films, sacré
+    - Concert à quatre et à six voix dans la même soirée
+  detail:
+    - >-
+      KatréKatr Set, c'est « quatre et quatre, sept » dit à voix haute : un
+      nom pensé pour un ensemble à géométrie variable, qui chante à six et à
+      quatre selon le programme.
+    - >-
+      Une voix par partie, toujours. Le concert alterne les pièces du quatuor
+      grave et les pièces à six, ce qui permet le répertoire le plus large et
+      les changements de couleur les plus nets.
+  # La photo de juillet 2026 montre le groupe à sept, Aurore comprise : elle
+  # ne peut plus illustrer la formation. Cadre vide en attendant une photo à six.
+  photo: null
+  photoAttendue: photo de KatréKatr Set à six
+
+- id: katr-tet
+  ordre: 2
   nom: Katr Tet
   registre: voix graves
   notation: TTBB
@@ -33,53 +64,3 @@
       aux musiques de films, aux standards et au sacré.
   photo: katr-tet-chenoise
   photoAttendue: photo de Katr Tet
-
-- id: quatuor-a-une-barbe
-  ordre: 2
-  nom: Quatuor à une barbe
-  registre: voix aiguës
-  notation: SSAA
-  effectif: 4
-  accroche: Quatre voix aiguës, et une seule barbe.
-  resume: >-
-    Naïs, Mathilde et Aurore, plus Maurin sur la ligne d'alto. Le quatuor s'est
-    monté autour du répertoire écrit pour voix aiguës : du sacré, du classique,
-    de la chanson. Le nom, lui, se lit tout seul.
-  puces:
-    - Classique, sacré, chanson
-    - Souvent glissé dans un concert à sept
-  detail:
-    - >-
-      Beaucoup de pièces sont écrites pour des voix hautes et ne se transposent
-      pas sans y perdre. Ce quatuor s'est monté pour aller les chanter là où
-      elles sont écrites.
-    - >-
-      Maurin y tient la ligne d'alto. Ce n'est donc pas un quatuor féminin, et
-      le nom le dit sans détour.
-  photo: null
-  photoAttendue: photo du Quatuor à une barbe
-
-- id: 4plus4
-  ordre: 3
-  nom: 4+4=7
-  registre: voix mixtes
-  notation: null
-  effectif: 7
-  accroche: Les deux quatuors réunis, du grave à l'aigu.
-  resume: >-
-    Quatre plus quatre font sept parce que Maurin chante dans les deux. Le
-    concert passe des voix graves aux voix aiguës, puis réunit tout le monde
-    sur des pièces à sept parties.
-  puces:
-    - Le répertoire le plus large des trois
-    - Du grave à l'aigu dans le même concert
-  detail:
-    - >-
-      Quatre plus quatre font sept : Maurin chante dans les deux quatuors.
-      C'est l'arithmétique du nom, et c'est aussi le plan du concert.
-    - >-
-      On alterne les pièces graves, les pièces aiguës, puis les tutti à sept.
-      C'est la configuration où le répertoire est le plus large, et celle qui
-      demande le plus de répétitions.
-  photo: 4plus4-chenoise
-  photoAttendue: photo de 4+4=7

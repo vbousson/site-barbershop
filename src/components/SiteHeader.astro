@@ -2,7 +2,7 @@
 /**
  * La barre haute. Elle devient opaque dès qu'on quitte le hero, sinon elle
  * flotte sur le lavis. Les liens de navigation pointent tous vers les
- * sections de l'accueil : le site tient sur une page, plus trois pages de
+ * sections de l'accueil : le site tient sur une page, plus une page par
  * formation pour les programmateurs.
  */
 import { Image } from 'astro:assets';
@@ -22,7 +22,7 @@ const liens = [
 <header class="top" id="top">
   {/* Le logotype de Mathilde plutôt que le nom composé en Big Shoulders. */}
   <a class="brand" href={href()} aria-label={`${SITE.titre}, retour à l'accueil`}>
-    <Image src={MARKS.sept} alt={`${SITE.titre}, ensemble vocal`} widths={[110, 220]} sizes="110px" />
+    <Image src={MARKS.set} alt={`${SITE.titre}, ensemble vocal`} widths={[200, 400]} sizes="200px" />
   </a>
   <nav aria-label="Navigation principale">
     <span class="links">

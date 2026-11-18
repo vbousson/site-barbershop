@@ -1,7 +1,7 @@
 ---
 /**
- * Trois cartes au gabarit strictement identique : même format, même longueur
- * de texte, même nombre de puces. L'égalité entre les trois formations ne se
+ * Deux cartes au gabarit strictement identique : même format, même longueur
+ * de texte, même nombre de puces. L'égalité entre les formations ne se
  * décrète pas, elle s'impose par la contrainte typographique.
  */
 import SectionHead from '../SectionHead.astro';
@@ -15,9 +15,9 @@ const formations = await getFormations();
 <section id="formations">
   <div class="wrap">
     <SectionHead
-      eyebrow="Trois formations"
+      eyebrow="Deux formations"
       titre="Une voix par tête"
-      lede="Personne ne double personne : chaque partie est tenue par un seul chanteur. Ça change l'équilibre, l'écoute, et le risque. Trois configurations sont disponibles à la programmation."
+      lede="Personne ne double personne : chaque partie est tenue par un seul chanteur. Ça change l'équilibre, l'écoute, et le risque. Deux configurations sont disponibles à la programmation : à six, ou à quatre."
       tie={0}
       rot={-4}
     />
@@ -53,10 +53,10 @@ const formations = await getFormations();
 <style>
   /* Les cartes de formation. */
   /* ═══ cartes de formation ═══
-     Gabarit strictement identique pour les trois. */
+     Gabarit strictement identique pour les deux. */
   .cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(1.1rem, 2.4vw, 2.2rem);
   }
 

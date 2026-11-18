@@ -26,7 +26,7 @@ export async function getRepertoire() {
 
 export async function getFrise() {
   const all = await getCollection('frise');
-  return all.sort((a, b) => a.data.annee - b.data.annee);
+  return all.sort((a, b) => a.data.annee - b.data.annee || (a.data.mois ?? 0) - (b.data.mois ?? 0));
 }
 
 export async function getEnregistrements(): Promise<EnregistrementEntry[]> {

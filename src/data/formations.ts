@@ -1,22 +1,23 @@
 /**
- * Les trois formations programmables, côté plateau.
+ * Les formations programmables, côté plateau.
  *
  * Le texte éditorial vit dans `src/content/formations.yaml` ; ici on ne garde
  * que ce qui pilote le widget : qui est sur scène et où.
  *
- * Les identifiants sont ceux des URL. Ni `+` ni `=` ne passent en URL (ni
- * dans un formulaire SACEM), d'où `4plus4` pour la formation à sept.
+ * Depuis novembre 2026 l'ensemble est à six et s'appelle KatréKatr Set
+ * (« quatre et quatre, sept », à prononcer à voix haute). Le nom vaut pour la
+ * géométrie variable : à six, et à quatre avec Katr Tet. « 4+4=7 » en reste
+ * l'abréviation graphique. Le Quatuor à une barbe n'existe plus depuis le
+ * départ d'Aurore.
  *
- * On ne dit ni « hommes » ni « femmes » : Maurin chante dans le quatuor de
- * voix aiguës, « quatuor féminin » serait faux. Le seul axe vrai dans les
- * trois cas est le registre.
+ * Les identifiants sont ceux des URL : pas d'accent, ni `+` ni `=`.
  */
 
 import type { VoiceId } from './voices';
 import { ZORDER } from './voices';
-import { GEOM_KT, type FormationGeom } from './geometry';
+import { GEOM_KKS, GEOM_KT, type FormationGeom } from './geometry';
 
-export const FORMATION_IDS = ['4plus4', 'katr-tet', 'quatuor-a-une-barbe'] as const;
+export const FORMATION_IDS = ['katrekatr-set', 'katr-tet'] as const;
 export type FormationId = (typeof FORMATION_IDS)[number];
 
 export interface Formation extends FormationGeom {
@@ -29,14 +30,14 @@ export interface Formation extends FormationGeom {
 }
 
 export const FORMATIONS: Record<FormationId, Formation> = {
-  // Positions exactes de l'affiche : aucun recentrage.
-  '4plus4': {
-    id: '4plus4',
-    tab: '4+4=7',
-    effectif: '7 voix',
-    exact: true,
+  // Le nouveau logo de Mathilde, tout le monde sur scène.
+  'katrekatr-set': {
+    id: 'katrekatr-set',
+    tab: 'KatréKatr Set',
+    effectif: '6 voix',
+    geom: GEOM_KKS,
     members: ZORDER,
-    mark: { kind: 'img', asset: 'sept', left: 26.214, top: 62.472, w: 46.468 },
+    mark: { kind: 'img', asset: 'set', ...GEOM_KKS.mark },
   },
 
   // Le quatuor de voix graves reprend la géométrie de son propre logo.
@@ -46,30 +47,11 @@ export const FORMATIONS: Record<FormationId, Formation> = {
     effectif: '4 voix',
     geom: GEOM_KT,
     members: ['basse', 'tenor', 'lead', 'baryton'],
-    mark: { kind: 'img', asset: 'kt', left: 12.856, top: 46.293, w: 71.758 },
-  },
-
-  // Pas de logo existant pour cette formation : centres choisis à la main,
-  // ascendants par tessiture, et un logotype purement typographique.
-  'quatuor-a-une-barbe': {
-    id: 'quatuor-a-une-barbe',
-    tab: 'Quatuor à une barbe',
-    effectif: '4 voix',
-    members: ['tenor', 'alto', 'mezzo', 'soprano'],
-    // Mathilde (mezzo) à droite, Naïs (soprano) au milieu : les deux places ont
-    // été échangées par rapport au premier jet, qui rangeait les têtes par
-    // tessiture croissante.
-    centres: {
-      tenor: [19, 39],
-      alto: [39.5, 31],
-      soprano: [61.5, 29],
-      mezzo: [81.5, 35],
-    },
-    mark: { kind: 'txt', lines: ['Quatuor', 'à\u00A0une\u00A0barbe'], left: 12, top: 55, w: 76, fs: 9.9 },
+    mark: { kind: 'img', asset: 'kt', ...GEOM_KT.mark },
   },
 };
 
 export const FORMATION_LIST: Formation[] = FORMATION_IDS.map((id) => FORMATIONS[id]);
 
-/** La formation par défaut : celle de l'affiche, tout le monde sur scène. */
-export const DEFAULT_FORMATION: FormationId = '4plus4';
+/** La formation par défaut : celle du logo, tout le monde sur scène. */
+export const DEFAULT_FORMATION: FormationId = 'katrekatr-set';

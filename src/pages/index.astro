@@ -19,20 +19,23 @@ import DonneesStructurees from '../components/DonneesStructurees.astro';
 import { ogImage } from '../lib/og';
 
 const description =
-  'Sept chanteurs, une voix par partie. Trois formations programmables : Katr Tet (4 voix graves), Quatuor à une barbe (4 voix aiguës) et 4+4=7 (7 voix mixtes).';
-const partage = await ogImage('4plus4-chenoise');
+  'Six chanteurs a cappella à Grenoble, une voix par partie. KatréKatr Set chante à six voix mixtes, et à quatre voix graves sous le nom de Katr Tet.';
+// La photo de juillet 2026 montre le groupe à sept, Aurore comprise. En
+// attendant une photo à six (ou une image de partage dessinée par Mathilde),
+// on partage l'ambiance du concert, comme les pages de formation sans photo.
+const partage = await ogImage('public-chenoise');
 ---
 
 <Base title="Ensemble vocal à Grenoble" description={description} image={partage}>
   <DonneesStructurees
     slot="head"
-    nom="4+4=7"
+    nom="KatréKatr Set"
     description={description}
-    effectif={7}
+    effectif={6}
     url={new URL(Astro.url.pathname, Astro.site)}
   />
 
-  <Hero titre="4+4=7, ensemble vocal a cappella à Grenoble" />
+  <Hero titre="KatréKatr Set, ensemble vocal a cappella à Grenoble" />
   <Formations />
   <Ecouter />
   <Repertoire />

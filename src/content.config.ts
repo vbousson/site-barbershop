@@ -26,11 +26,11 @@ const formations = defineCollection({
     id: formationRef,
     ordre: z.number(),
     nom: z.string(),
-    /** Le seul axe vrai dans les trois cas : le registre. */
+    /** Le seul axe vrai pour toutes les formations : le registre. */
     registre: z.string(),
     /**
-     * Notation pour les programmateurs musiciens : TTBB, SSAA. Vide quand elle
-     * n'a pas de sens : sept parties ne sont pas un SATB.
+     * Notation pour les programmateurs musiciens : TTBB. Vide quand elle
+     * n'a pas de sens : six parties ne font pas un SATB.
      */
     notation: z.string().nullable().default(null),
     effectif: z.number(),
@@ -115,9 +115,14 @@ const frise = defineCollection({
   schema: z.object({
     id: z.string(),
     annee: z.number(),
+    /**
+     * Facultatif : départage deux jalons de la même année (l'ordre du fichier
+     * n'est pas garanti par le chargeur). Sans mois, le jalon passe en tête.
+     */
+    mois: z.number().int().min(1).max(12).optional(),
     titre: z.string(),
     texte: z.string(),
-    /** Le jalon de naissance du second quatuor : nœud papillon au lieu du point. */
+    /** Jalon marquant (le second quatuor, le passage à six) : mis en avant. */
     cle: z.boolean().default(false),
     /** ⚠ millésime reconstruit à partir du récit oral, à confirmer. */
     aConfirmer: z.boolean().default(false),

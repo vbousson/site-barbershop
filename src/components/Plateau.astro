@@ -1,7 +1,7 @@
 ---
 /**
  * Le plateau, la pièce maîtresse et la seule audace visuelle du site.
- * Le logo est jouable : trois onglets basculent entre les formations, les
+ * Le logo est jouable : deux onglets basculent entre les formations, les
  * têtes se réorganisent en suivant la géométrie exacte du logo correspondant,
  * et cliquer une tête fait entrer sa voix.
  *
@@ -33,7 +33,7 @@ const f = FORMATIONS[formation];
 // Les deux logotypes en image sont préparés au build : le script n'a plus qu'à
 // permuter deux URL connues, sans rien recalculer.
 const markSrc = {
-  sept: (await getImage({ src: MARKS.sept, format: "webp" })).src,
+  set: (await getImage({ src: MARKS.set, format: "webp", width: 900 })).src,
   kt: (await getImage({ src: MARKS.kt, format: "webp", width: 900 })).src,
 };
 
@@ -76,7 +76,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
       <div
         class="mark"
         id="mark"
-        data-mark-sept={markSrc.sept}
+        data-mark-set={markSrc.set}
         data-mark-kt={markSrc.kt}
         style={`left:${mark.left}%;top:${mark.top}%;width:${mark.w}%${
           mark.kind === "txt" ? `;--ms:${mark.fs.toFixed(2)}cqw` : ""
@@ -89,7 +89,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
               alt={
                 mark.asset === "kt"
                   ? "Katr Tet · Barbershop"
-                  : "4+4=7 · Ensemble vocal"
+                  : "KatréKatr Set · Ensemble vocal"
               }
             />
           ) : (
@@ -113,7 +113,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
           return (
             <button
               type="button"
-              class:list={["face", { pivot: v.pivot, gone: !onstage }]}
+              class:list={["face", { gone: !onstage }]}
               data-voice={id}
               aria-pressed="false"
               aria-label={`${v.name}, ${v.label.toLowerCase()}`}

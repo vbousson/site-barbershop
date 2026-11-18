@@ -5,7 +5,7 @@
 
 Ecrit sur la sortie standard un fichier prêt à coller dans src/data/pistes/.
 Les voix non fournies sortent en silence, avec un avertissement : le plateau en
-exige sept, cf. le README du dossier pistes.
+exige six, cf. le README du dossier pistes.
 
 MuseScore n'est pas lu directement : dans MuseScore, Fichier > Exporter >
 MusicXML (compressé .mxl ou non, les deux passent ici). Le format interne .mscz
@@ -152,7 +152,7 @@ def en_notation(pas, bemols, par_mesure, garde_orthographe):
     return ' '.join(jetons)
 
 
-VOIX = ['basse', 'baryton', 'lead', 'tenor', 'alto', 'mezzo', 'soprano']
+VOIX = ['basse', 'baryton', 'lead', 'tenor', 'mezzo', 'soprano']
 
 
 def main():

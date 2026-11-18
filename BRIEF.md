@@ -1,6 +1,23 @@
-# 4+4=7, site vitrine
+# KatréKatr Set (ex-4+4=7), site vitrine
 
-**État : prototype fonctionnel, prêt à être porté sous Astro.js et publié sur GitHub Pages.**
+**État : porté sous Astro. Passage à six et nouveau nom en novembre 2026, mise en ligne sur katrekatrset.fr en préparation (Firebase Hosting, cf. README).**
+
+> **Mise à jour du 19 novembre 2026, à lire avant le reste.** Le document
+> ci-dessous décrit le prototype à sept. Ce qui a changé depuis :
+>
+> - **Aurore a quitté le groupe.** On est six : Valentin, Amédée, Adrien,
+>   Maurin, Naïs, Mathilde. Le Quatuor à une barbe n'existe plus.
+> - **Le nom de contenant est tranché : KatréKatr Set** (« quatre et quatre,
+>   sept », à dire à voix haute), abrégé KatréKatr, ou 4+4=7 en signe
+>   graphique. Il vaut pour la géométrie variable : l'ensemble chante à six,
+>   et à quatre sous le nom de Katr Tet. Domaine : `katrekatrset.fr`.
+> - **Deux formations programmables** au lieu de trois : KatréKatr Set (6 voix
+>   mixtes) et Katr Tet (4 voix graves, TTBB). Deux onglets sur le plateau.
+> - **Nouveau logo de Mathilde**, proposition « en haut à gauche » de sa
+>   planche, retenue en attendant que le groupe tranche. Ce sont les mêmes
+>   têtes que sur l'affiche de juillet, réduites de 13,4 % ; la géométrie a
+>   été relevée au pixel comme les précédentes (`tools/releve-logo.py`).
+> - Les §1, §2 et §7 ci-dessous gardent la trace des décisions d'avant.
 
 Ce document est le point d'entrée du projet. Il décrit ce qu'est l'ensemble, ce qui a été décidé, ce qui a été construit, ce qui reste ouvert, et comment reprendre le travail.
 
@@ -42,7 +59,7 @@ Mathilde Varin est aussi la graphiste : les logos, l'affiche et tous les visuels
 
 **Nom de la formation à 7 : « 4+4=7 »**, retenu contre « KatEtKatSet ». C'est un signe graphique avant d'être un nom, il se lit instantanément, et il raconte le mécanisme. Contrainte : ni `+` ni `=` ne passent en URL ni dans un formulaire SACEM, donc prévoir une forme écrite de repli (`4plus4`, ou « Quatre plus quatre »).
 
-**Nom de contenant : non tranché.** Voir §7.
+**Nom de contenant : non tranché.** Voir §7. *(Tranché en novembre 2026 : KatréKatr Set, cf. la mise à jour en tête.)*
 
 **Cible du site.** Ce n'est pas une vitrine de fans, c'est un **outil de programmation**. Le visiteur type est une mairie, un festival, un office de tourisme. Il cherche quatre réponses : qu'est-ce que je peux réserver, à quoi ça ressemble, combien de temps ça dure, qui j'appelle. Tout le reste sert à donner envie sans jamais bloquer l'accès à ces quatre réponses.
 
@@ -158,7 +175,7 @@ Les fichiers `assets/` sont nommés par **identifiant de voix**, pas par positio
 
 Deux vérifications avant d'acheter : `.fr` libre, et absence d'homonyme au Journal Officiel. Prévoir des domaines de vanité en redirection 301 vers les pages internes plutôt que des sites séparés.
 
-**Affectation des visages féminins.** Aurore est supposée être la femme de gauche sur l'affiche. Non confirmé. Si c'est faux, échanger `IMG` et `GEOM` entre les deux identifiants concernés (même opération que celle déjà faite pour Mathilde/Naïs).
+**Affectation des visages féminins.** *(Sans objet depuis le passage à six : le nouveau logo n'a que deux visages féminins, Naïs à gauche et Mathilde à droite, identifiés par comparaison avec les têtes existantes.)* Aurore est supposée être la femme de gauche sur l'affiche. Non confirmé. Si c'est faux, échanger `IMG` et `GEOM` entre les deux identifiants concernés (même opération que celle déjà faite pour Mathilde/Naïs).
 
 **Dates de la frise.** 2018 / 2020 / 2022 / 2023 / 2024 / 2026 sont des reconstructions à partir du récit oral. À corriger.
 

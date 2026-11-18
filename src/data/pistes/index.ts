@@ -5,8 +5,8 @@
  * Chaque ligne est rendue hors-ligne en une boucle par le navigateur : deux
  * oscillateurs dents-de-scie désaccordés, filtre passe-bas, vibrato, réverbe
  * à réponse impulsionnelle générée. C'est une maquette sonore, pas le groupe.
- * Le remplacement par de vraies prises est mécanique (cf. BRIEF §8) : sept
- * fichiers audio au lieu des sept lignes, le reste du widget ne bouge pas.
+ * Le remplacement par de vraies prises est mécanique (cf. BRIEF §8) : six
+ * fichiers audio au lieu des six lignes, le reste du widget ne bouge pas.
  *
  * L'ordre de ce tableau est l'ordre d'affichage, et la première est celle
  * chargée au premier clic. Ajouter une boucle = un fichier à côté + une ligne

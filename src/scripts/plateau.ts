@@ -28,8 +28,8 @@ function init(spot: HTMLElement): void {
   const btnPlay = document.getElementById('btnPlay') as HTMLButtonElement;
   const btnStop = document.getElementById('btnStop') as HTMLButtonElement;
 
-  const MARK_SRC: Record<'sept' | 'kt', string> = {
-    sept: markEl.dataset.markSept!,
+  const MARK_SRC: Record<'set' | 'kt', string> = {
+    set: markEl.dataset.markSet!,
     kt: markEl.dataset.markKt!,
   };
 
@@ -126,7 +126,7 @@ function init(spot: HTMLElement): void {
       o2.type = 'sawtooth';
       o2.detune.value = 7; // le battement entre les deux donne l'épaisseur
 
-      // Vibrato, légèrement différent par voix : sinon les sept sonnent comme une.
+      // Vibrato, légèrement différent par voix : sinon les six sonnent comme une.
       const lfo = oc.createOscillator();
       const lg = oc.createGain();
       lfo.frequency.value = 4.4 + idx * 0.19;
@@ -201,7 +201,7 @@ function init(spot: HTMLElement): void {
     },
 
     /**
-     * Lance les sept boucles au même instant, depuis leur début.
+     * Lance les six boucles au même instant, depuis leur début.
      *
      * Personne ne démarre un morceau en plein milieu de la partition : la
      * boucle ne tourne donc que pendant que quelqu'un chante. Les sources
@@ -429,7 +429,7 @@ function init(spot: HTMLElement): void {
     if (m.kind === 'img') {
       markEl.style.removeProperty('--ms');
       markEl.innerHTML =
-        `<img alt="${m.asset === 'kt' ? 'Katr Tet · Barbershop' : '4+4=7 · Ensemble vocal'}"` +
+        `<img alt="${m.asset === 'kt' ? 'Katr Tet · Barbershop' : 'KatréKatr Set · Ensemble vocal'}"` +
         ` src="${MARK_SRC[m.asset]}">`;
     } else {
       markEl.style.setProperty('--ms', m.fs.toFixed(2) + 'cqw');

@@ -12,18 +12,27 @@
 # (Depsival, Salle Olivier Messiaen, Atelier du 8, CHU Sud) : un programmateur
 # extérieur ne saura pas où c'est. À compléter.
 
+- id: kateb-yacine-2026-12
+  date: 2026-12-05
+  lieu: Bibliothèque Kateb-Yacine - Grenoble
+  # Affiche de Mathilde : « Concert a capella à 4 et 6 voix. Mélodies de Noël,
+  # pop revisitées… », samedi 5 décembre à partir de 16 h. Une seule formation
+  # par entrée : on rattache à KatréKatr Set, qui inclut le passage à quatre.
+  description: Mélodies de Noël et pop revisitées, à 4 et 6 voix, à partir de 16 h
+  formation: katrekatr-set
+
 - id: chenoise-2026
   date: 2026-07
   lieu: Rue Chenoise - Grenoble
-  description: Musiques de films a cappella, avec Osez Chenoise
-  formation: 4plus4
+  description: Musiques de films a cappella, avec Osez Chenoise (encore à sept, sous le nom 4+4=7)
+  formation: katrekatr-set
   enregistrement: chenoise-2026
 
 - id: chu-sud-2026-06
   date: 2026-06
   lieu: CHU Sud
   description: Musiques de films a cappella
-  formation: 4plus4
+  formation: katrekatr-set
 
 - id: atelier-du-8-2025-02
   date: 2025-02
@@ -56,7 +65,7 @@
   # liste d'origine. Si c'est en fait la même, supprimer cette entrée.
   date: null
   lieu: CHU Sud
-  formation: 4plus4
+  formation: katrekatr-set
   brouillon: true
 
 - id: entre-amis-a
