@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vbousson.github.io/site-barbershop/sitemap-index.xml
+Sitemap: https://katrekatrset.fr/sitemap-index.xml

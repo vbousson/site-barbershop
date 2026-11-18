@@ -1,23 +1,27 @@
-name: Déployer sur GitHub Pages
+name: Déployer sur Firebase Hosting
 
+# main → le site en ligne (katrekatrset.fr).
+# Pull request → un canal de prévisualisation Firebase, dont l'adresse est
+# postée en commentaire de la PR et qui expire au bout de 7 jours.
 on:
   push:
     branches: [main]
+  pull_request:
   # Permet de relancer un déploiement à la main depuis l'onglet Actions.
   workflow_dispatch:
 
-# Un seul déploiement à la fois ; on ne coupe pas celui qui est en cours.
+# Un seul déploiement à la fois par branche ; on ne coupe pas celui en cours.
 concurrency:
-  group: pages
+  group: firebase-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  checks: write
+  pull-requests: write
 
 jobs:
-  build:
+  deployer:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,16 +38,12 @@ jobs:
 
       - run: npx astro build
 
-      - uses: actions/upload-pages-artifact@v3
+      # Le secret est créé par `firebase init hosting:github` (cf. README,
+      # « Mise en ligne »). Son nom suit l'identifiant du projet Firebase :
+      # si le projet s'appelle autrement, changer les deux lignes ensemble.
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploiement.outputs.page_url }}
-    steps:
-      - id: deploiement
-        uses: actions/deploy-pages@v4
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KATREKATRSET }}
+          projectId: katrekatrset
+          channelId: ${{ github.event_name == 'pull_request' && '' || 'live' }}

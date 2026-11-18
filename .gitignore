@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # matière première fournie à la main, jamais publiée
 tmp_data/
+
+# Firebase
+.firebase/
+firebase-debug.log

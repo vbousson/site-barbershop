@@ -1,17 +1,19 @@
-# 4+4=7, site vitrine
+# KatréKatr Set, site vitrine
 
-Site statique de l'ensemble vocal grenoblois, porté sous Astro depuis le
+Site statique de l'ensemble vocal grenoblois (anciennement 4+4=7), porté sous Astro depuis le
 prototype d'origine. `BRIEF.md` reste le document de référence du projet :
 il décrit l'ensemble, les décisions arrêtées, la direction artistique et ce
 qui reste ouvert. Ce fichier-ci ne parle que du code.
 
-En ligne : <https://vbousson.github.io/site-barbershop/>
+En ligne : <https://katrekatrset.fr> une fois la bascule faite (cf. « Mise en
+ligne » plus bas). Jusque-là, l'ancienne version reste sur
+<https://vbousson.github.io/site-barbershop/>.
 
 ## Démarrer
 
 ```sh
 npm install
-npm run dev        # http://localhost:4321/site-barbershop/
+npm run dev        # http://localhost:4321/
 npm run build      # sortie statique dans dist/
 npm run preview    # sert dist/ comme en production
 npx astro check    # typage, lancé par la CI avant de déployer
@@ -27,7 +29,7 @@ en ligne.
 
 | Quoi | Fichier |
 |---|---|
-| Le texte des trois formations | `src/content/formations.yaml` |
+| Le texte des deux formations | `src/content/formations.yaml` |
 | Les titres du répertoire | `src/content/repertoire.yaml` |
 | Les dates de concert | `src/content/concerts.yaml` |
 | Les captations | `src/content/enregistrements.yaml` |
@@ -55,9 +57,12 @@ chaque déploiement : une date qui passe bascule toute seule.
 ## À compléter (repris de BRIEF §7)
 
 - [x] L'adresse mail : `katr.tet@gmail.com`, à revoir quand l'association aura la sienne
-- [x] Photo de Katr Tet et photo de 4+4=7 (Chenoise, 16 juillet 2026)
-- [x] Six concerts datés (2023 → 2026)
-- [ ] **Une photo du Quatuor à une barbe** : sa carte affiche encore un cadre vide
+- [x] Photo de Katr Tet (Chenoise, 16 juillet 2026)
+- [x] Sept concerts datés (2023 → 2026), dont le 5 décembre 2026 à Kateb-Yacine
+- [ ] **Une photo de KatréKatr Set à six** : celle de juillet montre le groupe à
+      sept, Aurore comprise ; la carte affiche un cadre vide en attendant
+- [ ] **Le logotype KatréKatr Set en fichier source** : l'actuel est détouré
+      d'une capture WhatsApp (`tools/releve-logo.py`)
 - [ ] **Les villes des quatre salles** : Depsival, Salle Olivier Messiaen,
       Atelier du 8, CHU Sud. Un programmateur extérieur ne sait pas où c'est.
 - [ ] **Quatre concerts sans date** : deux « Concert entre amis », un mariage,
@@ -65,11 +70,10 @@ chaque déploiement : une date qui passe bascule toute seule.
 - [x] Les titres du répertoire : trois familles renseignées, plus aucun placeholder
 - [ ] Arbitrer les deux familles gardées en commentaire dans `repertoire.yaml`
       (« Pop & contemporain », « Autres »)
-- [ ] Aucun concert n'est rattaché au Quatuor à une barbe : sa page affiche
-      « Rien encore à cette affiche »
+- [ ] Chihiro et Gladiator, chantés par l'ex-Quatuor à une barbe, sont passés
+      en brouillon sous KatréKatr Set : repris à six, ou retirés ?
 - [ ] Les quatre documents à télécharger (fiche technique, photos HD, logos, répertoire)
 - [ ] Confirmer les millésimes de la frise, tous marqués `aConfirmer: true`
-- [ ] Confirmer l'affectation des visages féminins, voir le commentaire en tête de `src/data/voices.ts`
 - [ ] Remplacer l'audio de synthèse par de vraies prises (BRIEF §8, priorité 1)
 - [ ] Les captations : rien en ligne, et rien à mettre en ligne avant d'avoir
       réglé la question SACEM (voir plus bas)
@@ -127,7 +131,7 @@ logos de Mathilde, pas placées à l'œil ; le relevé brut est conservé dans
 `src/data/geometry.releve.json`.
 
 **Les têtes ne changent jamais de taille.** Les largeurs sont identiques au
-millième entre les trois géométries. C'est une contrainte, pas un hasard.
+millième entre les géométries. C'est une contrainte, pas un hasard.
 
 **Le disque est un trou.** `overflow:hidden` + `clip-path` : rien n'existe hors
 du périmètre, les têtes émergent de sous la ligne. `container-type:inline-size`
@@ -139,23 +143,44 @@ contient déjà les têtes à leur place finale ; le script les renvoie aux
 coulisses pour rejouer leur arrivée. `prefers-reduced-motion` court-circuite
 tout le moteur de vol.
 
-**L'audio est entièrement synthétique.** Trois boucles pré-rendues en
+**L'audio est entièrement synthétique.** Quatre boucles pré-rendues en
 `OfflineAudioContext` à partir de lignes écrites à la main. Le panneau le dit
-au visiteur. Le remplacement par de vraies prises est mécanique : sept fichiers
-audio à la place des sept lignes de `src/data/pistes.ts`, le reste ne bouge pas.
+au visiteur. Le remplacement par de vraies prises est mécanique : six fichiers
+audio à la place des six lignes de chaque boucle (`src/data/pistes/`), le reste ne bouge pas.
 
-## Déploiement
+## Mise en ligne
+
+Hébergement : **Firebase Hosting**, dans un projet Firebase personnel (pas
+celui de Twinsight). Configuration dans `firebase.json` (redirections, en-têtes
+de sécurité, cache long sur `/_astro/`) et `.firebaserc` (identifiant du
+projet, `katrekatrset`).
 
 Chaque poussée sur `main` déclenche `.github/workflows/deploy.yml` :
-`astro check`, puis `astro build`, puis publication sur GitHub Pages.
+`astro check`, `astro build`, puis déploiement sur le canal `live`. Chaque pull
+request reçoit un canal de prévisualisation, dont l'adresse est postée en
+commentaire et qui expire au bout de 7 jours.
 
-Une seule chose à faire une fois, côté dépôt :
-**Settings → Pages → Source : GitHub Actions**.
+Mise en place, une seule fois :
 
-Le site est servi dans un sous-dossier au nom du dépôt, d'où le `base` dans
-`astro.config.mjs`. Pour passer sur un vrai domaine : mettre `site` au domaine
-et supprimer `base`. Tous les liens internes passent par `src/lib/url.ts`, il
-n'y a donc rien d'autre à corriger.
+1. Créer le projet sur <https://console.firebase.google.com> avec le compte
+   Google perso, identifiant `katrekatrset` (plan Spark, gratuit). Si
+   l'identifiant est pris, en choisir un autre et le reporter dans
+   `.firebaserc` et dans les deux lignes du workflow (`projectId` et le nom du
+   secret).
+2. `npx firebase-tools login`, puis `npx firebase-tools init hosting:github`
+   dans ce dossier : il crée le compte de service et le secret GitHub
+   `FIREBASE_SERVICE_ACCOUNT_KATREKATRSET`. Refuser qu'il réécrive
+   `firebase.json` et les workflows, ils existent déjà.
+3. Pousser `main` : le site sort sur `https://katrekatrset.web.app`.
+4. Console Firebase → Hosting → « Ajouter un domaine personnalisé » :
+   `katrekatrset.fr`, puis `www.katrekatrset.fr` en redirection vers le
+   domaine nu. Recopier les enregistrements (TXT, puis A) chez le registrar.
+   Le certificat arrive tout seul, compter de 30 min à quelques heures.
+5. Une fois le domaine servi en HTTPS : GitHub → Settings → Pages → désactiver
+   l'ancien site.
+
+Le site est servi à la racine du domaine, d'où l'absence de `base` dans
+`astro.config.mjs`. Tous les liens internes passent par `src/lib/url.ts`.
 
 ## Droits
 

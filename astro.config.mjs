@@ -2,11 +2,12 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Le site est publié sur GitHub Pages, dans un sous-dossier au nom du dépôt.
-// Un domaine propre plus tard : passer `site` au domaine et vider `base`.
+// Le site est servi à la racine de son domaine, par Firebase Hosting.
+// Jusqu'en novembre 2026 il vivait sur GitHub Pages, dans un sous-dossier :
+// tous les liens internes passent par src/lib/url.ts, donc changer `site` (et
+// `base` s'il le faut un jour) suffit, il n'y a rien d'autre à corriger.
 export default defineConfig({
-  site: 'https://vbousson.github.io',
-  base: '/site-barbershop',
+  site: 'https://katrekatrset.fr',
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },
