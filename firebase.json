@@ -10,17 +10,7 @@
     "redirects": [
       {
         "source": "/4plus4{,/**}",
-        "destination": "/formations/katrekatr-set/",
-        "type": 301
-      },
-      {
-        "source": "/formations/4plus4{,/**}",
-        "destination": "/formations/katrekatr-set/",
-        "type": 301
-      },
-      {
-        "source": "/formations/quatuor-a-une-barbe{,/**}",
-        "destination": "/",
+        "destination": "/formations/4plus4/",
         "type": 301
       },
       {

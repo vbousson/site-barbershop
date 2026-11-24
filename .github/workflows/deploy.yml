@@ -1,8 +1,19 @@
-name: Déployer sur Firebase Hosting
+name: Vérifier, construire, déployer
 
-# main → le site en ligne (katrekatrset.fr).
-# Pull request → un canal de prévisualisation Firebase, dont l'adresse est
-# postée en commentaire de la PR et qui expire au bout de 7 jours.
+# Chaque poussée et chaque pull request : `astro check` puis `astro build`.
+# Le déploiement dépend de la variable de dépôt HEBERGEUR (Settings > Secrets
+# and variables > Actions > Variables) :
+#
+#  - absente (ou HEBERGEUR=pages) : sur main seulement, publication sur
+#    GitHub Pages, https://vbousson.github.io/site-barbershop/, le temps que
+#    le domaine soit branché.
+#  - HEBERGEUR=ovh : sur main seulement, envoi de dist/ en FTP chiffré sur
+#    l'hébergement gratuit OVH, par tools/deploy-ovh.py. Secrets attendus :
+#    OVH_FTP_HOST, OVH_FTP_USER, OVH_FTP_PASSWORD. Pas de prévisualisation
+#    des pull requests : l'hébergement gratuit n'a qu'un site.
+#  - HEBERGEUR=firebase : main → le site en ligne ; pull request → un canal
+#    de prévisualisation dont l'adresse est postée en commentaire de la PR.
+
 on:
   push:
     branches: [main]
@@ -12,13 +23,15 @@ on:
 
 # Un seul déploiement à la fois par branche ; on ne coupe pas celui en cours.
 concurrency:
-  group: firebase-${{ github.ref }}
+  group: deploy-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
   contents: read
   checks: write
   pull-requests: write
+  pages: write
+  id-token: write
 
 jobs:
   deployer:
@@ -38,12 +51,45 @@ jobs:
 
       - run: npx astro build
 
+      # Le mot de passe FTP ne transite que par l'environnement de cette étape.
+      - if: vars.HEBERGEUR == 'ovh' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: python3 tools/deploy-ovh.py
+        env:
+          OVH_FTP_HOST: ${{ secrets.OVH_FTP_HOST }}
+          OVH_FTP_USER: ${{ secrets.OVH_FTP_USER }}
+          OVH_FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+
       # Le secret est créé par `firebase init hosting:github` (cf. README,
       # « Mise en ligne »). Son nom suit l'identifiant du projet Firebase :
       # si le projet s'appelle autrement, changer les deux lignes ensemble.
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - if: vars.HEBERGEUR == 'firebase'
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KATREKATRSET }}
           projectId: katrekatrset
           channelId: ${{ github.event_name == 'pull_request' && '' || 'live' }}
+
+      # GitHub Pages sert le site dans un sous-dossier : on reconstruit avec
+      # la bonne adresse plutôt que de réutiliser dist/, fait pour la racine.
+      - if: (vars.HEBERGEUR == '' || vars.HEBERGEUR == 'pages') && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: npx astro build
+        env:
+          SITE_URL: https://vbousson.github.io
+          SITE_BASE: /site-barbershop
+
+      - if: (vars.HEBERGEUR == '' || vars.HEBERGEUR == 'pages') && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  pages:
+    needs: deployer
+    if: (vars.HEBERGEUR == '' || vars.HEBERGEUR == 'pages') && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4

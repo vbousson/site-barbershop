@@ -150,34 +150,69 @@ audio à la place des six lignes de chaque boucle (`src/data/pistes/`), le reste
 
 ## Mise en ligne
 
-Hébergement : **Firebase Hosting**, dans un projet Firebase personnel (pas
-celui de Twinsight). Configuration dans `firebase.json` (redirections, en-têtes
-de sécurité, cache long sur `/_astro/`) et `.firebaserc` (identifiant du
-projet, `katrekatrset`).
+Deux hébergements sont prêts. On essaie d'abord **OVH**, l'hébergement gratuit
+de 100 Mo livré avec le domaine : pas de nouveau compte à ouvrir, le domaine
+est déjà rattaché, et le site (moins de 3 Mo) y tient très largement. Si ça
+coince, **Firebase Hosting** prend le relais sans rien réécrire.
 
-Chaque poussée sur `main` déclenche `.github/workflows/deploy.yml` :
-`astro check`, `astro build`, puis déploiement sur le canal `live`. Chaque pull
-request reçoit un canal de prévisualisation, dont l'adresse est postée en
-commentaire et qui expire au bout de 7 jours.
+Dans les deux cas, chaque poussée sur `main` lance
+`.github/workflows/deploy.yml` (`astro check` puis `astro build`), et déploie
+selon la variable de dépôt `HEBERGEUR` (`ovh` ou `firebase`). Absente, le
+site part sur GitHub Pages, https://vbousson.github.io/site-barbershop/,
+construit pour ce sous-dossier (`SITE_URL` et `SITE_BASE`, cf.
+`astro.config.mjs`) : c'est l'adresse à montrer tant que le domaine ne sert
+pas le site.
 
-Mise en place, une seule fois :
+### Option A : OVH (à tester d'abord)
 
-1. Créer le projet sur <https://console.firebase.google.com> avec le compte
-   Google perso, identifiant `katrekatrset` (plan Spark, gratuit). Si
-   l'identifiant est pris, en choisir un autre et le reporter dans
-   `.firebaserc` et dans les deux lignes du workflow (`projectId` et le nom du
-   secret).
-2. `npx firebase-tools login`, puis `npx firebase-tools init hosting:github`
-   dans ce dossier : il crée le compte de service et le secret GitHub
-   `FIREBASE_SERVICE_ACCOUNT_KATREKATRSET`. Refuser qu'il réécrive
-   `firebase.json` et les workflows, ils existent déjà.
-3. Pousser `main` : le site sort sur `https://katrekatrset.web.app`.
-4. Console Firebase → Hosting → « Ajouter un domaine personnalisé » :
-   `katrekatrset.fr`, puis `www.katrekatrset.fr` en redirection vers le
-   domaine nu. Recopier les enregistrements (TXT, puis A) chez le registrar.
-   Le certificat arrive tout seul, compter de 30 min à quelques heures.
-5. Une fois le domaine servi en HTTPS : GitHub → Settings → Pages → désactiver
+Configuration : `public/.htaccess` (redirections, en-têtes de sécurité, cache
+long sur `/_astro/`), copié tel quel dans `dist/`. Envoi : `tools/deploy-ovh.py`,
+en FTP chiffré, sans rien à installer.
+
+1. Espace client OVH → le domaine `katrekatrset.fr` → activer l'hébergement
+   gratuit (il faut que le domaine n'ait ni hébergement ni MX Plan). OVH envoie
+   par mail l'hôte, l'identifiant et le mot de passe FTP.
+2. Construire et envoyer :
+   ```sh
+   export OVH_FTP_HOST=ftp.clusterXXX.hosting.ovh.net OVH_FTP_USER=<identifiant>
+   npm run build
+   python3 tools/deploy-ovh.py --dry-run   # liste ce qui partirait
+   python3 tools/deploy-ovh.py             # envoie (mot de passe demandé)
+   ```
+   Si le FTP chiffré est refusé, `--sans-tls` passe en FTP simple : le temps de
+   constater que ça marche, puis changer le mot de passe FTP.
+3. Vérifier que `http://katrekatrset.fr` répond (le DNS peut mettre quelques
+   heures).
+4. Espace client → Hébergements → Certificat SSL → Let's Encrypt. Une fois
+   `https://katrekatrset.fr` servi, décommenter les trois lignes « Tout en
+   HTTPS » de `public/.htaccess`, reconstruire, renvoyer.
+5. Déploiement automatique : GitHub → Settings → Secrets and variables →
+   Actions. Secrets `OVH_FTP_HOST`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD` ;
+   variable `HEBERGEUR` = `ovh`. Chaque poussée sur `main` construit et
+   envoie le site (même script, mot de passe pris dans le secret).
+6. Une fois le domaine servi en HTTPS : GitHub → Settings → Pages → désactiver
    l'ancien site.
+
+### Option B : Firebase Hosting
+
+Configuration dans `firebase.json` et `.firebaserc` (projet `katrekatrset`,
+compte Google perso, pas celui de Twinsight). Le déploiement par GitHub est
+éteint tant que la variable de dépôt `HEBERGEUR` ne vaut pas `firebase`.
+
+1. Créer le projet sur <https://console.firebase.google.com>, identifiant
+   `katrekatrset` (plan Spark, gratuit). Si l'identifiant est pris, le
+   reporter dans `.firebaserc` et dans le workflow (`projectId` et nom du
+   secret).
+2. `npx firebase-tools login`, puis `npx firebase-tools init hosting:github` :
+   il crée le secret `FIREBASE_SERVICE_ACCOUNT_KATREKATRSET`. Refuser qu'il
+   réécrive `firebase.json` et les workflows.
+3. GitHub → Settings → Secrets and variables → Actions → Variables :
+   `HEBERGEUR` = `firebase`. Pousser `main` : le site sort sur
+   `https://katrekatrset.web.app`, et chaque pull request reçoit un canal de
+   prévisualisation.
+4. Console Firebase → Hosting → domaine personnalisé `katrekatrset.fr` (puis
+   `www` en redirection), recopier les enregistrements DNS chez OVH, en
+   retirant ceux de l'hébergement gratuit.
 
 Le site est servi à la racine du domaine, d'où l'absence de `base` dans
 `astro.config.mjs`. Tous les liens internes passent par `src/lib/url.ts`.

@@ -2,12 +2,13 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Le site est servi à la racine de son domaine, par Firebase Hosting.
-// Jusqu'en novembre 2026 il vivait sur GitHub Pages, dans un sous-dossier :
-// tous les liens internes passent par src/lib/url.ts, donc changer `site` (et
-// `base` s'il le faut un jour) suffit, il n'y a rien d'autre à corriger.
+// Le site est servi à la racine de son domaine (OVH, ou Firebase en secours).
+// En attendant, il reste aussi publié sur GitHub Pages, dans un sous-dossier :
+// la CI passe SITE_URL et SITE_BASE pour cette construction-là. Tous les liens
+// internes passent par src/lib/url.ts, il n'y a rien d'autre à corriger.
 export default defineConfig({
-  site: 'https://katrekatrset.fr',
+  site: process.env.SITE_URL || 'https://katrekatrset.fr',
+  base: process.env.SITE_BASE || '/',
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },
