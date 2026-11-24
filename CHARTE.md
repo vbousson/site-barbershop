@@ -45,7 +45,7 @@ capitales, **Riesling** pour la police fine (« Ensemble vocal », « Set »).
 | Complète, tout noir | impressions monochromes | absente | vectoriel |
 | Complète, tout clair | sur fond sombre | absente | vectoriel |
 | Courte, sans « Ensemble vocal » | barre du haut, pied de page | absente (on réduit la complète, « Ensemble vocal » devient illisible sous 60 px de haut) | vectoriel |
-| Pictogramme carré | icône d'onglet, icône de téléphone | absent (l'onglet affiche encore « 4+4=7 ») | SVG + PNG 512 × 512 ; Mathilde dessine un monogramme **K + S** (« KKS »), Valentin préfère la version de droite, façon cassette |
+| Pictogramme | icône d'onglet, icône de téléphone | d'après le dessin de Mathilde (24/11) : K en Boomtown Deco gris ardoise `#353C41`, « Set » vertical en Riesling or `#E5A43B`, cercle doré sur crème `#F4F0E6`. `public/favicon.svg` (version onglet : cercle épais, lettres agrandies, lisible à 16 px), `src/assets/pictogramme.svg` (version fine, fidèle au dessin), `public/apple-touch-icon.png` 180 px, `public/icon-512.png` | à refaire si Mathilde retouche le K |
 
 **Taille minimale** : la version complète ne descend pas sous 60 px de haut à
 l'écran. En dessous, on passe à la version courte. **Zone de protection** :
@@ -176,4 +176,5 @@ référence sans demander.
 | 2026-11-24 | Aquarelle de fond seule et version bandeau déposées ; découpe sur mesure possible |
 | 2026-11-24 | Favicon : monogramme K + S en préparation ; le nœud papillon, écarté pour le favicon, reste comme marqueur sur le site |
 | 2026-11-24 | Le K du logo sera peut-être retouché (on lit « HS ») |
+| 2026-11-24 | Pictogramme K + « Set » vertical dans un cercle doré (dessin de Mathilde), reconstruit en vectoriel pour le favicon |
 | 2026-11-24 | Valentin : variante du logo de l'affiche du 5/12 ; aquarelle en filigrane ; nœuds papillon gardés ; Boomtown Deco pour les titres, Jost pour le texte, Riesling écartée (illisible hors du logo) |
