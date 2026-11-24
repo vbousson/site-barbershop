@@ -7,10 +7,10 @@ name: Vérifier, construire, déployer
 #  - absente (ou HEBERGEUR=pages) : sur main seulement, publication sur
 #    GitHub Pages, https://vbousson.github.io/site-barbershop/, le temps que
 #    le domaine soit branché.
-#  - HEBERGEUR=ovh : sur main seulement, envoi de dist/ en FTP chiffré sur
-#    l'hébergement gratuit OVH, par tools/deploy-ovh.py. Secrets attendus :
-#    OVH_FTP_HOST, OVH_FTP_USER, OVH_FTP_PASSWORD. Pas de prévisualisation
-#    des pull requests : l'hébergement gratuit n'a qu'un site.
+#  - HEBERGEUR=ovh : sur main seulement, envoi de dist/ en SFTP sur
+#    l'hébergement gratuit OVH, par tools/deploy-sftp.sh. Secret attendu :
+#    OVH_SFTP_PASSWORD. Pas de prévisualisation des pull requests :
+#    l'hébergement gratuit n'a qu'un site.
 #  - HEBERGEUR=firebase : main → le site en ligne ; pull request → un canal
 #    de prévisualisation dont l'adresse est postée en commentaire de la PR.
 
@@ -51,13 +51,11 @@ jobs:
 
       - run: npx astro build
 
-      # Le mot de passe FTP ne transite que par l'environnement de cette étape.
+      # Le mot de passe ne transite que par l'environnement de cette étape.
       - if: vars.HEBERGEUR == 'ovh' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        run: python3 tools/deploy-ovh.py
+        run: tools/deploy-sftp.sh
         env:
-          OVH_FTP_HOST: ${{ secrets.OVH_FTP_HOST }}
-          OVH_FTP_USER: ${{ secrets.OVH_FTP_USER }}
-          OVH_FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+          OVH_SFTP_PASSWORD: ${{ secrets.OVH_SFTP_PASSWORD }}
 
       # Le secret est créé par `firebase init hosting:github` (cf. README,
       # « Mise en ligne »). Son nom suit l'identifiant du projet Firebase :

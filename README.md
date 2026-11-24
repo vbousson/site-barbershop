@@ -163,35 +163,31 @@ construit pour ce sous-dossier (`SITE_URL` et `SITE_BASE`, cf.
 `astro.config.mjs`) : c'est l'adresse à montrer tant que le domaine ne sert
 pas le site.
 
-### Option A : OVH (à tester d'abord)
+### Option A : OVH (en service)
 
-Configuration : `public/.htaccess` (redirections, en-têtes de sécurité, cache
-long sur `/_astro/`), copié tel quel dans `dist/`. Envoi : `tools/deploy-ovh.py`,
-en FTP chiffré, sans rien à installer.
+Configuration : `public/.htaccess` (HTTPS forcé, redirections, en-têtes de
+sécurité, cache long sur `/_astro/`), copié tel quel dans `dist/`. Envoi :
+`tools/deploy-sftp.sh`, en SFTP (port 22, chiffré). L'offre gratuite refuse
+le FTP chiffré et les clés SSH, et n'ouvre aucun shell : on passe donc par
+`sftp` avec le mot de passe, sans miroir (rien n'est supprimé côté serveur).
 
-1. Espace client OVH → le domaine `katrekatrset.fr` → activer l'hébergement
-   gratuit (il faut que le domaine n'ait ni hébergement ni MX Plan). OVH envoie
-   par mail l'hôte, l'identifiant et le mot de passe FTP.
-2. Construire et envoyer :
-   ```sh
-   export OVH_FTP_HOST=ftp.clusterXXX.hosting.ovh.net OVH_FTP_USER=<identifiant>
-   npm run build
-   python3 tools/deploy-ovh.py --dry-run   # liste ce qui partirait
-   python3 tools/deploy-ovh.py             # envoie (mot de passe demandé)
-   ```
-   Si le FTP chiffré est refusé, `--sans-tls` passe en FTP simple : le temps de
-   constater que ça marche, puis changer le mot de passe FTP.
-3. Vérifier que `http://katrekatrset.fr` répond (le DNS peut mettre quelques
-   heures).
-4. Espace client → Hébergements → Certificat SSL → Let's Encrypt. Une fois
-   `https://katrekatrset.fr` servi, décommenter les trois lignes « Tout en
-   HTTPS » de `public/.htaccess`, reconstruire, renvoyer.
-5. Déploiement automatique : GitHub → Settings → Secrets and variables →
-   Actions. Secrets `OVH_FTP_HOST`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD` ;
-   variable `HEBERGEUR` = `ovh`. Chaque poussée sur `main` construit et
-   envoie le site (même script, mot de passe pris dans le secret).
-6. Une fois le domaine servi en HTTPS : GitHub → Settings → Pages → désactiver
-   l'ancien site.
+- **Hôte** `ftp.cluster129.hosting.ovh.net`, **utilisateur** `katrekb`,
+  dossier `www/`. La clé du serveur est figée dans `tools/ovh_known_hosts` :
+  si OVH la change un jour, le script refuse de se connecter, à refaire avec
+  `ssh-keyscan` après vérification dans l'espace client.
+- **Mot de passe** : sur le poste, dans `~/.netrc` (chmod 600), ligne
+  `machine ftp.cluster129.hosting.ovh.net login katrekb password <mdp>` ;
+  en CI, le secret `OVH_SFTP_PASSWORD`. `tools/askpass-netrc.py` le donne à
+  ssh sans qu'il passe par la ligne de commande.
+- **À la main** :
+  ```sh
+  npm run build
+  tools/deploy-sftp.sh --dry-run   # liste les fichiers et teste la connexion
+  tools/deploy-sftp.sh
+  ```
+- **Automatique** : variable de dépôt `HEBERGEUR` = `ovh` et secret
+  `OVH_SFTP_PASSWORD`. Chaque poussée sur `main` construit et envoie.
+- Une fois en place : GitHub → Settings → Pages → désactiver l'ancien site.
 
 ### Option B : Firebase Hosting
 

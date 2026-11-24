@@ -10,6 +10,9 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## Documentation
 
+Charte graphique (nom, logo, couleurs, fontes, éléments dessinés, décisions de
+Mathilde) : `CHARTE.md`. La lire avant toute retouche visuelle et la tenir à jour.
+
 Full documentation: https://docs.astro.build
 
 Consult these guides before working on related tasks:
