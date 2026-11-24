@@ -45,7 +45,7 @@ capitales, **Riesling** pour la police fine (« Ensemble vocal », « Set »).
 | Complète, tout noir | impressions monochromes | absente | vectoriel |
 | Complète, tout clair | sur fond sombre | absente | vectoriel |
 | Courte, sans « Ensemble vocal » | barre du haut, pied de page | absente (on réduit la complète, « Ensemble vocal » devient illisible sous 60 px de haut) | vectoriel |
-| Pictogramme | icône d'onglet, icône de téléphone | d'après le dessin de Mathilde (24/11) : K en Boomtown Deco gris ardoise `#353C41`, « Set » vertical en Riesling or `#E5A43B`, cercle doré sur crème `#F4F0E6`. `public/favicon.svg` (version onglet : cercle épais, lettres agrandies, lisible à 16 px), `src/assets/pictogramme.svg` (version fine, fidèle au dessin), `public/apple-touch-icon.png` 180 px, `public/icon-512.png` | à refaire si Mathilde retouche le K |
+| Pictogramme | icône d'onglet, icône de téléphone | d'après le dessin de Mathilde (24/11) : K en Boomtown Deco gris ardoise `#353C41`, « Set » vertical en Riesling or `#E5A43B` sur toute la hauteur du K (pied du S au bas du K, barre du t au haut du K), cercle doré sur crème `#F4F0E6`. `tools/pictogramme.py` génère `public/favicon.svg` (version onglet : cercle épais, lettres agrandies, lisible à 16 px), `src/assets/pictogramme.svg` (version fine, fidèle au dessin), `public/apple-touch-icon.png` 180 px, `public/icon-512.png` | à refaire si Mathilde retouche le K |
 
 **Taille minimale** : la version complète ne descend pas sous 60 px de haut à
 l'écran. En dessous, on passe à la version courte. **Zone de protection** :
