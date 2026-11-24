@@ -54,17 +54,5 @@ export default defineConfig({
       styles: ['normal', 'italic'],
       fallbacks: ['Futura', 'system-ui', 'sans-serif'],
     },
-    {
-      // La police fine du logo (« Ensemble vocal », « Set »), choisie par
-      // Mathilde pour les sous-titres et les titres de morceaux. Trop fine
-      // pour du texte courant. Licence : gratuite, à vérifier pour le web.
-      provider: fontProviders.local(),
-      name: 'Riesling',
-      cssVariable: '--font-fine',
-      fallbacks: ['Futura', 'sans-serif'],
-      options: {
-        variants: [{ src: ['./src/assets/fonts/riesling.ttf'], weight: 400, style: 'normal' }],
-      },
-    },
   ],
 });
