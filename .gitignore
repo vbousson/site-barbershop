@@ -30,3 +30,6 @@ tmp_data/
 .firebase/
 firebase-debug.log
 Notes/
+
+# Python
+__pycache__/

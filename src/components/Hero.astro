@@ -58,6 +58,9 @@ const { formation, titre } = Astro.props;
     object-fit: cover;
     object-position: 70% 75%;
     pointer-events: none;
+    /* En filigrane : l'aquarelle donne la matière, pas la couleur. */
+    opacity: 0.32;
+    filter: saturate(0.6);
   }
 
   .hero-in {

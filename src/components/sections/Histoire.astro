@@ -7,6 +7,7 @@
  * identiques. Le drapeau `cle` du contenu n'est plus utilisé à l'affichage.
  */
 import SectionHead from '../SectionHead.astro';
+import Bowtie from '../Bowtie.astro';
 import { getFrise } from '../../lib/content';
 
 interface Props {
@@ -49,7 +50,7 @@ const CHAPOS = {
           <li class:list={{ cle: j.data.cle }}>
             <span class="yr">{j.data.annee}</span>
             <span class="rail">
-              <span class="pt" />
+              <Bowtie n={i} rot={(i % 2 ? 5 : -5) + (i % 3)} size="frise" />
             </span>
             <div>
               <h3>{j.data.titre}</h3>
@@ -109,21 +110,13 @@ const CHAPOS = {
     position: relative;
   }
 
-  /* Le jalon : une tache dorée sur le rail. */
-  .tl2 .rail .pt {
+  /* Le nœud est rendu par Bowtie et porte donc SA portée, pas celle d'ici :
+     la partie enfant du sélecteur doit être globale. */
+  .tl2 .rail> :global(*) {
     position: absolute;
     left: 50%;
-    top: 0.4rem;
+    top: 0.25rem;
     translate: -50% 0;
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 0 4px var(--paper);
-  }
-
-  .tl2 .cle .rail .pt {
-    background: var(--gold-deep);
   }
 
   .tl2 h3 {
@@ -138,7 +131,16 @@ const CHAPOS = {
     max-width: 48ch;
   }
 
-  .alt .tl2 .rail .pt {
-    box-shadow: 0 0 0 4px var(--wash);
+  /* Chaque jalon porte un nœud papillon. Le halo de la couleur du fond coupe le
+     filet vertical derrière lui, sinon la ligne traverse le nœud de part en part. */
+  .tl2 .rail> :global(.tie) {
+    top: 0.1rem;
+    width: 30px;
+    padding: 0 2px;
+    background: var(--paper);
+  }
+
+  .alt .tl2 .rail> :global(.tie) {
+    background: var(--wash);
   }
 </style>

@@ -36,9 +36,9 @@ export const HEADS: Record<VoiceId, ImageMetadata> = {
 
 export const MARKS = {
   /**
-   * Le logotype KatréKatr Set + « Ensemble vocal » (novembre 2026).
-   * ⚠ Provisoire : détouré d'une capture WhatsApp de ~440 px de large, en
-   * attendant le fichier source de Mathilde.
+   * Le logotype KatréKatr Set + « Ensemble vocal » (novembre 2026), variante
+   * de l'affiche du 5 décembre : le fichier original de Mathilde, 1478 px.
+   * Son K sera peut-être retouché (cf. CHARTE.md).
    */
   set: markKatrekatrSet,
   /** Le logotype Katr Tet : « Barbershop » + KATR TÊT + filets. */

@@ -13,6 +13,7 @@
  *   b  cadre un peu ce qu'on attend dans le message
  *   c  la question en guise de titre, l'adresse en grand
  */
+import Bowtie from "../Bowtie.astro";
 import { SITE } from "../../data/site";
 
 const VERSION = "c" as "a" | "b" | "c";
@@ -25,6 +26,7 @@ const lien = `mailto:${SITE.mail}`;
     {
       VERSION === "a" && (
         <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
           <p class="eyebrow">Contact</p>
           <h2>Nous écrire</h2>
           <p class="lede">
@@ -40,6 +42,7 @@ const lien = `mailto:${SITE.mail}`;
     {
       VERSION === "b" && (
         <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
           <p class="eyebrow">Contact</p>
           <h2>Nous programmer</h2>
           <p class="lede">
@@ -57,6 +60,7 @@ const lien = `mailto:${SITE.mail}`;
     {
       VERSION === "c" && (
         <div class="bloc rv">
+          <Bowtie n={3} rot={-5} />
           <p class="eyebrow">Contact</p>
           <h2>On vient chanter chez vous ?</h2>
           <a class="bigmail" href={lien}>
@@ -101,6 +105,10 @@ const lien = `mailto:${SITE.mail}`;
   /* Un seul bloc, plutôt que les deux colonnes de la fiche technique. */
   .bloc {
     max-width: 42rem;
+  }
+
+  .bloc :global(.tie) {
+    margin-bottom: 1rem;
   }
 
   .bloc h2 {

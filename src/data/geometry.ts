@@ -63,9 +63,12 @@ export const GEOM_KT: GeomTable = {
 };
 
 /**
- * Logo KatréKatr Set (novembre 2026), relevé sur l'affiche du concert du
- * 5 décembre 2026 pour les têtes et sur la planche de propositions pour le
- * logotype (proposition « en haut à gauche », retenue par le groupe).
+ * Logo KatréKatr Set (novembre 2026), relevé tout entier sur l'affiche du
+ * concert du 5 décembre 2026 en haute définition, têtes et logotype : c'est la
+ * dernière variante utilisée par Mathilde (R à l'envers, « Ensemble vocal »
+ * dessous), retenue le 24/11 à la place de la proposition « en haut à gauche »
+ * de la planche. Le fichier du logotype est l'original de Mathilde
+ * (KetrekatrSet_Logo.png), recalé sur l'affiche (ECC 0,996).
  *
  * Mathilde a réutilisé exactement les mêmes dessins, réduits d'un même
  * facteur : 0,866, à 1 % près sur les six têtes. Les largeurs ci-dessous sont
@@ -75,28 +78,29 @@ export const GEOM_KT: GeomTable = {
  * C'est K (plus bas) qui ramène le tout à la taille de l'affiche.
  *
  * Têtes du haut, de gauche à droite : Maurin · Valentin · Adrien · Amédée.
- * Rangée du bas : Naïs, Mathilde. Script de relevé : tools/releve-logo.py.
+ * Rangée du bas : Naïs, Mathilde. Script de relevé : tools/releve-logo.py
+ * (forme --logo, avec TETES_REF = les découpes d'avant le passage en HD).
  */
 export const GEOM_KKS: GeomTable = {
-  tenor: { left: 10.389, top: 12.409, w: 19.868, h: 28.366 },
-  basse: { left: 31.437, top: 6.49, w: 19.536, h: 27.815 },
-  lead: { left: 56.601, top: 7.386, w: 19.757, h: 26.6 },
-  baryton: { left: 75.728, top: 13.24, w: 20.751, h: 27.483 },
-  soprano: { left: 28.864, top: 34.972, w: 23.841, h: 21.854 },
-  mezzo: { left: 56.347, top: 35.798, w: 18.874, h: 18.985 },
-  mark: { left: 3.809, top: 57.935, w: 93.239 },
+  tenor: { left: 5.627, top: 13.105, w: 19.868, h: 28.366 },
+  basse: { left: 26.75, top: 7.158, w: 19.536, h: 27.815 },
+  lead: { left: 52.028, top: 7.967, w: 19.757, h: 26.6 },
+  baryton: { left: 71.192, top: 13.972, w: 20.751, h: 27.483 },
+  soprano: { left: 24.183, top: 35.729, w: 23.841, h: 21.854 },
+  mezzo: { left: 51.879, top: 36.436, w: 18.874, h: 18.985 },
+  mark: { left: 6.685, top: 59.363, w: 86.828 },
 };
 
 /**
  * K = respiration. Tout le contenu du disque est réduit autour de son centre.
  * Une seule valeur à toucher pour resserrer ou aérer la composition.
  *
- * 0,823 = 0,95 × 0,866 : la respiration d'origine (0,95), multipliée par la
+ * 0,82 = 0,95 × 0,864 : la respiration d'origine (0,95), multipliée par la
  * réduction que Mathilde a appliquée aux têtes sur le logo de novembre 2026.
  * Les têtes s'affichent donc à la taille de la nouvelle affiche, dans les deux
  * formations.
  */
-export const K = 0.823;
+export const K = 0.82;
 
 /** Ramène une coordonnée en % vers le centre du disque. */
 export const SC = (v: number): number => 50 + (v - 50) * K;

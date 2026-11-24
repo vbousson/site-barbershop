@@ -25,12 +25,12 @@ l'historique.
 
 ## Le logo
 
-Le site affiche aujourd'hui la proposition **en haut à gauche** de la planche
-de novembre 2026 (« Ensemble vocal » au-dessus à droite, R à l'endroit,
-« Set » vertical en or). Le fichier que Mathilde a déposé sur le Drive comme
-« le nouveau logo » (`KetrekatrSet_Logo.png`, 1478 × 514, fond transparent)
-est l'autre variante, celle de l'affiche du 5 décembre : R à l'envers,
-« Ensemble vocal » en dessous. **À confirmer** laquelle fait référence.
+Variante retenue le 24/11 : **celle de l'affiche du 5 décembre**, la
+dernière utilisée par Mathilde. R à l'envers, « Ensemble vocal » en dessous,
+« Set » vertical en or. Fichier : `KetrekatrSet_Logo.png` (Drive, 1478 × 514,
+fond transparent), copié tel quel dans `src/assets/marks/katrekatr-set.png`.
+La proposition « en haut à gauche » de la planche, utilisée jusque-là, est
+abandonnée.
 
 Le logo n'est pas figé : Mathilde envisage de retoucher le **K**, qui a « un
 petit côté H » (on lit « HS » au lieu de « KS »). Attendre sa version avant
@@ -41,7 +41,7 @@ capitales, **Riesling** pour la police fine (« Ensemble vocal », « Set »).
 
 | Déclinaison | Usage | Fichier aujourd'hui | Fichier attendu |
 |---|---|---|---|
-| Complète, noir et or | disque de l'accueil, image de partage | `src/assets/marks/katrekatr-set.png`, 1785 × 550, détourée d'une capture | vectoriel (SVG ou PDF) |
+| Complète, noir et or | disque de l'accueil, image de partage | `src/assets/marks/katrekatr-set.png`, l'original de Mathilde, 1478 × 514 | vectoriel (SVG ou PDF), après la retouche du K |
 | Complète, tout noir | impressions monochromes | absente | vectoriel |
 | Complète, tout clair | sur fond sombre | absente | vectoriel |
 | Courte, sans « Ensemble vocal » | barre du haut, pied de page | absente (on réduit la complète, « Ensemble vocal » devient illisible sous 60 px de haut) | vectoriel |
@@ -86,15 +86,20 @@ texte courant. Pour l'ergonomie, elle renvoie à Naïs. Boomtown Deco et
 Riesling sont gratuites d'après elle ; Futura est payante (équivalent libre :
 Jost). **À vérifier** : que leurs licences autorisent l'intégration web.
 
-**Ce que le site utilise aujourd'hui**, en attendant : quatre familles, une
-fonction chacune, toutes des Google Fonts hébergées par le site lui-même.
+**Ce que le site utilise** (24/11) : Riesling pour les titres de morceaux,
+Jost pour le texte courant. Boomtown Deco n'est pas encore intégrée (elle se
+télécharge sur Dribbble, compte requis ; gratuite pour un usage personnel,
+licence commerciale à demander à son auteur, Chris Skillern) : les titres
+restent en Archivo Black en attendant le fichier. Valentin teste d'abord
+ainsi et paiera les licences s'il le faut.
 
 | Rôle | Fonte | Usage |
 |---|---|---|
 | Titres | Archivo Black | titres de section, à la manière de l'affiche peinte |
 | Chiffres | Big Shoulders | millésimes de la frise, grands nombres |
 | Manuscrit | Caveat | annotations, petites phrases à la main |
-| Texte | Karla | corps de texte, étiquettes, données |
+| Texte | Jost (équivalent libre de Futura) | corps de texte, étiquettes, données |
+| Fine | Riesling | titres de morceaux (sous-titres à venir) |
 
 Le logo est dessiné et n'utilise aucune de ces fontes : on ne le recompose
 jamais en texte.
@@ -108,17 +113,18 @@ jamais en texte.
   juillet). Depuis le 24/11, `src/assets/heads/` en est tiré par
   `tools/hd-tetes.py` (fond rendu transparent, même cadrage que les anciennes
   découpes, ~1000 px de haut). Une tête sans nom dans le trombinoscope,
-  `Fichier (2025-11-14…)` : **à identifier** (Léa ?).
+  `Fichier (2025-11-14…)` : Jo, sans emploi sur le site.
 - **Les nœuds papillon**, en or, au nombre de quatre (`src/assets/bowties/`).
-  Depuis le 24/11, ils ne servent plus de marqueur : il y en avait trop, et
-  c'est un attribut masculin dans un ensemble mixte (Valentin, approuvé par
-  Mathilde). Ils restent sur les têtes des hommes et sur la page 404. Les
-  puces et les jalons de frise sont des taches dorées.
+  Ils marquent le début des sections, les jalons de la frise et servent de
+  puces dans la liste des boucles audio. La question de leur nombre et de leur
+  côté masculin dans un ensemble mixte a été posée le 24/11 ; Valentin a
+  choisi de les garder.
 - **Le disque blanc.** C'est le seul objet fort de la page. Le reste du site
   reste sobre.
 - **L'aquarelle de fond**, la vraie, sans texte (`fondaffiche.jpeg`,
   6948 × 4852, paysage) : fond de la bannière d'accueil depuis le 24/11
-  (`src/assets/fond/aquarelle.jpg`, réduite à 3200 px). Les rayons dorés
+  (`src/assets/fond/aquarelle.jpg`, réduite à 3200 px), **en filigrane**
+  (opacité 0,32, saturation 0,6) : elle doit rester discrète. Les rayons dorés
   partent d'en bas à droite, c'est le coin à garder quand l'écran rogne.
   Mathilde a aussi fait une version bandeau (`KKS_bandeau.jpeg`,
   1880 × 725) ; elle peut recouper à d'autres dimensions sur demande.
@@ -146,7 +152,7 @@ référence sans demander.
 |---|---|
 | `Trombinoscope/*.jpg` | **à jour** : les têtes, source du site |
 | `fondaffiche.jpeg`, `KKS_bandeau.jpeg` | **à jour** : l'aquarelle seule, et en bandeau |
-| `KetrekatrSet_Logo.png` | **à jour**, mais le K va peut-être changer |
+| `KetrekatrSet_Logo.png` | **à jour**, variante retenue ; le K va peut-être changer |
 | `KatrekatreSet-affBibKY.jpg` | affiche du 5/12, 3508 × 4961 |
 | `BBshop4Tet logos Mathilde/BBshop-4tet-*.png`, `fond blanc/noir.jpg` | logo Katr Tet, en vigueur |
 | `4+4=7-logocomplet.png`, `4+4=7-chenoise v2*` | configuration passée à sept (juillet 2026) : historique |
@@ -161,5 +167,6 @@ référence sans demander.
 | 2026-11-24 | Nouveau logo déposé sur le Drive du groupe, dossier « Visuels » ; affiche du 5/12 corrigée |
 | 2026-11-24 | Polices : Boomtown Deco + Riesling (logo), Futura (texte des affiches) ; Boomtown pour les titres, Riesling pour les sous-titres, une police simple pour le corps |
 | 2026-11-24 | Aquarelle de fond seule et version bandeau déposées ; découpe sur mesure possible |
-| 2026-11-24 | Favicon : monogramme K + S en préparation ; nœud papillon écarté (trop présent, pas adapté à un ensemble mixte) |
+| 2026-11-24 | Favicon : monogramme K + S en préparation ; le nœud papillon, écarté pour le favicon, reste comme marqueur sur le site |
 | 2026-11-24 | Le K du logo sera peut-être retouché (on lit « HS ») |
+| 2026-11-24 | Valentin : variante du logo de l'affiche du 5/12 ; aquarelle en filigrane ; nœuds papillon gardés ; Riesling + Jost testés |

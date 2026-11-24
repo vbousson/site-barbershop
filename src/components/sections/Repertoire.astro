@@ -95,6 +95,15 @@ const familles = (await getRepertoire())
     border-bottom: var(--rule);
   }
 
+  /* Les titres de morceaux dans la police fine du logo (Riesling), comme le
+     propose Mathilde. Elle est fine et haute : il lui faut du corps. */
+  .rep li > span {
+    font-family: var(--font-fine);
+    font-size: 1.45rem;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+
   .rep li i {
     display: block;
     font-style: normal;
