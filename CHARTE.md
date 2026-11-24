@@ -86,18 +86,24 @@ texte courant. Pour l'ergonomie, elle renvoie à Naïs. Boomtown Deco et
 Riesling sont gratuites d'après elle ; Futura est payante (équivalent libre :
 Jost). **À vérifier** : que leurs licences autorisent l'intégration web.
 
-**Ce que le site utilise** (24/11) : Jost pour le texte courant. Riesling,
+**Ce que le site utilise** (24/11) : **Boomtown Deco** pour tous les titres,
+**Jost** (équivalent libre de Futura) pour le texte courant. Riesling,
 essayée sur les titres de morceaux, est illisible hors du logo : écartée.
 Mathilde ne l'emploie d'ailleurs que dans ses logos (l'affiche de juillet
-n'utilise que Boomtown Deco, Futura et Marker Felt). Boomtown Deco n'est pas encore intégrée (elle se
-télécharge sur Dribbble, compte requis ; gratuite pour un usage personnel,
-licence commerciale à demander à son auteur, Chris Skillern) : les titres
-restent en Archivo Black en attendant le fichier. Valentin teste d'abord
-ainsi et paiera les licences s'il le faut.
+n'utilise que Boomtown Deco, Futura et Marker Felt).
+
+Boomtown Deco (Chris Skillern) est gratuite pour un usage personnel, la
+licence commerciale est à demander à son auteur ; Valentin teste d'abord
+ainsi et paiera s'il le faut. Elle n'a **aucun accent** : le site utilise
+`src/assets/fonts/boomtown-deco-fr.ttf`, complétée par
+`tools/boomtown-accents.py` (é è ê ë à â î ï ô ù û ü ç et capitales,
+accents dessinés à l'épaisseur de ses fûts). Elle est très étroite : il lui
+faut environ 1,5 fois le corps d'une police normale. Une adresse mail ou un
+numéro se composent en Jost, jamais en Boomtown.
 
 | Rôle | Fonte | Usage |
 |---|---|---|
-| Titres | Archivo Black | titres de section, à la manière de l'affiche peinte |
+| Titres | Boomtown Deco FR | titres de section, de frise, de pistes |
 | Chiffres | Big Shoulders | millésimes de la frise, grands nombres |
 | Manuscrit | Caveat | annotations, petites phrases à la main |
 | Texte | Jost (équivalent libre de Futura) | corps de texte, étiquettes, données |
@@ -170,4 +176,4 @@ référence sans demander.
 | 2026-11-24 | Aquarelle de fond seule et version bandeau déposées ; découpe sur mesure possible |
 | 2026-11-24 | Favicon : monogramme K + S en préparation ; le nœud papillon, écarté pour le favicon, reste comme marqueur sur le site |
 | 2026-11-24 | Le K du logo sera peut-être retouché (on lit « HS ») |
-| 2026-11-24 | Valentin : variante du logo de l'affiche du 5/12 ; aquarelle en filigrane ; nœuds papillon gardés ; Jost retenue, Riesling écartée (illisible hors du logo) |
+| 2026-11-24 | Valentin : variante du logo de l'affiche du 5/12 ; aquarelle en filigrane ; nœuds papillon gardés ; Boomtown Deco pour les titres, Jost pour le texte, Riesling écartée (illisible hors du logo) |

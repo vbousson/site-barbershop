@@ -62,7 +62,7 @@ const lien = `mailto:${SITE.mail}`;
         <div class="bloc rv">
           <Bowtie n={3} rot={-5} />
           <p class="eyebrow">Contact</p>
-          <h2>On vient chanter chez vous ?</h2>
+          <h2>On vient chanter chez vous ?</h2>
           <a class="bigmail" href={lien}>
             {SITE.mail}
           </a>
@@ -92,8 +92,11 @@ const lien = `mailto:${SITE.mail}`;
     color: color-mix(in srgb, var(--wash) 72%, transparent);
   }
 
+  /* L'adresse reste dans la police du texte : un @ et des points en Boomtown
+     se lisent mal, et c'est la seule chose à recopier sans erreur. */
   .bigmail {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    font-weight: 500;
     font-size: clamp(1.15rem, 3.4vw, 2.1rem);
     text-decoration: none;
     border-bottom: 4px solid var(--gold);

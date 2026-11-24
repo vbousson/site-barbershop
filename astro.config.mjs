@@ -21,11 +21,17 @@ export default defineConfig({
   // Quatre familles, une fonction chacune, comme sur l'affiche de Mathilde.
   fonts: [
     {
-      provider: fontProviders.google(),
-      name: 'Archivo Black',
+      // La police du logo et des affiches de Mathilde, pour les titres.
+      // Boomtown Deco (Chris Skillern) n'a aucun accent : la version FR est
+      // complétée par tools/boomtown-accents.py. Licence : gratuite pour un
+      // usage personnel, commerciale à demander à l'auteur (cf. CHARTE.md).
+      provider: fontProviders.local(),
+      name: 'Boomtown Deco FR',
       cssVariable: '--font-display',
-      weights: [400],
-      fallbacks: ['system-ui', 'sans-serif'],
+      fallbacks: ['Big Shoulders', 'Arial Narrow', 'sans-serif'],
+      options: {
+        variants: [{ src: ['./src/assets/fonts/boomtown-deco-fr.ttf'], weight: 400, style: 'normal' }],
+      },
     },
     {
       provider: fontProviders.google(),
@@ -35,7 +41,7 @@ export default defineConfig({
       name: 'Big Shoulders',
       cssVariable: '--font-numeral',
       weights: [600, 700, 800],
-      fallbacks: ['Archivo Black', 'sans-serif'],
+      fallbacks: ['Arial Narrow', 'sans-serif'],
     },
     {
       provider: fontProviders.google(),
