@@ -152,7 +152,7 @@ def en_notation(pas, bemols, par_mesure, garde_orthographe):
     return ' '.join(jetons)
 
 
-VOIX = ['basse', 'baryton', 'lead', 'tenor', 'mezzo', 'soprano']
+VOIX = ['basse', 'baryton', 'lead', 'tenor', 'alto', 'mezzo', 'soprano']
 
 
 def main():

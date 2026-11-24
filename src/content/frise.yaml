@@ -51,23 +51,15 @@
     Léa passe la main à Aurore sur la ligne d'alto. Même répertoire, une
     couleur de voix différente, et tout un équilibre à retrouver.
 
-- id: identite
-  annee: 2026
-  titre: Identité et structure
-  texte: >-
-    Mathilde dessine les logos et les visuels. Une association est en cours de
-    constitution, pour facturer, déclarer à la Sacem, et porter les formations
-    à venir.
-
-# ✎ Écrit la nuit du 19 novembre 2026 à partir de trois faits : le groupe est
-# à six sans Aurore, le nom KatréKatr Set est retenu, le logo est de Mathilde.
-# Formulation à valider (et à reprendre par Naïs).
+# ✎ 2026 simplifié le 19 novembre au soir (mémo de Valentin) : ni
+# l'association en cours de constitution, ni le choix du nom ou du logo ne
+# s'affichent. Une seule étape pour l'année, à reprendre par Naïs.
 - id: a-six
   annee: 2026
   mois: 11
   cle: true
-  titre: KatréKatr Set
+  titre: À six
   texte: >-
-    Aurore quitte le groupe. On continue à six, sous un nom qui se lit à voix
-    haute : KatréKatr Set, quatre et quatre, sept. Mathilde redessine le logo
-    pour l'occasion.
+    Aurore quitte le groupe. L'ensemble continue à six, sous le nom KatréKatr
+    Set, et garde ses configurations : à six, à quatre voix graves, à trois
+    voix hautes.

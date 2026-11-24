@@ -12,6 +12,7 @@
 
 import type { VoiceId } from './voices';
 
+import alto from '../assets/heads/alto.png';
 import baryton from '../assets/heads/baryton.png';
 import basse from '../assets/heads/basse.png';
 import lead from '../assets/heads/lead.png';
@@ -21,12 +22,14 @@ import tenor from '../assets/heads/tenor.png';
 
 import markKatrekatrSet from '../assets/marks/katrekatr-set.png';
 import markKatrTet from '../assets/marks/katrtet.png';
+import mark4plus4 from '../assets/marks/4plus4.png';
 
 export const HEADS: Record<VoiceId, ImageMetadata> = {
   basse,
   baryton,
   lead,
   tenor,
+  alto,
   mezzo,
   soprano,
 };
@@ -40,4 +43,6 @@ export const MARKS = {
   set: markKatrekatrSet,
   /** Le logotype Katr Tet : « Barbershop » + KATR TÊT + filets. */
   kt: markKatrTet,
+  /** Le logotype 4+4=7 de l'affiche de juillet 2026, la configuration à sept. */
+  sept: mark4plus4,
 } as const;

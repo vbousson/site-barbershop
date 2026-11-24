@@ -47,7 +47,7 @@ const partage = await ogImage(d.photo ?? 'public-chenoise');
 
 // La notation est absente pour la formation à six : on ne laisse pas de
 // séparateur orphelin derrière elle.
-const signature = [`${d.effectif}`, d.registre, d.notation].filter(Boolean).join(' · ');
+const signature = [`${d.effectif}`, d.registre, d.notation, d.periode].filter(Boolean).join(' · ');
 const titreLong = [`${d.nom}, ${d.effectif} ${d.registre}`, d.notation].filter(Boolean).join(', ');
 ---
 
@@ -94,7 +94,7 @@ const titreLong = [`${d.nom}, ${d.effectif} ${d.registre}`, d.notation].filter(B
         </div>
 
         <div class="rv">
-          <h3>Qui chante</h3>
+          <h3>{d.periode ? 'Qui chantait' : 'Qui chante'}</h3>
           <div class="dl-clair">
             {
               membres.map((v) => (
@@ -116,6 +116,7 @@ const titreLong = [`${d.nom}, ${d.effectif} ${d.registre}`, d.notation].filter(B
                   <a href={href(`formations/${f.id}`)}>{f.data.nom}</a>
                   <span>
                     {f.data.effectif} {f.data.registre}
+                    {f.data.periode && `, ${f.data.periode}`}
                   </span>
                 </li>
               ))

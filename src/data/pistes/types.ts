@@ -26,7 +26,7 @@ export interface Piste {
   lines: Record<VoiceId, Step[]>;
 }
 
-/** Ce qu'on écrit à la main : les six lignes en notation compacte. */
+/** Ce qu'on écrit à la main : les sept lignes en notation compacte. */
 export interface PisteSource extends Omit<Piste, 'lines'> {
   lines: Record<VoiceId, string>;
 }
@@ -70,7 +70,7 @@ const temps = (l: Step[]): number => l.reduce((s, x) => s + x[1], 0);
  * Convertit une boucle écrite à la main et refuse ce que le moteur ne saurait
  * pas jouer juste.
  *
- * La vérification qui compte est l'égalité des longueurs : les six boucles
+ * La vérification qui compte est l'égalité des longueurs : les sept boucles
  * sont lancées au même instant et rebouclent chacune sur sa propre durée. Une
  * ligne plus courte que les autres ne provoque aucune erreur audible tout de
  * suite : elle décale progressivement, et le morceau se délite au bout de
@@ -95,7 +95,7 @@ export function definirPiste(src: PisteSource): Piste {
       throw new Error(
         `${src.id} : les lignes n'ont pas la même longueur, ` +
           `${v.id} fait ${n} temps, ${VOICES[0]!.id} en fait ${ref}. ` +
-          `Les six boucles doivent tomber ensemble.`,
+          `Les sept boucles doivent tomber ensemble.`,
       );
     }
   }

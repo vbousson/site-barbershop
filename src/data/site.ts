@@ -30,7 +30,7 @@ export const SITE = {
  * demande. Les données restent ici, prêtes à être remises si le besoin vient.
  */
 export const FICHE_TECHNIQUE: { k: string; v: string }[] = [
-  { k: 'Effectifs', v: '4 voix graves (Katr Tet) · 6 voix mixtes' },
+  { k: 'Effectifs', v: '6 voix mixtes · 4 voix graves (Katr Tet) · 3 voix hautes' },
   { k: 'Durées', v: "de 20 min à 1 h 30, avec ou sans entracte" },
   { k: 'Sonorisation', v: "aucune jusqu'à 150 places ; 6 micros au-delà" },
   { k: 'Scène', v: '3 × 2 m, sol plat, éclairage simple' },

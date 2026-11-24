@@ -25,6 +25,12 @@ const formations = defineCollection({
   schema: z.object({
     id: formationRef,
     ordre: z.number(),
+    /**
+     * Renseignée pour une configuration passée (« 2024 – 2026 ») : elle quitte
+     * la grille de l'accueil pour la ligne « Avant », mais garde sa page, ses
+     * concerts et son onglet sur le plateau.
+     */
+    periode: z.string().nullable().default(null),
     nom: z.string(),
     /** Le seul axe vrai pour toutes les formations : le registre. */
     registre: z.string(),

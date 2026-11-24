@@ -1,7 +1,8 @@
 ---
 /**
  * Le plateau, la pièce maîtresse et la seule audace visuelle du site.
- * Le logo est jouable : deux onglets basculent entre les formations, les
+ * Le logo est jouable : les onglets basculent entre les formations (celles
+ * d'aujourd'hui, puis une rangée « Avant » pour les configurations passées), les
  * têtes se réorganisent en suivant la géométrie exacte du logo correspondant,
  * et cliquer une tête fait entrer sa voix.
  *
@@ -16,7 +17,8 @@ import { HEADS, MARKS } from "../data/images";
 import { boxOf, markOf } from "../data/geometry";
 import {
   FORMATIONS,
-  FORMATION_LIST,
+  FORMATIONS_ACTUELLES,
+  FORMATIONS_PASSEES,
   DEFAULT_FORMATION,
   type FormationId,
 } from "../data/formations";
@@ -30,12 +32,19 @@ interface Props {
 const { formation = DEFAULT_FORMATION } = Astro.props;
 const f = FORMATIONS[formation];
 
-// Les deux logotypes en image sont préparés au build : le script n'a plus qu'à
-// permuter deux URL connues, sans rien recalculer.
+// Les logotypes en image sont préparés au build : le script n'a plus qu'à
+// permuter des URL connues, sans rien recalculer.
 const markSrc = {
   set: (await getImage({ src: MARKS.set, format: "webp", width: 900 })).src,
   kt: (await getImage({ src: MARKS.kt, format: "webp", width: 900 })).src,
+  sept: (await getImage({ src: MARKS.sept, format: "webp", width: 900 })).src,
 };
+
+const MARK_ALT = {
+  set: "KatréKatr Set · Ensemble vocal",
+  kt: "Katr Tet · Barbershop",
+  sept: "4+4=7",
+} as const;
 
 const mark = markOf(f);
 
@@ -44,20 +53,51 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
 ---
 
 <div class="tabs" role="tablist" aria-label="Choisir une formation">
-  {
-    FORMATION_LIST.map((x) => (
-      <button
-        class="tab"
-        role="tab"
-        type="button"
-        data-f={x.id}
-        aria-selected={x.id === formation ? "true" : "false"}
-        aria-controls="spot"
-      >
-        {x.tab} <em>{x.effectif}</em>
-      </button>
-    ))
-  }
+  <div class="row">
+    {
+      FORMATIONS_ACTUELLES.map((x) => (
+        <button
+          class="tab"
+          role="tab"
+          type="button"
+          data-f={x.id}
+          aria-selected={x.id === formation ? "true" : "false"}
+          aria-controls="spot"
+        >
+          {x.tab} <em>{x.effectif}</em>
+        </button>
+      ))
+    }
+  </div>
+  {/* Les configurations passées restent à portée, mais repliées : ce n'est
+     pas ce qu'on montre en premier. Sans JavaScript, la rangée est ouverte. */}
+  <button
+    type="button"
+    class="ouvrir-avant"
+    id="ouvrir-avant"
+    aria-expanded={f.passee ? "true" : "false"}
+    aria-controls="avant"
+  >
+    Avant…
+  </button>
+  <div class:list={["row passees", { open: f.passee }]} id="avant">
+    <span class="avant" aria-hidden="true">Avant</span>
+    {
+      FORMATIONS_PASSEES.map((x) => (
+        <button
+          class="tab"
+          role="tab"
+          type="button"
+          data-f={x.id}
+          aria-selected={x.id === formation ? "true" : "false"}
+          aria-controls="spot"
+          aria-label={`${x.tab}, ${x.effectif}, configuration passée`}
+        >
+          {x.tab} <em>{x.effectif}</em>
+        </button>
+      ))
+    }
+  </div>
 </div>
 
 <div class="stage-grid">
@@ -78,6 +118,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
         id="mark"
         data-mark-set={markSrc.set}
         data-mark-kt={markSrc.kt}
+        data-mark-sept={markSrc.sept}
         style={`left:${mark.left}%;top:${mark.top}%;width:${mark.w}%${
           mark.kind === "txt" ? `;--ms:${mark.fs.toFixed(2)}cqw` : ""
         }`}
@@ -86,11 +127,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
           mark.kind === "img" ? (
             <img
               src={markSrc[mark.asset]}
-              alt={
-                mark.asset === "kt"
-                  ? "Katr Tet · Barbershop"
-                  : "KatréKatr Set · Ensemble vocal"
-              }
+              alt={MARK_ALT[mark.asset]}
             />
           ) : (
             <>
@@ -118,7 +155,9 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
               aria-pressed="false"
               aria-label={`${v.name}, ${v.label.toLowerCase()}`}
               tabindex={onstage ? undefined : -1}
-              style={`left:${box.left}%;top:${box.top}%;width:${box.w}%`}
+              style={`left:${box.left}%;top:${box.top}%;width:${box.w}%${
+                f.devant?.includes(id) ? ";z-index:2" : ""
+              }`}
             >
               <span class="glow" />
               <Image src={HEADS[id]} alt="" />
@@ -212,11 +251,61 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
      l'exécution, d'où les :global() : ils ne portent pas la portée d'Astro. */
   /* ═══ onglets de formation ═══ */
   .tabs {
+    display: grid;
+    justify-items: center;
+    gap: 0.55rem;
+    margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
+  }
+
+  .tabs .row {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.4rem;
     flex-wrap: wrap;
-    margin-bottom: clamp(1rem, 2.5vw, 1.8rem);
+  }
+
+  /* Les configurations passées : même geste, voix plus basse. */
+  .passees .tab {
+    font-size: 0.66rem;
+    padding: 0.3rem 0.8rem;
+    border-style: dashed;
+  }
+
+  .passees .tab[aria-selected='true'] {
+    border-style: solid;
+  }
+
+  :global(.js) .passees:not(.open) {
+    display: none;
+  }
+
+  .ouvrir-avant {
+    display: none;
+    font-family: var(--font-script);
+    font-size: 1rem;
+    color: color-mix(in srgb, var(--ink) 55%, transparent);
+    padding: 0.1rem 0.4rem;
+  }
+
+  :global(.js) .ouvrir-avant {
+    display: block;
+  }
+
+  .ouvrir-avant:hover,
+  .ouvrir-avant[aria-expanded='true'] {
+    color: var(--ink);
+  }
+
+  .ouvrir-avant[aria-expanded='true'] {
+    display: none;
+  }
+
+  .avant {
+    font-family: var(--font-script);
+    font-size: 1rem;
+    color: color-mix(in srgb, var(--ink) 55%, transparent);
+    margin-right: 0.2rem;
   }
 
   .tab {
@@ -380,6 +469,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
   }
 
   .face .glow {
+    pointer-events: none;
     position: absolute;
     left: 50%;
     top: 44%;

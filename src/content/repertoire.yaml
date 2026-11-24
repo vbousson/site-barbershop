@@ -16,11 +16,9 @@
   ordre: 1
   famille: Musiques de films
   titres:
-    # Chihiro et Gladiator étaient au Quatuor à une barbe, qui n'existe plus :
-    # rattachés à six en brouillon, à confirmer (repris à six, ou retirés ?).
-    - { titre: Le voyage de Chihiro, formation: katrekatr-set, brouillon: true }
+    - { titre: Le voyage de Chihiro, formation: quatuor-a-une-barbe }
     - { titre: Les Aristochats, formation: katr-tet }
-    - { titre: Gladiator, formation: katrekatr-set, brouillon: true }
+    - { titre: Gladiator, formation: quatuor-a-une-barbe }
     - { titre: Le bossu de Notre-Dame, formation: katr-tet }
     # - { titre: Toy Story, formation: katr-tet }
 
@@ -37,10 +35,10 @@
   ordre: 3
   famille: Classique & sacré
   titres:
-    - { titre: Evening Rise, formation: katrekatr-set }
-    - { titre: Coventry Carol, formation: katrekatr-set }
+    - { titre: Evening Rise, formation: 4plus4 }
+    - { titre: Coventry Carol, formation: 4plus4 }
     - { titre: Quatre Petites Prières de saint François d’Assise, formation: katr-tet }
-    - { titre: Gaudete Christus est Natus, formation: katrekatr-set }
+    - { titre: Gaudete Christus est Natus, formation: 4plus4 }
 
 # - id: pop
 #   ordre: 4
@@ -58,5 +56,5 @@
 #   titres:
 #     - { titre: Signore delle cime, formation: katr-tet }
 #     - { titre: , formation: katr-tet }
-#     - { titre: Titre à compléter, formation: katrekatr-set }
+#     - { titre: Titre à compléter, formation: 4plus4 }
 #     - { titre: Tag à compléter, formation: katr-tet }

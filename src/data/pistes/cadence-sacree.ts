@@ -17,6 +17,7 @@ export default definirPiste({
     baryton: 'A3:4 | A3:4 | F3:4 | G3:4',
     lead: 'C4:4 | D4:4 | D4:4 | C4:4',
     tenor: 'F4:4 | F4:4 | Bb4:4 | G4:4',
+    alto: 'A4:4 | A4:4 | F4:4 | E4:4',
     mezzo: 'C5:4 | D5:4 | D5:4 | C5:4',
     soprano: 'F5:4 | F5:4 | Bb5:4 | G5:4',
   },

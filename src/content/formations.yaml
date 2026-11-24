@@ -1,4 +1,6 @@
-# Les formations programmables : KatréKatr Set à six, Katr Tet à quatre.
+# Les formations : aujourd'hui KatréKatr Set à six, Katr Tet à quatre voix
+# graves, les trois voix hautes ; avant, 4+4=7 à sept et le Quatuor à une barbe
+# (`periode` renseignée = configuration passée).
 #
 # Le gabarit est volontairement contraint : même longueur de résumé, deux
 # puces chacune. L'égalité entre les formations ne se décrète pas, elle
@@ -64,3 +66,85 @@
       aux musiques de films, aux standards et au sacré.
   photo: katr-tet-chenoise
   photoAttendue: photo de Katr Tet
+
+# ✎ Trio écrit le 19 novembre 2026 au soir, d'après le mémo de Valentin : les
+# trois voix hautes chantent encore ensemble dans les concerts à six. Pas de
+# nom à elles, elles portent le nom chapeau. Texte factuel, à reprendre par Naïs.
+- id: voix-hautes
+  ordre: 3
+  nom: Trois voix hautes
+  registre: voix hautes
+  notation: null
+  effectif: 3
+  accroche: "Soprano, mezzo, ténor : les voix hautes de KatréKatr Set, entre elles."
+  resume: >-
+    Naïs, Mathilde et Maurin. Au milieu d'un concert à six, les voix graves
+    sortent et les trois voix hautes chantent seules quelques pièces. Pas de
+    nom à elles : c'est encore KatréKatr Set, sous une autre forme.
+  puces:
+    - Pièces glissées dans les concerts à six
+    - Le registre aigu, sans les basses
+  detail:
+    - >-
+      KatréKatr Set est un ensemble à géométrie variable : à six, à quatre voix
+      graves, et à trois voix hautes. Le trio n'a pas de nom propre, il garde
+      celui de l'ensemble.
+    - >-
+      Maurin y chante au-dessus de son registre de ténor de quatuor : c'est lui
+      qui fait le pont entre les voix graves et les voix hautes.
+  photo: null
+  photoAttendue: photo des trois voix hautes
+
+# Configurations passées : onglets « Avant » du plateau. Les concerts qu'elles
+# ont chantés restent rattachés à elles. Textes de juillet 2026, mis au passé.
+- id: 4plus4
+  ordre: 4
+  periode: 2024 – 2026
+  nom: 4+4=7
+  registre: voix mixtes
+  notation: null
+  effectif: 7
+  accroche: Les deux quatuors réunis, du grave à l'aigu.
+  resume: >-
+    Quatre plus quatre font sept parce que Maurin chantait dans les deux
+    quatuors. Le concert passait des voix graves aux voix aiguës, puis
+    réunissait tout le monde sur des pièces à sept parties.
+  puces:
+    - Le répertoire le plus large
+    - Du grave à l'aigu dans le même concert
+  detail:
+    - >-
+      Quatre plus quatre font sept : Maurin chantait dans les deux quatuors.
+      C'était l'arithmétique du nom, et aussi le plan du concert.
+    - >-
+      Léa puis Aurore y ont tenu l'alto. La configuration s'est arrêtée au
+      départ d'Aurore, en novembre 2026 ; l'ensemble a continué à six, sous
+      le nom KatréKatr Set.
+  photo: 4plus4-chenoise
+  photoAttendue: photo de 4+4=7
+
+- id: quatuor-a-une-barbe
+  ordre: 5
+  periode: 2024 – 2026
+  nom: Quatuor à une barbe
+  registre: voix aiguës
+  notation: SSAA
+  effectif: 4
+  accroche: Quatre voix aiguës, et une seule barbe.
+  resume: >-
+    Naïs, Mathilde, Léa puis Aurore, et Maurin sur la ligne d'alto. Le quatuor
+    s'était monté autour du répertoire écrit pour voix aiguës : du sacré, du
+    classique, de la chanson. Le nom se lisait tout seul.
+  puces:
+    - Classique, sacré, chanson
+    - Souvent glissé dans un concert à sept
+  detail:
+    - >-
+      Beaucoup de pièces sont écrites pour des voix hautes et ne se transposent
+      pas sans y perdre. Ce quatuor s'était monté pour aller les chanter là où
+      elles sont écrites.
+    - >-
+      Maurin y tenait la ligne d'alto. Ce n'était donc pas un quatuor féminin,
+      et le nom le disait sans détour.
+  photo: null
+  photoAttendue: photo du Quatuor à une barbe

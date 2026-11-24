@@ -33,10 +33,11 @@ export type GeomTable = Partial<Record<VoiceId, Box>> & { mark: MarkBox };
 /**
  * Affiche du 16 juillet 2026, à sept voix : c'est d'elle que viennent les
  * tailles natives des têtes (`w`, `h`), que toutes les autres tables
- * reprennent au millième. Les positions ne servent plus à aucune formation.
- * La ligne d'Aurore (alto) a été retirée avec elle.
+ * reprennent au millième. Ses positions servent encore à l'onglet passé
+ * 4+4=7, la configuration à sept.
  */
 export const GEOM: GeomTable = {
+  alto: { left: 12.528, top: 9.934, w: 18.985, h: 28.587 },
   mezzo: { left: 72.241, top: 16.004, w: 18.874, h: 18.985 },
   soprano: { left: 37.804, top: 8.057, w: 23.841, h: 21.854 },
   basse: { left: 8.554, top: 38.3, w: 19.536, h: 27.815 },
@@ -102,7 +103,7 @@ export const SC = (v: number): number => 50 + (v - 50) * K;
 
 /** Le logotype : soit une image de Mathilde, soit un bloc typographique. */
 export type MarkSpec =
-  | { kind: 'img'; asset: 'set' | 'kt'; left: number; top: number; w: number }
+  | { kind: 'img'; asset: 'set' | 'kt' | 'sept'; left: number; top: number; w: number }
   | { kind: 'txt'; lines: string[]; left: number; top: number; w: number; fs: number };
 
 export interface FormationGeom {

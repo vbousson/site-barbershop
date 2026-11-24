@@ -24,15 +24,15 @@
 - id: chenoise-2026
   date: 2026-07
   lieu: Rue Chenoise - Grenoble
-  description: Musiques de films a cappella, avec Osez Chenoise (encore à sept, sous le nom 4+4=7)
-  formation: katrekatr-set
+  description: Musiques de films a cappella, avec Osez Chenoise
+  formation: 4plus4
   enregistrement: chenoise-2026
 
 - id: chu-sud-2026-06
   date: 2026-06
   lieu: CHU Sud
   description: Musiques de films a cappella
-  formation: katrekatr-set
+  formation: 4plus4
 
 - id: atelier-du-8-2025-02
   date: 2025-02
@@ -65,7 +65,7 @@
   # liste d'origine. Si c'est en fait la même, supprimer cette entrée.
   date: null
   lieu: CHU Sud
-  formation: katrekatr-set
+  formation: 4plus4
   brouillon: true
 
 - id: entre-amis-a

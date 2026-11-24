@@ -1,7 +1,7 @@
 # Écrire une boucle
 
-Une boucle, c'est **six lignes de même longueur** (une par voix) que le
-navigateur transforme en six fichiers audio et lance au même instant. Le
+Une boucle, c'est **sept lignes de même longueur** (une par voix) que le
+navigateur transforme en sept fichiers audio et lance au même instant. Le
 plateau ne fait rien d'autre : quand tu cliques une tête, il monte le volume de
 la ligne correspondante.
 
@@ -58,42 +58,54 @@ se relise, alors autant les poser juste : à 4/4, une mesure fait quatre temps.
 
 ## Les deux règles
 
-**Les six lignes doivent faire le même nombre de temps.** C'est la seule
+**Les sept lignes doivent faire le même nombre de temps.** C'est la seule
 contrainte dure, et elle est vérifiée au build : si tu te trompes, la page
 refuse de se construire en te disant quelle voix fait combien de temps. Sans
 cette vérification l'erreur serait inaudible au premier tour, puis le morceau
 se déliterait au fil des boucles, chaque voix rebouclant sur sa propre durée.
 
-**Les six voix sont obligatoires.** Une voix qui n'a rien à chanter chante un
+**Les sept voix sont obligatoires.** Une voix qui n'a rien à chanter chante un
 silence : `'_:16'`. Pas de ligne absente.
 
-## La règle : le quatuor grave doit tenir seul
+## La règle qui n'était écrite nulle part : deux quatuors superposés
 
-Le plateau ne joue pas six voix quelconques. Les deux onglets font que les
-mêmes six lignes doivent tenir debout dans **deux configurations** :
+Le plateau ne joue pas sept voix quelconques. Ses cinq onglets font que les
+mêmes sept lignes doivent tenir debout dans **cinq configurations** :
 
 | Onglet | Voix allumables |
 |---|---|
+| KatréKatr Set | les six d'aujourd'hui (tout sauf l'alto) |
 | Katr Tet | basse, baryton, lead, ténor |
-| KatréKatr Set | les six |
+| KatréKatr, 3 voix hautes | ténor, mezzo, soprano |
+| 4+4=7 (avant) | les sept |
+| Quatuor à une barbe (avant) | ténor, alto, mezzo, soprano |
 
-Donc **chaque accord doit être complet dans le quatuor grave**, écrit comme un
-TTBB normal, ténor au sommet. Mezzo et soprano viennent par-dessus : elles
-doublent ou colorent l'accord, mais rien d'essentiel ne doit reposer sur elles,
-sinon l'onglet Katr Tet sonne troué. Il suffit de cliquer l'onglet pour le
-vérifier.
+L'alto est la ligne d'Aurore : elle ne chante plus que dans les deux onglets
+« Avant ». Depuis le passage à six, le trio voix hautes demande que ténor,
+mezzo et soprano disent l'accord à eux trois, sans l'alto.
 
-Jusqu'en novembre 2026 il y avait sept voix et trois onglets, avec un second
-quatuor aigu (ténor, alto, mezzo, soprano) qui devait lui aussi tenir seul.
-Les boucles ont été écrites pour cette contrainte-là ; la ligne d'alto en a
-simplement été retirée au passage à six, ce qui laisse quelques accords du
-haut incomplets (le Bb6 du tag suspendu perd son sol). C'est inaudible dans le
-quatuor grave et sans conséquence pour une maquette, mais une boucle réécrite
-pour six voix sonnerait plus pleine.
+Le ténor est dans les deux quatuors, comme Maurin. Donc **chaque accord doit
+être voicé deux fois** : une fois par le quatuor grave, une fois par le quatuor
+aigu, la ligne de ténor servant de sommet au premier et de fondement au second.
+
+Les trois boucles d'origine respectent cette règle sans le dire. Le tag, par
+exemple, sur son premier accord :
+
+```
+quatuor grave   basse Bb2 · baryton G3 · lead D4 · ténor F4    → Bb6 complet
+quatuor aigu             ténor F4 · alto G4 · mezzo Bb4 · soprano D5   → Bb6 complet
+```
+
+En pratique : écris d'abord le quatuor grave comme un TTBB normal, ténor au
+sommet. Puis rejoue le même accord au-dessus du ténor avec alto, mezzo et
+soprano. Rien n'interdit un croisement de voix (le tag en a), mais un accord
+incomplet dans l'un des deux quatuors s'entend tout de suite : il suffit de
+cliquer un onglet pour le vérifier.
 
 C'est aussi ce qui distingue ce travail d'une simple transcription. Un tag
-barbershop publié est un TTBB, donc quatre lignes sur six : les deux voix
-aiguës restent à écrire.
+barbershop publié est un TTBB, donc quatre lignes sur sept : le quatuor aigu
+reste à écrire, et une transposition mécanique du TTBB ne suffit pas puisque la
+ligne de ténor doit rester commune aux deux.
 
 ## Choisir un extrait
 
@@ -125,7 +137,7 @@ l'orthographe de la partition (un fa dièse ressort en `F#`, pas en `Gb`), pose
 les barres de mesure, et met un silence sur les voix que le fichier ne fournit
 pas, en te disant lesquelles.
 
-Ce qu'il ne fait pas : écrire les voix aiguës à ta place, ni renseigner
+Ce qu'il ne fait pas : écrire le quatuor aigu à ta place, ni renseigner
 `origine`. Il laisse `'À RENSEIGNER'` exprès.
 
 ## Le nœud papillon
@@ -144,7 +156,7 @@ reprise dit d'où elle vient.
 
 ## Quand il y aura de vraies prises
 
-Cette couche disparaît. Les six lignes de synthèse deviennent six fichiers
+Cette couche disparaît. Les sept lignes de synthèse deviennent sept fichiers
 audio et `renderVoice()` cède la place à un `decodeAudioData()`. Le reste du
 plateau (les vols, la bascule de formation, l'arc doré, le transport) ne
 bouge pas d'une ligne. C'est la priorité 1 du BRIEF.

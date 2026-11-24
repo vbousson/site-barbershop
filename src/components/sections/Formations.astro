@@ -1,23 +1,27 @@
 ---
 /**
- * Deux cartes au gabarit strictement identique : même format, même longueur
- * de texte, même nombre de puces. L'égalité entre les formations ne se
- * décrète pas, elle s'impose par la contrainte typographique.
+ * Les configurations d'aujourd'hui, en cartes au gabarit strictement
+ * identique : même format, même longueur de texte, même nombre de puces.
+ * L'égalité entre les formations ne se décrète pas, elle s'impose par la
+ * contrainte typographique. Les configurations passées tiennent sur une ligne
+ * en dessous : elles gardent leur page, pas leur place dans la grille.
  */
 import SectionHead from '../SectionHead.astro';
 import Photo from '../Photo.astro';
 import { getFormations } from '../../lib/content';
 import { href } from '../../lib/url';
 
-const formations = await getFormations();
+const toutes = await getFormations();
+const formations = toutes.filter((f) => f.data.periode === null);
+const passees = toutes.filter((f) => f.data.periode !== null);
 ---
 
 <section id="formations">
   <div class="wrap">
     <SectionHead
-      eyebrow="Deux formations"
+      eyebrow="Géométrie variable"
       titre="Une voix par tête"
-      lede="Personne ne double personne : chaque partie est tenue par un seul chanteur. Ça change l'équilibre, l'écoute, et le risque. Deux configurations sont disponibles à la programmation : à six, ou à quatre."
+      lede="Personne ne double personne : chaque partie est tenue par un seul chanteur. Ça change l'équilibre, l'écoute, et le risque. Le même concert passe d'une configuration à l'autre : à six, à quatre voix graves, à trois voix hautes."
       tie={0}
       rot={-4}
     />
@@ -47,16 +51,34 @@ const formations = await getFormations();
         ))
       }
     </div>
+
+    {
+      passees.length > 0 && (
+        <p class="avant">
+          <span>Avant</span>
+          {passees.map((f, i) => (
+            <>
+              {i > 0 && ' · '}
+              <a href={href(`formations/${f.id}`)}>{f.data.nom}</a>
+              <small>
+                {' '}
+                {f.data.effectif} voix, {f.data.periode}
+              </small>
+            </>
+          ))}
+        </p>
+      )
+    }
   </div>
 </section>
 
 <style>
   /* Les cartes de formation. */
   /* ═══ cartes de formation ═══
-     Gabarit strictement identique pour les deux. */
+     Gabarit strictement identique pour toutes. */
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(1.1rem, 2.4vw, 2.2rem);
   }
 
@@ -118,5 +140,23 @@ const formations = await getFormations();
 
   .card ul li {
     padding: 0.14rem 0;
+  }
+
+  .avant {
+    margin: clamp(1.6rem, 3vw, 2.4rem) 0 0;
+    padding-top: 0.9rem;
+    border-top: var(--rule);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .avant span {
+    font-family: var(--font-script);
+    font-size: 1.15rem;
+    margin-right: 0.6rem;
+  }
+
+  .avant small {
+    color: color-mix(in srgb, var(--ink) 50%, transparent);
   }
 </style>
