@@ -25,10 +25,19 @@ l'historique.
 
 ## Le logo
 
-Variante retenue : celle **en haut à gauche** de la planche de novembre 2026.
-On y lit « KaTréKatr », « Ensemble vocal » au-dessus à droite, « Set » à la
-verticale, en or. L'affiche du 5 décembre utilise une autre variante (le R à
-l'envers) : **à confirmer** laquelle fait référence.
+Le site affiche aujourd'hui la proposition **en haut à gauche** de la planche
+de novembre 2026 (« Ensemble vocal » au-dessus à droite, R à l'endroit,
+« Set » vertical en or). Le fichier que Mathilde a déposé sur le Drive comme
+« le nouveau logo » (`KetrekatrSet_Logo.png`, 1478 × 514, fond transparent)
+est l'autre variante, celle de l'affiche du 5 décembre : R à l'envers,
+« Ensemble vocal » en dessous. **À confirmer** laquelle fait référence.
+
+Le logo n'est pas figé : Mathilde envisage de retoucher le **K**, qui a « un
+petit côté H » (on lit « HS » au lieu de « KS »). Attendre sa version avant
+de refaire les déclinaisons.
+
+**Polices du logo** (Mathilde, 24/11) : **Boomtown Deco** pour les lettres
+capitales, **Riesling** pour la police fine (« Ensemble vocal », « Set »).
 
 | Déclinaison | Usage | Fichier aujourd'hui | Fichier attendu |
 |---|---|---|---|
@@ -36,7 +45,7 @@ l'envers) : **à confirmer** laquelle fait référence.
 | Complète, tout noir | impressions monochromes | absente | vectoriel |
 | Complète, tout clair | sur fond sombre | absente | vectoriel |
 | Courte, sans « Ensemble vocal » | barre du haut, pied de page | absente (on réduit la complète, « Ensemble vocal » devient illisible sous 60 px de haut) | vectoriel |
-| Pictogramme carré | icône d'onglet, icône de téléphone | absent (l'onglet affiche encore « 4+4=7 ») | SVG + PNG 512 × 512 |
+| Pictogramme carré | icône d'onglet, icône de téléphone | absent (l'onglet affiche encore « 4+4=7 ») | SVG + PNG 512 × 512 ; Mathilde dessine un monogramme **K + S** (« KKS »), Valentin préfère la version de droite, façon cassette |
 
 **Taille minimale** : la version complète ne descend pas sous 60 px de haut à
 l'écran. En dessous, on passe à la version courte. **Zone de protection** :
@@ -69,8 +78,16 @@ le texte courant reste en `--ink` ou `--ink-soft`.
 
 ## La typographie
 
-Quatre familles, chacune avec un seul rôle, comme sur l'affiche. Toutes les
-quatre sont des Google Fonts, hébergées par le site lui-même.
+**Ce que Mathilde utilise** (24/11) : Boomtown Deco et Riesling pour le logo,
+**Futura** pour le texte des affiches. Sa proposition pour le site : Boomtown
+pour les titres, Riesling pour les sous-titres et les titres de morceaux,
+Futura ou une police simple pour le reste. Riesling n'est pas assez lisible en
+texte courant. Pour l'ergonomie, elle renvoie à Naïs. Boomtown Deco et
+Riesling sont gratuites d'après elle ; Futura est payante (équivalent libre :
+Jost). **À vérifier** : que leurs licences autorisent l'intégration web.
+
+**Ce que le site utilise aujourd'hui**, en attendant : quatre familles, une
+fonction chacune, toutes des Google Fonts hébergées par le site lui-même.
 
 | Rôle | Fonte | Usage |
 |---|---|---|
@@ -84,21 +101,27 @@ jamais en texte.
 
 ## Les éléments dessinés
 
-- **Les têtes** (caricatures). Une par chanteur, toutes à la même échelle
-  relative que sur le logo, nœud papillon compris pour les hommes. Elles ne
-  changent jamais de taille d'une configuration à l'autre. Les actuelles
-  (`src/assets/heads/`) font environ 240 px de haut. Attendu : PNG
-  transparent d'au moins 1000 px de haut, ou SVG, Aurore comprise pour la
-  rangée « Avant ».
+- **Les têtes** (caricatures). Une par chanteur, nœud papillon compris pour
+  les hommes. Elles ne changent jamais de taille d'une configuration à
+  l'autre. Sources : `Trombinoscope/` du Drive, fond blanc, ~1300 px. Toutes
+  les affiches les réutilisent au même facteur (0,239 sur l'affiche de
+  juillet). Depuis le 24/11, `src/assets/heads/` en est tiré par
+  `tools/hd-tetes.py` (fond rendu transparent, même cadrage que les anciennes
+  découpes, ~1000 px de haut). Une tête sans nom dans le trombinoscope,
+  `Fichier (2025-11-14…)` : **à identifier** (Léa ?).
 - **Les nœuds papillon**, en or, au nombre de quatre (`src/assets/bowties/`).
-  Ils marquent le début des sections et servent de puces dans la liste des
-  boucles audio.
+  Depuis le 24/11, ils ne servent plus de marqueur : il y en avait trop, et
+  c'est un attribut masculin dans un ensemble mixte (Valentin, approuvé par
+  Mathilde). Ils restent sur les têtes des hommes et sur la page 404. Les
+  puces et les jalons de frise sont des taches dorées.
 - **Le disque blanc.** C'est le seul objet fort de la page. Le reste du site
   reste sobre.
-- **Le lavis aquarelle**, pêche et lilas sur fond crème, avec une portée dorée
-  en bas à droite. Aujourd'hui, il est imité en dégradés CSS. Si Mathilde
-  fournit le fond seul (JPEG ou WebP d'au moins 2400 px de large), on prend
-  le vrai.
+- **L'aquarelle de fond**, la vraie, sans texte (`fondaffiche.jpeg`,
+  6948 × 4852, paysage) : fond de la bannière d'accueil depuis le 24/11
+  (`src/assets/fond/aquarelle.jpg`, réduite à 3200 px). Les rayons dorés
+  partent d'en bas à droite, c'est le coin à garder quand l'écran rogne.
+  Mathilde a aussi fait une version bandeau (`KKS_bandeau.jpeg`,
+  1880 × 725) ; elle peut recouper à d'autres dimensions sur demande.
 
 ## Les images de partage
 
@@ -114,9 +137,29 @@ Le mieux est du vectoriel : SVG, ou PDF/AI avec les textes vectorisés. À
 défaut, du PNG à fond transparent, en grand. Les noms de fichiers sont
 libres, on les range au moment de l'intégration.
 
+## Le Drive « Visuels » : ce qui sert, ce qui est obsolète
+
+Le dossier contient des variantes anciennes : ne pas les prendre pour
+référence sans demander.
+
+| Fichier | Statut |
+|---|---|
+| `Trombinoscope/*.jpg` | **à jour** : les têtes, source du site |
+| `fondaffiche.jpeg`, `KKS_bandeau.jpeg` | **à jour** : l'aquarelle seule, et en bandeau |
+| `KetrekatrSet_Logo.png` | **à jour**, mais le K va peut-être changer |
+| `KatrekatreSet-affBibKY.jpg` | affiche du 5/12, 3508 × 4961 |
+| `BBshop4Tet logos Mathilde/BBshop-4tet-*.png`, `fond blanc/noir.jpg` | logo Katr Tet, en vigueur |
+| `4+4=7-logocomplet.png`, `4+4=7-chenoise v2*` | configuration passée à sept (juillet 2026) : historique |
+| `4+4=7-logo_OLD.png`, `4+4=6.png` | **obsolètes** |
+| `BBshop4Tet logos Mathilde/IA/` | **obsolète** : essais de 2023 |
+
 ## Journal des décisions de Mathilde
 
 | Date | Décision |
 |---|---|
 | 2026-11-19 | Logo : variante en haut à gauche de la planche, choisie par Valentin |
-| 2026-11-24 | Nouveau logo déposé sur le Drive du groupe, dossier « visuel pour le site » ; affiche du 5/12 corrigée |
+| 2026-11-24 | Nouveau logo déposé sur le Drive du groupe, dossier « Visuels » ; affiche du 5/12 corrigée |
+| 2026-11-24 | Polices : Boomtown Deco + Riesling (logo), Futura (texte des affiches) ; Boomtown pour les titres, Riesling pour les sous-titres, une police simple pour le corps |
+| 2026-11-24 | Aquarelle de fond seule et version bandeau déposées ; découpe sur mesure possible |
+| 2026-11-24 | Favicon : monogramme K + S en préparation ; nœud papillon écarté (trop présent, pas adapté à un ensemble mixte) |
+| 2026-11-24 | Le K du logo sera peut-être retouché (on lit « HS ») |

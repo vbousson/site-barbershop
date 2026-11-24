@@ -11,7 +11,6 @@
  * qu'ajouter le comportement : vols, bascule, audio.
  */
 import { Image, getImage } from "astro:assets";
-import Bowtie from "./Bowtie.astro";
 import { VOICES, ZORDER, voiceById } from "../data/voices";
 import { HEADS, MARKS } from "../data/images";
 import { boxOf, markOf } from "../data/geometry";
@@ -160,7 +159,14 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
               }`}
             >
               <span class="glow" />
-              <Image src={HEADS[id]} alt="" />
+              {/* Une tête fait ~20 % du disque (660 px au plus) : 640 px couvre les
+                  écrans denses et le zoom, sans charger l'original. */}
+              <Image
+                src={HEADS[id]}
+                alt=""
+                widths={[160, 320, 640]}
+                sizes="min(20vw, 160px)"
+              />
               <span class="nm">
                 <b>{v.name}</b>
                 <i>{v.label}</i>
@@ -227,7 +233,7 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
             data-piste={p.id}
             aria-pressed={i === 0 ? "true" : "false"}
           >
-            <Bowtie n={p.tie} rot={i % 2 ? 6 : -6} size="puce" />
+            <span class="pt" aria-hidden="true" />
             {p.nom}
             <i>{p.meta}</i>
           </button>
@@ -635,25 +641,25 @@ const boxes = new Map(f.members.map((id) => [id, boxOf(id, f)]));
     font-weight: 700;
   }
 
-  /* Le nœud papillon est rendu par Bowtie et porte donc SA portée, pas celle
-     d'ici : d'où le :global(). L'aquarelle ne se recolore pas comme un SVG,
-     donc la boucle choisie se signale par un nœud rendu à ses vraies couleurs,
-     les autres restant en retrait, presque au crayon. */
-  .piste :global(.tie) {
+  /* La puce : une tache dorée, pleine pour la boucle choisie, en retrait
+     pour les autres. */
+  .piste .pt {
     flex: 0 0 auto;
-    opacity: 0.38;
-    filter: saturate(0.12);
-    transition: opacity 0.2s, filter 0.2s;
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.3;
+    transition: opacity 0.2s;
   }
 
-  .piste:hover :global(.tie) {
-    opacity: 0.66;
-    filter: saturate(0.5);
+  .piste:hover .pt {
+    opacity: 0.6;
   }
 
-  .piste[aria-pressed='true'] :global(.tie) {
+  .piste[aria-pressed='true'] .pt {
     opacity: 1;
-    filter: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 30%, transparent);
   }
 
   .piste i {

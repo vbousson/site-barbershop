@@ -1,12 +1,15 @@
 ---
 /**
- * Le hero : le lavis aquarelle reconstitué en dégradés radiaux, les taches,
- * la portée dorée, et le plateau au milieu.
+ * Le hero : l'aquarelle de Mathilde (le fond de ses affiches, sans texte) et
+ * le plateau au milieu. Le disque blanc est géré par le plateau, pas par
+ * l'image, pour tomber au bon endroit quelle que soit la largeur.
  *
  * Le hero est commun aux quatre pages, simplement pré-réglé sur une formation
  * différente.
  */
+import { Image } from 'astro:assets';
 import Plateau from './Plateau.astro';
+import aquarelle from '../assets/fond/aquarelle.jpg';
 import type { FormationId } from '../data/formations';
 
 interface Props {
@@ -20,13 +23,15 @@ const { formation, titre } = Astro.props;
 ---
 
 <div class="hero">
-  <span class="splash" style="width:9rem;height:7rem;left:4%;top:16%;background:color-mix(in srgb,var(--peach) 45%,transparent)"></span>
-  <span class="splash" style="width:4rem;height:4rem;left:12%;top:52%;background:color-mix(in srgb,var(--lilac) 42%,transparent)"></span>
-  <span class="splash" style="width:6rem;height:5rem;right:6%;top:12%;background:color-mix(in srgb,var(--gold) 50%,transparent)"></span>
-  <span class="splash" style="width:3.4rem;height:3.4rem;right:16%;bottom:14%;background:color-mix(in srgb,var(--peach) 40%,transparent)"></span>
-  <div class="staff" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
+  <Image
+    class="fond"
+    src={aquarelle}
+    alt=""
+    widths={[800, 1400, 2000, 2800]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
 
   <div class="wrap hero-in">
     <h1 class="hero-title">{titre}</h1>
@@ -35,57 +40,24 @@ const { formation, titre } = Astro.props;
 </div>
 
 <style>
-  /* Le hero et son lavis. */
   /* ═══ hero aquarelle ═══
-     Le lavis de l'affiche est reconstitué en dégradés radiaux, avec une portée
-     dorée en bas à droite. */
+     L'aquarelle couvre tout le hero ; les rayons dorés partent d'en bas à
+     droite, on garde donc ce coin quand l'écran rogne l'image. */
   .hero {
     position: relative;
     overflow: hidden;
     padding: 5.9rem 0 3rem;
-    background:
-      radial-gradient(58% 44% at 6% 74%, color-mix(in srgb, var(--gold) 55%, transparent) 0%, transparent 68%),
-      radial-gradient(46% 38% at 96% 34%, color-mix(in srgb, var(--gold) 40%, transparent) 0%, transparent 70%),
-      radial-gradient(75% 44% at 52% 112%, color-mix(in srgb, var(--gold-deep) 42%, transparent) 0%, transparent 66%),
-      radial-gradient(26% 20% at 16% 20%, color-mix(in srgb, var(--peach) 44%, transparent) 0%, transparent 68%),
-      radial-gradient(22% 17% at 84% 88%, color-mix(in srgb, var(--lilac) 40%, transparent) 0%, transparent 68%),
-      radial-gradient(18% 14% at 92% 64%, color-mix(in srgb, var(--peach) 34%, transparent) 0%, transparent 70%),
-      var(--wash);
+    background: var(--wash);
   }
 
-  .hero::after {
-    content: '';
+  .fond {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% 75%;
     pointer-events: none;
-    opacity: 0.35;
-    background-image: radial-gradient(color-mix(in srgb, var(--ink) 12%, transparent) 0.5px, transparent 0.5px);
-    background-size: 3px 3px;
-  }
-
-  .splash {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(6px);
-    pointer-events: none;
-  }
-
-  .staff {
-    position: absolute;
-    right: -6%;
-    bottom: 6%;
-    width: 46%;
-    opacity: 0.4;
-    pointer-events: none;
-    rotate: -8deg;
-  }
-
-  .staff span {
-    display: block;
-    height: 2px;
-    background: var(--gold-deep);
-    margin-bottom: 9px;
-    border-radius: 2px;
   }
 
   .hero-in {
